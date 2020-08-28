@@ -38,13 +38,15 @@ const TheSidebar = () => {
       <CSidebarNavItem>
 
         {/**start of side bar items */}
+        <div>
         <Link to='/dashboard'>
-         <li class="c-sidebar-nav-item" style={{backgroundColor:"#24385e", marginTop:"10px"}}>
+         <div class="c-sidebar-nav-item" style={{backgroundColor:"#24385e", marginTop:"10px"}}>
             <button class="c-sidebar-nav-link" style={{border:"none", width:"100%"}}>
                <CIcon name="cil-home" /> <span style={{marginLeft:"20px"}}>DASHBOARD</span>
             </button>
-         </li>
+         </div>
          </Link>
+         </div>
          
          {/** start categories */}
          <Link to='/categories'>
