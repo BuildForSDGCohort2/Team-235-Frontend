@@ -1,6 +1,5 @@
 import React from 'react'
 import {
-  TheContent,
   TheSidebar,
   TheFooter,
   TheHeader

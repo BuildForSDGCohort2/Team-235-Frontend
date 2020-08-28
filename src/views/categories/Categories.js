@@ -1,5 +1,4 @@
 import React from 'react'
-import { CContainer, CCard } from '@coreui/react'
 
 export default class Categories extends React.Component{
        render(){
