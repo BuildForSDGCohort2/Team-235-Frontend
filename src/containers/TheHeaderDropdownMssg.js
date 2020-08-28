@@ -4,7 +4,7 @@ import {
 } from '@coreui/react'
 
 const TheHeaderDropdownMssg = () => {
-  const itemsCount = 4
+  //const itemsCount = 4
   return (
     <CDropdown
       inNav
