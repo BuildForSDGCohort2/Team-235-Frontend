@@ -15,11 +15,7 @@ import {
   CRow
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
-<<<<<<< HEAD
-
-=======
  
->>>>>>> master
 const Login = () => {
   return (
     <div className="c-app c-default-layout flex-row align-items-center">
@@ -50,13 +46,9 @@ const Login = () => {
                     </CInputGroup>
                     <CRow>
                       <CCol xs="6">
-<<<<<<< HEAD
-                        <CButton color="primary" className="px-4">Login</CButton>
-=======
                         <Link to ='/dashboard'>
                         <CButton color="primary" className="px-4">Login</CButton>
                         </Link>
->>>>>>> master
                       </CCol>
                       <CCol xs="6" className="text-right">
                         <CButton color="link" className="px-0">Forgot password?</CButton>
