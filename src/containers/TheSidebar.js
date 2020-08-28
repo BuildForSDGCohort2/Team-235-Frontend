@@ -10,17 +10,11 @@ import {
   CSidebarMinimizer,
   CSidebarNavDropdown,
   CSidebarNavItem,
-<<<<<<< HEAD
-} from '@coreui/react'
-
-import CIcon from '@coreui/icons-react'
-=======
   CDropdownMenu,
 } from '@coreui/react'
 
 import CIcon from '@coreui/icons-react'
 import {Link} from 'react-router-dom';
->>>>>>> master
 
 // sidebar nav config
 import navigation from './_nav'
@@ -39,11 +33,7 @@ const TheSidebar = () => {
           className="c-sidebar-brand-full"
           name="logo-negative"
           height={35}
-<<<<<<< HEAD
-        /> */} LOGO GOES HERE
-=======
         /> */} STOCK TRACKER
->>>>>>> master
         <CIcon
           className="c-sidebar-brand-minimized"
           name="sygnet"
@@ -51,18 +41,6 @@ const TheSidebar = () => {
         />
       </CSidebarBrand>
       <CSidebarNav>
-<<<<<<< HEAD
-
-        <CCreateElement
-          items={navigation}
-          components={{
-            CSidebarNavDivider,
-            CSidebarNavDropdown,
-            CSidebarNavItem,
-            CSidebarNavTitle
-          }}
-        />
-=======
       <CSidebarNavItem>
 
         {/**start of side bar items */}
@@ -130,7 +108,6 @@ const TheSidebar = () => {
 
 
          </CSidebarNavItem>
->>>>>>> master
       </CSidebarNav>
       <CSidebarMinimizer className="c-d-md-down-none"/>
     </CSidebar>
