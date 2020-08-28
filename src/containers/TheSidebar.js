@@ -1,23 +1,18 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import {
-  CCreateElement,
+   CButton,
   CSidebar,
   CSidebarBrand,
   CSidebarNav,
-  CSidebarNavDivider,
-  CSidebarNavTitle,
   CSidebarMinimizer,
-  CSidebarNavDropdown,
   CSidebarNavItem,
-  CDropdownMenu,
 } from '@coreui/react'
 
 import CIcon from '@coreui/icons-react'
 import {Link} from 'react-router-dom';
 
 // sidebar nav config
-import navigation from './_nav'
 
 const TheSidebar = () => {
   const dispatch = useDispatch()
@@ -44,67 +39,76 @@ const TheSidebar = () => {
       <CSidebarNavItem>
 
         {/**start of side bar items */}
-        <Link to='/dashboard'>
-         <li class="c-sidebar-nav-item" style={{backgroundColor:"#24385e", marginTop:"10px"}}>
-            <a class="c-sidebar-nav-link" href="#">
-               <CIcon name="cil-home" /> <span style={{marginLeft:"20px"}}>DASHBOARD</span>
-            </a>
-         </li>
+        <div>
+                <Link to='/dashboard'>
+               <div className ="c-sidebar-nav-item" style={{backgroundColor:"#24385e", marginTop:"10px"}}>
+                  <CButton className="c-sidebar-nav-link" style={{border:"none", width:"100%"}}>
+                     <CIcon name="cil-home" /> <span style={{marginLeft:"20px"}}>DASHBOARD</span>
+                  </CButton>
+               </div >
          </Link>
          
-         {/** start categories */}
-         <li class="c-sidebar-nav-item" style={{backgroundColor:"#24385e", marginTop:"10px"}}>
-            <a class="c-sidebar-nav-link" href="#">
+         {/* * start categories *div */}
+         <Link to='/categories'>
+         <div className="c-sidebar-nav-item" style={{backgroundColor:"#24385e", marginTop:"10px"}}>
+            <CButton className="c-sidebar-nav-link" style={{border:"none", width:"100%"}}>
                <CIcon name="cilListNumbered" /> <span style={{marginLeft:"20px"}}>CATEGORIES</span>
-            </a>
-         </li>
-         {/** end categories */}
+            </CButton>
+         </div>
+         </Link>
+         {/* {/** end categories */}
 
-         <li class="c-sidebar-nav-item" style={{backgroundColor:"#24385e", marginTop:"10px"}}>
-            <a class="c-sidebar-nav-link" href="#">
+         <div className="c-sidebar-nav-item" style={{backgroundColor:"#24385e", marginTop:"10px"}}>
+            <CButton className="c-sidebar-nav-link" style={{border:"none", width:"100%"}}>
                <CIcon name="cilBasket" /> <span style={{marginLeft:"20px"}}>STOCK DETAILS</span>
-            </a>
-         </li>
+            </CButton>
+         </div>
 
-         <li class="c-sidebar-nav-item" style={{backgroundColor:"#24385e", marginTop:"10px"}}>
-            <a class="c-sidebar-nav-link" href="#">
+         <div className="c-sidebar-nav-item" style={{backgroundColor:"#24385e", marginTop:"10px"}}>
+            <CButton className="c-sidebar-nav-link" style={{border:"none", width:"100%"}}>
                <CIcon name="cilBell" /> <span style={{marginLeft:"20px"}}>SUPPLIES</span>
-            </a>
-         </li>
+            </CButton>
+         </div>
 
-         <li class="c-sidebar-nav-item" style={{backgroundColor:"#24385e", marginTop:"10px"}}>
-            <a class="c-sidebar-nav-link" href="#">
+         <div className="c-sidebar-nav-item" style={{backgroundColor:"#24385e", marginTop:"10px"}}>
+            <CButton className="c-sidebar-nav-link" style={{border:"none", width:"100%"}}>
                <CIcon name="cilTags" /> <span style={{marginLeft:"20px"}}>ASSETS COLUMN</span>
-            </a>
-         </li>
+            </CButton>
+         </div>
         
-         <li class="c-sidebar-nav-item" style={{backgroundColor:"#24385e", marginTop:"10px"}}>
-            <a class="c-sidebar-nav-link" href="#">
+        {/**user management starts */}
+        <Link to='/management'>
+         <div className="c-sidebar-nav-item" style={{backgroundColor:"#24385e", marginTop:"10px"}}>
+            <CButton className="c-sidebar-nav-link" style={{border:"none", width:"100%"}}>
                <CIcon name="cilNotes" /> <span style={{marginLeft:"20px"}}>USER MANAGEMENT</span>
-            </a>
-         </li>
+            </CButton>
+         </div>
+         </Link>
+         {/**user management ends */}
          
 
-         <li class="c-sidebar-nav-item" style={{backgroundColor:"#24385e", marginTop:"10px"}}>
-            <a class="c-sidebar-nav-link" href="#">
+         <div className="c-sidebar-nav-item" style={{backgroundColor:"#24385e", marginTop:"10px"}}>
+            <CButton className="c-sidebar-nav-link" style={{border:"none", width:"100%"}}>
                <CIcon name="cilSettings" /> <span style={{marginLeft:"20px"}}>SETTINGS</span>
-            </a>
-         </li>
+            </CButton>
+         </div>
 
-         <li class="c-sidebar-nav-item" style={{backgroundColor:"#24385e", marginTop:"10px"}}>
-            <a class="c-sidebar-nav-link" href="#">
+         <div className="c-sidebar-nav-item" style={{backgroundColor:"#24385e", marginTop:"10px"}}>
+            <CButton className="c-sidebar-nav-link" style={{border:"none", width:"100%"}}>
                <CIcon name="cilCode" /> <span style={{marginLeft:"20px"}}>ABOUT</span>
-            </a>
-         </li>
+            </CButton>
+         </div>
       
-         <li class="c-sidebar-nav-item" style={{backgroundColor:"#24385e", marginTop:"30px"}}>
-            <a class="c-sidebar-nav-link c-sidebar-nav-link-danger" href="#">
+         <div className="c-sidebar-nav-item" style={{backgroundColor:"#24385e", marginTop:"30px"}}>
+            <CButton className="c-sidebar-nav-link c-sidebar-nav-link-danger" style={{border:"none", width:"100%"}}>
               <Link to='/'>
                <CIcon name="cil-user" style={{color:"white"}} /> <span style={{marginLeft:"20px",color:"white"}}>LOGOUT</span>
               </Link>
-            </a>
-         </li>
+            </CButton>
+         </div>
         {/**end of side bar items */ }
+        </div>
+       
 
 
          </CSidebarNavItem>

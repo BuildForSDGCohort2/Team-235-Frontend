@@ -4,7 +4,7 @@ import CIcon from '@coreui/icons-react'
 export default [
   {
     _tag: 'CSidebarNavItem',
-    name: 'Dashboard',
+    name: 'DASHBOARD',
     to: '/dashboard',
     icon: <CIcon name="cil-speedometer" customClasses="c-sidebar-nav-icon"/>,
     badge: {
@@ -12,6 +12,63 @@ export default [
      
     }
   },
+  {
+    _tag: 'CSidebarNavItem',
+    name: 'CATEGORIES',
+    to: '/categories',
+    icon: <CIcon name="cilListNumbered"/>,
+    
+  },
+  {
+    _tag: 'CSidebarNavItem',
+    name: 'STOCK DETAILS',
+    to: '/stock-details',
+    icon: <CIcon name="cilBasket"/>,
+    
+  },
+  {
+    _tag: 'CSidebarNavItem',
+    name: 'SUPPLIES',
+    to: '/supplies',
+    icon: <CIcon name="cilBell"/>,
+    
+  },
+  {
+    _tag: 'CSidebarNavItem',
+    name: 'ASSETS COLUMN',
+    to: '/assets-column',
+    icon: <CIcon name="cilTags"/>,
+    
+  },
+  {
+    _tag: 'CSidebarNavItem',
+    name: 'USER MANAGEMENT',
+    to: '/management',
+    icon: <CIcon name="cilNotes"/>,
+    
+  },
+  {
+    _tag: 'CSidebarNavItem',
+    name: 'SETTINGS',
+    to: '/settings',
+    icon: <CIcon name="cilSettings"/>,
+    
+  },
+  {
+    _tag: 'CSidebarNavItem',
+    name: 'ABOUT',
+    to: '/about',
+    icon: <CIcon name="cilCode"/>,
+    
+  },
+  {
+    _tag: 'CSidebarNavItem',
+    name: 'LOGOUT',
+    to: '/',
+    icon: <CIcon name="cil-user"/>,
+    
+  },
+  
   // {
   //   _tag: 'CSidebarNavTitle',
   //   _children: ['Theme']
@@ -32,12 +89,12 @@ export default [
   //   _tag: 'CSidebarNavTitle',
   //   _children: ['Components']
   // },
-  {
-    _tag: 'CSidebarNavDropdown',
-    name: 'Categories',
-    route: '/base',
-    icon: 'cil-puzzle',
-    _children: [
+  // {
+  //   _tag: 'CSidebarNavDropdown',
+  //   name: 'Categories',
+  //   route: '/base',
+  //   icon: 'cil-puzzle',
+  //   _children: [
       // {
       //   _tag: 'CSidebarNavItem',
       //   name: 'Breadcrumb',
@@ -118,8 +175,8 @@ export default [
       //   name: 'Tooltips',
       //   to: '/base/tooltips',
       // },
-    ],
-  },
+  //   ],
+  // },
   // {
   //   _tag: 'CSidebarNavDropdown',
   //   name: 'Buttons',

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { HashRouter, Route, Switch } from 'react-router-dom';
 import './scss/style.scss';
 
+
 const loading = (
   <div className="pt-3 text-center">
     <div className="sk-spinner sk-spinner-pulse"></div>
@@ -10,12 +11,17 @@ const loading = (
 
 // Containers
 const TheLayout = React.lazy(() => import('./containers/TheLayout'));
+// const TheCategoriesLayout = React.lazy(() => import('./containers/TheCategoriesLayout'));
+// const TheManagementLayout = React.lazy(() => import('./containers/TheManagementLayout'));
+
 
 // Pages
 const Login = React.lazy(() => import('./views/pages/login/Login'));
 const Register = React.lazy(() => import('./views/pages/register/Register'));
 const Page404 = React.lazy(() => import('./views/pages/page404/Page404'));
 const Page500 = React.lazy(() => import('./views/pages/page500/Page500'));
+ 
+ 
 
 class App extends Component {
 
@@ -29,6 +35,8 @@ class App extends Component {
               <Route exact path="/404" name="Page 404" render={props => <Page404 {...props}/>} />
               <Route exact path="/500" name="Page 500" render={props => <Page500 {...props}/>} />
               <Route exact path="/dashboard" name="Home" render={props => <TheLayout {...props}/>} />
+              <Route exact path="/categories" name="Categories" render={props => <TheLayout {...props}/>} />
+              <Route exact path = "/management" name="User Management" render={props => <TheLayout {...props}/>}/>
             </Switch>
           </React.Suspense>
       </HashRouter>
