@@ -40,23 +40,14 @@ const TheSidebar = () => {
 
         {/**start of side bar items */}
         <div>
-<<<<<<< HEAD
-        <Link to='/dashboard'>
-         <div class="c-sidebar-nav-item" style={{backgroundColor:"#24385e", marginTop:"10px"}}>
-            <button class="c-sidebar-nav-link" style={{border:"none", width:"100%"}}>
-               <CIcon name="cil-home" /> <span style={{marginLeft:"20px"}}>DASHBOARD</span>
-            </button>
-         </div>
-=======
-                <Link to='/dashboard'>
-               <div className ="c-sidebar-nav-item" style={{backgroundColor:"#24385e", marginTop:"10px"}}>
-                  <CButton className="c-sidebar-nav-link" style={{border:"none", width:"100%"}}>
-                     <CIcon name="cil-home" /> <span style={{marginLeft:"20px"}}>DASHBOARD</span>
-                  </CButton>
-               </div >
->>>>>>> 887040c0572ecf97604a562733e287d06642b122
+         <Link to='/dashboard'>
+            <div className ="c-sidebar-nav-item" style={{backgroundColor:"#24385e", marginTop:"10px"}}>
+               <CButton className="c-sidebar-nav-link" style={{border:"none", width:"100%"}}>
+                  <CIcon name="cil-home" /> <span style={{marginLeft:"20px"}}>DASHBOARD</span>
+               </CButton>
+            </div >
          </Link>
-         </div>
+        </div>
          
          {/* * start categories *div */}
          <Link to='/categories'>
@@ -117,10 +108,7 @@ const TheSidebar = () => {
             </CButton>
          </div>
         {/**end of side bar items */ }
-        </div>
-       
-
-
+        
          </CSidebarNavItem>
       </CSidebarNav>
       <CSidebarMinimizer className="c-d-md-down-none"/>
