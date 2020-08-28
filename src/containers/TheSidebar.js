@@ -80,11 +80,15 @@ const TheSidebar = () => {
             </a>
          </li>
         
+        {/**user management starts */}
+        <Link to='/management'>
          <li class="c-sidebar-nav-item" style={{backgroundColor:"#24385e", marginTop:"10px"}}>
             <a class="c-sidebar-nav-link" href="#">
                <CIcon name="cilNotes" /> <span style={{marginLeft:"20px"}}>USER MANAGEMENT</span>
             </a>
          </li>
+         </Link>
+         {/**user management ends */}
          
 
          <li class="c-sidebar-nav-item" style={{backgroundColor:"#24385e", marginTop:"10px"}}>
