@@ -1,6 +1,5 @@
 import React from 'react';
 
-const TheLayout = React.lazy(() => import('./containers/TheLayout'));
 
 const Breadcrumbs = React.lazy(() => import('./views/base/breadcrumbs/Breadcrumbs'));
 const Categories = React.lazy(() => import('./views/categories/Categories'));
@@ -16,15 +15,15 @@ const UserManagement = React.lazy(() => import('./views/management/Management'))
 const routes = [
   { path: '/', exact: true, name: 'Home' },
   { path: '/dashboard', name: 'Dashboard', component: Dashboard },
-  { path: '/base/breadcrumbs',exact: true,  name: 'Breadcrumbs', component: Breadcrumbs },
-  { path: '/categories',exact: true,  name: 'Categories', component: Categories },
-  { path: '/supplies',exact: true,  name: 'Supplies', component: Supplies },
-  { path: '/stock-details',exact: true,  name: 'Stock Details', component: StockDetails },
-  { path: '/assets-column',exact: true,  name: 'Assets Column', component: AssetsColumn },
-  { path: '/settings',exact: true, name: 'Settings', component: Settings },
-  { path: '/about',exact: true,  name: 'About', component: About },
+  { path: '/base/breadcrumbs',  name: 'Breadcrumbs', component: Breadcrumbs },
+  { path: '/categories',  name: 'Categories', component: Categories },
+  { path: '/supplies',  name: 'Supplies', component: Supplies },
+  { path: '/stock-details',  name: 'Stock Details', component: StockDetails },
+  { path: '/assets-column',  name: 'Assets Column', component: AssetsColumn },
+  { path: '/settings', name: 'Settings', component: Settings },
+  { path: '/about',  name: 'About', component: About },
   { path: '/charts', name: 'Charts', component: Charts },
-  { path: '/management',exact: true,  name: 'User Management', component: UserManagement},
+  { path: '/management',  name: 'User Management', component: UserManagement},
   
 ];
 
