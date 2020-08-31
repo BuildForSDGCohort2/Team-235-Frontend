@@ -21,7 +21,7 @@ import CIcon from '@coreui/icons-react'
 const CategoriesCard = () => {
   //Manage state
   const [modal, setModal] = React.useState(false)
-  const [name, setName] = React.useState('')
+  const [setName] = React.useState('')
 
   //Allow input changes
   const handleChangeName = (e) =>
