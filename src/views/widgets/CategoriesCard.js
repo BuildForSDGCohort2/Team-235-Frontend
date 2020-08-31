@@ -21,7 +21,7 @@ import CIcon from '@coreui/icons-react'
 const CategoriesCard = () => {
   //Manage state
   const [modal, setModal] = React.useState(false)
-  const [name, setName] = React.useState('')
+  const [setName] = React.useState('')
 
   //Allow input changes
   const handleChangeName = (e) =>
@@ -37,7 +37,7 @@ const CategoriesCard = () => {
     < CContainer style = {{paddingTop: '2rem'}}>
     <CRow>
     <CCol sm = "6"lg = "3" >
-    <CWidgetDropdown color = "gradient-primary" header = "Drugs" text = "Save Drugs"text = "Save Drugs"text = "Save Drugs">
+    <CWidgetDropdown color = "gradient-primary" header = "Drugs" text = "Save Drugs">
     <CDropdown>
     <CDropdownToggle color = "transparent" >
     <CIcon name = "cil-settings"/>
