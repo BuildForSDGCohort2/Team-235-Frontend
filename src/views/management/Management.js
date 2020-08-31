@@ -92,7 +92,7 @@ const TheModal = () => {
 
       {/**display list of user */}
       <div className="container" style={{marginTop:"20px"}}>
-         {/**<List /> */}
+       
       </div>
  
       </div>
