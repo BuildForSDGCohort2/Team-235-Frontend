@@ -1,5 +1,4 @@
 import React from 'react' 
-import List from './list'
 import { useState } from 'react';
  
 import {CButton,CModal,CModalBody,CModalFooter, CCard, CCardBody, CCardHeader} from '@coreui/react'
