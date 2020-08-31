@@ -33,7 +33,7 @@ const TheModal = () => {
         <div className="container">
 
         {/**start of card background */}
-        <CCard style={{height:"80vh",borderRadius:"10px"}}>
+        <CCard style={{height:"60vh",borderRadius:"10px"}}>
            <CCardHeader>
                <CButton style={{float:"right"}} color="info" onClick={toggle} className="mr-1">ADD NEW USER</CButton>
            </CCardHeader>
