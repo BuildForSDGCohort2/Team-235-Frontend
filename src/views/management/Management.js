@@ -2,7 +2,7 @@ import React from 'react'
 import List from './list'
 import { useState } from 'react';
  
-import {CButton,CModal,CModalBody,CModalFooter} from '@coreui/react'
+import {CButton,CModal,CModalBody,CModalFooter, CCard, CCardBody, CCardHeader} from '@coreui/react'
  
 
  
@@ -31,14 +31,19 @@ const TheModal = () => {
    
     return (
         <div className="container">
-        <form onSubmit={handleSubmit}>
-        <CButton style={{float:"right"}} color="info" onClick={toggle} className="mr-1">ADD NEW USER</CButton>
-        <CModal show={modal} onClose={toggle}>
 
-           <CModalBody>
-            
+        {/**start of card background */}
+        <CCard style={{height:"80vh",borderRadius:"10px"}}>
+           <CCardHeader>
+               <CButton style={{float:"right"}} color="info" onClick={toggle} className="mr-1">ADD NEW USER</CButton>
+           </CCardHeader>
+           <CCardBody>
+            <form onSubmit={handleSubmit}>
+     
+        <CModal show={modal} onClose={toggle}>
+           <CModalBody className="text-center" style={{borderRadius:"15px", margin:"20px"}}>
            <div className="form-group">
-                <label htmlFor="firstnameId">First name</label>
+                <label htmlFor="firstnameId"><em>First name</em></label>
                 <input type="text" 
                 className="form-control" 
                 id="firstnameId" 
@@ -49,7 +54,7 @@ const TheModal = () => {
            </div>
 
            <div className="form-group">
-                <label htmlFor="lastnameId">Last name</label>
+                <label htmlFor="lastnameId"><em>last name</em></label>
                 <input type="text" 
                 className="form-control" 
                 id="lastnameId" 
@@ -60,7 +65,7 @@ const TheModal = () => {
            </div>
 
            <div className="form-group">
-                <label htmlFor="emailId">Email</label>
+                <label htmlFor="emailId"><em>email</em></label>
                 <input 
                 type="email" 
                 className="form-control" 
@@ -72,7 +77,7 @@ const TheModal = () => {
            </div>
 
            <div className="form-group">
-                <label htmlFor="phoneId">Phone number</label>
+                <label htmlFor="phoneId"><em>phone</em></label>
                 <input type="phone" 
                 className="form-control" 
                 id="phoneId"
@@ -84,18 +89,19 @@ const TheModal = () => {
            </CModalBody>
 
            <CModalFooter>
-             <CButton type="submit" color="primary">SAVE</CButton>
-             <CButton color="secondary" onClick={toggle}>Cancel</CButton>
+             <CButton  type="submit" color="info" style={{width:"150px"}}>SAVE</CButton>
+             <CButton color="secondary" onClick={toggle} style={{width:"150px"}}>Cancel</CButton>
           </CModalFooter>
       </CModal>
       </form>
+    </CCardBody>
+    {/**end of card background */}
+ </CCard>
 
-      {/**display list of user */}
-      <div className="container" style={{marginTop:"20px"}}>
-       
-      </div>
- 
-      </div>
+</div>
+        
+
+      
     )
 }
 
