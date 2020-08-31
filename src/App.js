@@ -11,10 +11,7 @@ const loading = (
 
 // Containers
 const TheLayout = React.lazy(() => import('./containers/TheLayout'));
-// const TheCategoriesLayout = React.lazy(() => import('./containers/TheCategoriesLayout'));
-// const TheManagementLayout = React.lazy(() => import('./containers/TheManagementLayout'));
-
-
+ 
 // Pages
 const Login = React.lazy(() => import('./views/pages/login/Login'));
 const Register = React.lazy(() => import('./views/pages/register/Register'));

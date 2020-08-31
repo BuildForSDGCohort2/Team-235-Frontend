@@ -1,6 +1,5 @@
 import React from 'react';
 
-
 const Breadcrumbs = React.lazy(() => import('./views/base/breadcrumbs/Breadcrumbs'));
 const Categories = React.lazy(() => import('./views/categories/Categories'));
 const Supplies = React.lazy(() => import('./views/supplies/Supplies'));
