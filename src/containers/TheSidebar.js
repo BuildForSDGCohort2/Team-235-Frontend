@@ -1,7 +1,7 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import {
-   CButton,
+  CButton,
   CSidebar,
   CSidebarBrand,
   CSidebarNav,
@@ -63,7 +63,7 @@ const TheSidebar = () => {
 
          <div className="c-sidebar-nav-item" style={{backgroundColor:"#24385e", marginTop:"10px"}}>
             <CButton className="c-sidebar-nav-link" style={{border:"none", width:"100%"}}>
-               <CIcon name="cilBell" /> <span style={{marginLeft:"20px"}}>SUPPLIES</span>
+               <CIcon name="cilBan" /> <span style={{marginLeft:"20px"}}>SUPPLIES</span>
             </CButton>
          </div>
 
