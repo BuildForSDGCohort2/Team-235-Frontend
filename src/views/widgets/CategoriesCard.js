@@ -21,11 +21,11 @@ import CIcon from '@coreui/icons-react'
 const CategoriesCard = () => {
   //Manage state
   const [modal, setModal] = React.useState(false)
-  const [setName] = React.useState('')
+  const [name, setName] = React.useState('')
 
   //Allow input changes
   const handleChangeName = (e) =>
-    setName(e.target.value);
+    setName(e.target.name);
 
   //toggle modal
   const toggle = () => {
@@ -137,7 +137,6 @@ const CategoriesCard = () => {
     </CDropdownToggle> 
     <CDropdownMenu className = "pt-0" placement = "bottom-end" >
     <CDropdownItem onClick = {toggle} > Add Doctor </CDropdownItem>
-
     </CDropdownMenu> 
     </CDropdown> 
     </CWidgetDropdown> 
@@ -147,7 +146,7 @@ const CategoriesCard = () => {
     <CModalBody>
     <CForm onSubmit = {console.log("Add")}>
     <CFormGroup >
-    <CInput type = "text"name = "name"id = "item"placeholder = "Add Doctor" onChange = {handleChangeName}/> 
+    <CInput type = "text" name ="name"id = "item"placeholder = "Add Doctor" onChange = {handleChangeName}/> 
     <CButton color = "secondary" style = {{marginTop: '2rem'}} block>Add Doctor 
     </CButton> 
     </CFormGroup> 
