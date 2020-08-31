@@ -25,7 +25,7 @@ const CategoriesCard = () => {
 
   //Allow input changes
   const handleChangeName = (e) =>
-    setName(e.target.name);
+    setName(e.target.value);
 
   //toggle modal
   const toggle = () => {
