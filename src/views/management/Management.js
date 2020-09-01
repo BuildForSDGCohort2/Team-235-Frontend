@@ -1,5 +1,5 @@
 import React from 'react' 
-import { useState } from 'react';
+import  useState  from 'react';
  
 import {CButton,CModal,CModalBody,CModalFooter, CCard, CCardBody, CCardHeader} from '@coreui/react'
 import List from './list';
@@ -38,13 +38,8 @@ const TheModal = () => {
                 lastName: "Kwaku",
                 email: "davidikekwaku@gmail.com",
                 phone: "0234885595"
-            },
-            {
-                firstName:"Emmanuel Botwe",
-                lastName: "Kofi",
-                email: "emmanuelbotwe@gmail.com",
-                phone: "0223454565"
             }
+             
         
         ]
     })
@@ -67,7 +62,7 @@ const TheModal = () => {
         }
         setState({users:[...state.users, newUser]})
  
-         {/**extract data from state and send to backend*/}
+         /**extract data from state and send to backend*/
          //const {firstName, lastName, email, phone} = state;
 
         console.log(state)
