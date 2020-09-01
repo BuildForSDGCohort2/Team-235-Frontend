@@ -1,5 +1,5 @@
 import React from 'react' 
-import  useState  from 'react';
+import  {useState}  from 'react';
  
 import {CButton,CModal,CModalBody,CModalFooter, CCard, CCardBody, CCardHeader} from '@coreui/react'
 import List from './list';
@@ -14,7 +14,6 @@ const TheModal = () => {
         email:'',
         phone:'',
         users:[
-            //default users-----for testing purposes
             {
                 firstName:"Amedzro Elikplim",
                 lastName: "Emmanuel",
@@ -38,9 +37,13 @@ const TheModal = () => {
                 lastName: "Kwaku",
                 email: "davidikekwaku@gmail.com",
                 phone: "0234885595"
+            },
+            {
+                firstName:"Emmanuel Botwe",
+                lastName: "kofi",
+                email: "emmanuelbotwe@gmail.com",
+                phone: "0234885595"
             }
-             
-        
         ]
     })
 
