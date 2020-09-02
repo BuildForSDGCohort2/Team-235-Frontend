@@ -1,7 +1,9 @@
 import React from 'react' 
-import { useState } from 'react';
+import  {useState}  from 'react';
  
 import {CButton,CModal,CModalBody,CModalFooter, CCard, CCardBody, CCardHeader,CDataTable,CBadge,CCollapse} from '@coreui/react'
+// import {CButton,CModal,CModalBody,CModalFooter, CCard, CCardBody, CCardHeader} from '@coreui/react'
+import List from './list';
  
 
  
@@ -12,19 +14,65 @@ const TheModal = () => {
         lastName:'',
         email:'',
         phone:'',
+        users:[
+            {
+                firstName:"Amedzro Elikplim",
+                lastName: "Emmanuel",
+                email: "amedzroemmanuel@gmail.com",
+                phone: "0545941195"
+            }, 
+            {
+                firstName:"Betsy Nunu",
+                lastName: "Ama",
+                email: "betsynunu@gmail.com",
+                phone: "0245645673"
+            },
+            {
+                firstName:"Kwabena Beiko",
+                lastName: "Throw away",
+                email: "kwabenabeiko@gmail.com",
+                phone: "0234545795"
+            },
+            {
+                firstName:"David Ike",
+                lastName: "Kwaku",
+                email: "davidikekwaku@gmail.com",
+                phone: "0234885595"
+            },
+            {
+                firstName:"Emmanuel Botwe",
+                lastName: "kofi",
+                email: "emmanuelbotwe@gmail.com",
+                phone: "0234885595"
+            }
+        ]
     })
 
-    const toggle = ()=>{
+    const toggle = () =>{
         setModal(!modal);
     }
 
     function handleChange(e) {
-       setState({...state,[e.target.name] : e.target.value});
+       setState({...state, [e.target.name] : e.target.value});
     }
 
     function handleSubmit(e) {
         e.preventDefault();
-         console.log(state);
+        let newUser = {
+            firstName: state.firstName,
+            lastName: state.lastName,
+            email: state.email,
+            phone: state.phone,
+        }
+        setState({users:[...state.users, newUser]})
+ 
+         /**extract data from state and send to backend*/
+         //const {firstName, lastName, email, phone} = state;
+
+        console.log(state)
+      
+        setModal(!modal);
+          
     }
     const usersData = [
         {id: 0, name: 'John Doe', registered: '2018/01/01', role: 'Guest', status: 'Pending'},
@@ -94,10 +142,10 @@ const TheModal = () => {
       }
    
     return (
-        <div className="container">
+        <div className="container-fluid">
 
         {/**start of card background */}
-        <CCard style={{height:"60vh",borderRadius:"10px"}}>
+        <CCard style={{borderRadius:"10px"}}>
            <CCardHeader>
                <CButton style={{float:"right"}} color="info" onClick={toggle} className="mr-1">ADD NEW USER</CButton>
            </CCardHeader>
@@ -160,16 +208,20 @@ const TheModal = () => {
     />
      </CCard>
   {/* ) */}
-            <form onSubmit={handleSubmit}>
+            {/* <form onSubmit={handleSubmit}>
      
             <CModal show={modal} onClose={toggle}>
+           <CCardBody> */}
+
+        <form onSubmit={handleSubmit}>
+        <CModal show={modal} onClose={toggle}>
            <CModalBody className="text-center" style={{borderRadius:"15px", margin:"20px"}}>
            <div className="form-group">
                 <label htmlFor="firstnameId"><em>First name</em></label>
                 <input type="text" 
                 className="form-control" 
-                id="firstnameId" 
-                value={state.firstName}
+                id ="firstnameId" 
+                value={state.firstName || ''}
                 name="firstName"
                 onChange={handleChange}
                 required/>
@@ -181,7 +233,7 @@ const TheModal = () => {
                 className="form-control" 
                 id="lastnameId" 
                 name="lastName"
-                value={state.lastName}
+                value={state.lastName || ''}
                 onChange={handleChange}
                 required/>
            </div>
@@ -192,7 +244,7 @@ const TheModal = () => {
                 type="email" 
                 className="form-control" 
                 id="emailId"
-                value={state.email}
+                value={state.email || ''}
                 required
                 name="email"
                 onChange={handleChange}/>
@@ -204,11 +256,13 @@ const TheModal = () => {
                 className="form-control" 
                 id="phoneId"
                 name="phone"
-                value={state.phone}
+                value={state.phone || ''}
                 onChange={handleChange}/>
            </div>
 
+
            </CModalBody>
+
 
            <CModalFooter>
              <CButton  type="submit" color="info" style={{width:"150px"}}>SAVE</CButton>
@@ -217,14 +271,22 @@ const TheModal = () => {
       </CModal>
       </form>
     {/* </CCardBody> */}
+
+      <div>
+          {state.users.map((user, index) => (
+              <List key={index} firstName={user.firstName} lastName={user.lastName} email={user.email} phone={user.phone}/>
+          ))}
+      </div>
+    {/* </CCardBody> */}
     {/**end of card background */}
 
 
-</div>
+// </div>
         
     
       
-    )
+//     )
+)
 }
 
 export default TheModal;
