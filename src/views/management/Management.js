@@ -1,9 +1,8 @@
 import React from 'react' 
-import  {useState}  from 'react';
 import {Link} from 'react-router-dom';
  
-import 
-    {CButton,
+import {
+    CButton,
     CCard,
     CDropdown,
     CCardHeader,
@@ -12,11 +11,10 @@ import
     CDropdownItem,
     CDropdownMenu,
     CDropdownToggle,
-    CContainer} from '@coreui/react'
+    CContainer
+  } from '@coreui/react'
  
-const TheUserManagement = () => {
-  const [details, setDetails] = useState([])
-  
+const TheUserManagement = () => { 
     const usersData = [
         {id: 0, name: 'John Doe', email: 'kwakuboafo@gmail.com', phone: '0543243676', status: 'Pending'},
         {id: 1, name: 'Samppa Nori', email: 'kwakuboafo@gmail.com', phone: '0564438556', status: 'Active'},
