@@ -24,7 +24,7 @@ const TheUserManagement = () => {
         {id: 5, name: 'Friderik Dávid', email: 'sarpongemmanuel@gmail.com', phone: '0278834566', status: 'Active'},
         {id: 6, name: 'Yiorgos Avraamu', email: 'kwakuboafo@gmail.com', phone: '0563325647', status: 'Active'},
         {id: 7, name: 'Avram Tarasios', email: 'serwahasamoah@gmail.com', phone: '0278834566', status: 'Banned'},
-         {id: 0, name: 'John Doe', email: 'kwakuboafo@gmail.com', phone: '0543243676', status: 'Pending'},
+        {id: 0, name: 'John Doe', email: 'kwakuboafo@gmail.com', phone: '0543243676', status: 'Pending'},
         {id: 1, name: 'Samppa Nori', email: 'kwakuboafo@gmail.com', phone: '0564438556', status: 'Active'},
         {id: 2, name: 'Estavan Lykos', email: 'serwahasamoah@gmail.com', phone: '0278834566', status: 'Banned'},
         {id: 3, name: 'Chetan Mohamed', email: 'serwahasamoah@gmail.com', phone: '0234456782', status: 'Inactive'},
@@ -63,7 +63,8 @@ const TheUserManagement = () => {
                </Link>
            </CCardHeader>
            {/* <CCardBody> */}
-           <CDataTable style
+           <CDataTable 
+                    style
                     items={usersData}
                     fields={fields}
                     tableFilter
@@ -73,8 +74,8 @@ const TheUserManagement = () => {
                     sorter
                     pagination
                     scopedSlots = {{
+
                     'status':
-                    //handles status
                     (item)=>(
                         <td>
                         <CBadge color={getBadge(item.status)}>
@@ -83,24 +84,22 @@ const TheUserManagement = () => {
                         </td>
                     ),
                    'options':
-                    //handle show details
-                    (item, index)=>{
+                    ()=>{
                         return (
-                        <td className="py-2">
-                      <CDropdown>
-                          <CDropdownToggle>more</CDropdownToggle>
-                              <CDropdownMenu>
-                                <CDropdownItem>Edit</CDropdownItem>
-                                <CDropdownItem>Delete</CDropdownItem>
-                              <CDropdownItem>Assign roles</CDropdownItem>
-                        </CDropdownMenu>
-                     </CDropdown>
-              </td>
-              )
-              }
-      }}
-    />
-     </CCard>
+                            <td className="py-2">
+                              <CDropdown>
+                                  <CDropdownToggle>more</CDropdownToggle>
+                                      <CDropdownMenu>
+                                        <CDropdownItem>Edit</CDropdownItem>
+                                        <CDropdownItem>Delete</CDropdownItem>
+                                      <CDropdownItem>Assign roles</CDropdownItem>
+                                   </CDropdownMenu>
+                               </CDropdown>
+                            </td>
+                    )}
+                }}
+            />
+       </CCard>
   
 </CContainer>
         
