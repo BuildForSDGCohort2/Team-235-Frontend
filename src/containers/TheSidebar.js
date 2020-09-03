@@ -36,63 +36,73 @@ const TheSidebar = () => {
 
         {/**start of side bar items */}
         <div>
-         <Link to='/dashboard'>
             <div className ="c-sidebar-nav-item" style={{backgroundColor:"#24385e", marginTop:"10px"}}>
                <CButton className="c-sidebar-nav-link" style={{border:"none", width:"100%"}}>
-                  <CIcon name="cil-home" /> <span style={{marginLeft:"20px"}}>DASHBOARD</span>
+               <Link to='/dashboard'>
+                  <CIcon name="cil-home" style={{color:"white"}} /> <span style={{marginLeft:"20px", color:"white"}}>DASHBOARD</span>
+               </Link>
                </CButton>
             </div >
-         </Link>
         </div>
          
          {/* * start categories *div */}
-         <Link to='/categories'>
          <div className="c-sidebar-nav-item" style={{backgroundColor:"#24385e", marginTop:"10px"}}>
             <CButton className="c-sidebar-nav-link" style={{border:"none", width:"100%"}}>
-               <CIcon name="cilListNumbered" /> <span style={{marginLeft:"20px"}}>CATEGORIES</span>
+            <Link to='/categories'> 
+               <CIcon name="cilListNumbered" style= {{color:"white"}} /> <span style={{marginLeft:"20px", color:"white"}}>CATEGORIES</span>
+            </Link>   
             </CButton>
          </div>
-         </Link>
          {/* {/** end categories */}
 
          <div className="c-sidebar-nav-item" style={{backgroundColor:"#24385e", marginTop:"10px"}}>
             <CButton className="c-sidebar-nav-link" style={{border:"none", width:"100%"}}>
-               <CIcon name="cilBasket" /> <span style={{marginLeft:"20px"}}>STOCK DETAILS</span>
+               <Link to='./'>
+               <CIcon name="cilBasket" style={{color:"white"}} /> <span style={{marginLeft:"20px", color:"white"}}>STOCK DETAILS</span>
+               </Link>
             </CButton>
          </div>
 
          <div className="c-sidebar-nav-item" style={{backgroundColor:"#24385e", marginTop:"10px"}}>
             <CButton className="c-sidebar-nav-link" style={{border:"none", width:"100%"}}>
-               <CIcon name="cilBan" /> <span style={{marginLeft:"20px"}}>SUPPLIES</span>
+               <Link to='./'>
+               <CIcon name="cilBan" style={{color:"white"}} /> <span style={{marginLeft:"20px",color:"white"}}>SUPPLIES</span>
+               </Link>
             </CButton>
          </div>
 
          <div className="c-sidebar-nav-item" style={{backgroundColor:"#24385e", marginTop:"10px"}}>
             <CButton className="c-sidebar-nav-link" style={{border:"none", width:"100%"}}>
-               <CIcon name="cilTags" /> <span style={{marginLeft:"20px"}}>ASSETS COLUMN</span>
+               <Link to='./'>
+               <CIcon name="cilTags" style={{color:"white"}} /> <span style={{marginLeft:"20px", color:"white"}}>ASSETS COLUMN</span>
+               </Link>
             </CButton>
          </div>
         
         {/**user management starts */}
-        <Link to='/management'>
          <div className="c-sidebar-nav-item" style={{backgroundColor:"#24385e", marginTop:"10px"}}>
             <CButton className="c-sidebar-nav-link" style={{border:"none", width:"100%"}}>
-               <CIcon name="cilNotes" /> <span style={{marginLeft:"20px"}}>USER MANAGEMENT</span>
+            <Link to='/management'>
+               <CIcon name="cilNotes" style={{color:"white"}} /> <span style={{marginLeft:"20px", color:"white"}}>USER MANAGEMENT</span>
+            </Link>
             </CButton>
          </div>
-         </Link>
          {/**user management ends */}
          
 
          <div className="c-sidebar-nav-item" style={{backgroundColor:"#24385e", marginTop:"10px"}}>
             <CButton className="c-sidebar-nav-link" style={{border:"none", width:"100%"}}>
-               <CIcon name="cilSettings" /> <span style={{marginLeft:"20px"}}>SETTINGS</span>
+               <Link to='./'>
+               <CIcon name="cilSettings" style={{color:"white"}} /> <span style={{marginLeft:"20px", color:"white"}}>SETTINGS</span>
+               </Link>
             </CButton>
          </div>
 
          <div className="c-sidebar-nav-item" style={{backgroundColor:"#24385e", marginTop:"10px"}}>
             <CButton className="c-sidebar-nav-link" style={{border:"none", width:"100%"}}>
-               <CIcon name="cilCode" /> <span style={{marginLeft:"20px"}}>ABOUT</span>
+               <Link to='./'>
+               <CIcon name="cil-code" style={{color:"white"}} /> <span style={{marginLeft:"20px", color:"white"}}>ABOUT</span>
+               </Link>
             </CButton>
          </div>
       
