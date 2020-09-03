@@ -90,7 +90,7 @@ class NewUser extends React.Component{
       <CContainer>
          <CRow>
             <CCol>
-                  <CCard className="text-center" style={{marginTop:"65px",marginLeft:"auto", marginRight:"auto", borderRadius:"10px", width:"500px"}}>
+                  <CCard className="text-center" style={{marginTop:"-20px", marginLeft:"auto", marginRight:"auto", borderRadius:"10px", width:"500px"}}>
                       <CCardHeader><h4>ADD NEW USER</h4></CCardHeader>
                       <form onSubmit={this.handleSubmit}>
                       <CCardBody>
