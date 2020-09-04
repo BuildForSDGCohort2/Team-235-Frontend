@@ -1,107 +1,108 @@
 import React from 'react' 
-import { useState } from 'react';
+import {Link} from 'react-router-dom';
  
-import {CButton,CModal,CModalBody,CModalFooter, CCard, CCardBody, CCardHeader} from '@coreui/react'
+import {
+    CButton,
+    CCard,
+    CDropdown,
+    CCardHeader,
+    CDataTable,
+    CBadge,
+    CDropdownItem,
+    CDropdownMenu,
+    CDropdownToggle,
+    CContainer
+  } from '@coreui/react'
  
-
- 
-const TheModal = () => {
-    const [modal, setModal] = useState(false);
-    const [state, setState] = useState({
-        firstName:'',
-        lastName:'',
-        email:'',
-        phone:'',
-    })
-
-    const toggle = ()=>{
-        setModal(!modal);
-    }
-
-    function handleChange(e) {
-       setState({...state,[e.target.name] : e.target.value});
-    }
-
-    function handleSubmit(e) {
-        e.preventDefault();
-         console.log(state);
-    }
-
+const TheUserManagement = () => { 
+    const usersData = [
+        {id: 0, name: 'John Doe', email: 'kwakuboafo@gmail.com', phone: '0543243676', status: 'Pending'},
+        {id: 1, name: 'Samppa Nori', email: 'kwakuboafo@gmail.com', phone: '0564438556', status: 'Active'},
+        {id: 2, name: 'Estavan Lykos', email: 'serwahasamoah@gmail.com', phone: '0278834566', status: 'Banned'},
+        {id: 3, name: 'Chetan Mohamed', email: 'serwahasamoah@gmail.com', phone: '0234456782', status: 'Inactive'},
+        {id: 4, name: 'Derick Maximinus', email: 'amakuma@gmail.com', phone: '0563325647', status: 'Pending'},
+        {id: 5, name: 'Friderik Dávid', email: 'sarpongemmanuel@gmail.com', phone: '0278834566', status: 'Active'},
+        {id: 6, name: 'Yiorgos Avraamu', email: 'kwakuboafo@gmail.com', phone: '0563325647', status: 'Active'},
+        {id: 7, name: 'Avram Tarasios', email: 'serwahasamoah@gmail.com', phone: '0278834566', status: 'Banned'},
+        {id: 0, name: 'John Doe', email: 'kwakuboafo@gmail.com', phone: '0543243676', status: 'Pending'},
+        {id: 1, name: 'Samppa Nori', email: 'kwakuboafo@gmail.com', phone: '0564438556', status: 'Active'},
+        {id: 2, name: 'Estavan Lykos', email: 'serwahasamoah@gmail.com', phone: '0278834566', status: 'Banned'},
+        {id: 3, name: 'Chetan Mohamed', email: 'serwahasamoah@gmail.com', phone: '0234456782', status: 'Inactive'},
+        {id: 4, name: 'Derick Maximinus', email: 'amakuma@gmail.com', phone: '0563325647', status: 'Pending'},
+        {id: 5, name: 'Friderik Dávid', email: 'sarpongemmanuel@gmail.com', phone: '0278834566', status: 'Active'},
+        {id: 6, name: 'Yiorgos Avraamu', email: 'kwakuboafo@gmail.com', phone: '0563325647', status: 'Active'},
+        {id: 7, name: 'Avram Tarasios', email: 'serwahasamoah@gmail.com', phone: '0278834566', status: 'Banned'}
+        
+      ]
+    
+      const fields = [
+        { key: 'name', _style: { width: '25%'} },
+        {key:'email'},
+        { key: 'phone', _style: { width: '20%'} },
+        { key: 'status', _style: { width: '20%'} },
+        {key: 'options', _style:{width: '20%'}}
+      ]
+    
+      const getBadge = (status)=>{
+        switch (status) {
+          case 'Active': return 'success'
+          case 'Inactive': return 'secondary'
+          case 'Pending': return 'warning'
+          case 'Banned': return 'danger'
+          default: return 'primary'
+        }
+      }
    
     return (
-        <div className="container">
-
+        <CContainer fluid>
         {/**start of card background */}
-        <CCard style={{height:"60vh",borderRadius:"10px"}}>
+        <CCard className="cards" style={{borderRadius:"10px", padding:"30px", marginTop:"-20px"}}>
            <CCardHeader>
-               <CButton style={{float:"right"}} color="info" onClick={toggle} className="mr-1">ADD NEW USER</CButton>
+               <Link to="./add" >
+               <CButton style={{float:"right"}} color="info" className="mr-1">ADD NEW USER</CButton>
+               </Link>
            </CCardHeader>
-           <CCardBody>
-            <form onSubmit={handleSubmit}>
-     
-        <CModal show={modal} onClose={toggle}>
-           <CModalBody className="text-center" style={{borderRadius:"15px", margin:"20px"}}>
-           <div className="form-group">
-                <label htmlFor="firstnameId"><em>First name</em></label>
-                <input type="text" 
-                className="form-control" 
-                id="firstnameId" 
-                value={state.firstName}
-                name="firstName"
-                onChange={handleChange}
-                required/>
-           </div>
+           {/* <CCardBody> */}
+           <CDataTable 
+                    style
+                    items={usersData}
+                    fields={fields}
+                    tableFilter
+                    itemsPerPageSelect
+                    itemsPerPage={10}
+                    hover
+                    sorter
+                    pagination
+                    scopedSlots = {{
 
-           <div className="form-group">
-                <label htmlFor="lastnameId"><em>last name</em></label>
-                <input type="text" 
-                className="form-control" 
-                id="lastnameId" 
-                name="lastName"
-                value={state.lastName}
-                onChange={handleChange}
-                required/>
-           </div>
-
-           <div className="form-group">
-                <label htmlFor="emailId"><em>email</em></label>
-                <input 
-                type="email" 
-                className="form-control" 
-                id="emailId"
-                value={state.email}
-                required
-                name="email"
-                onChange={handleChange}/>
-           </div>
-
-           <div className="form-group">
-                <label htmlFor="phoneId"><em>phone</em></label>
-                <input type="phone" 
-                className="form-control" 
-                id="phoneId"
-                name="phone"
-                value={state.phone}
-                onChange={handleChange}/>
-           </div>
-
-           </CModalBody>
-
-           <CModalFooter>
-             <CButton  type="submit" color="info" style={{width:"150px"}}>SAVE</CButton>
-             <CButton color="secondary" onClick={toggle} style={{width:"150px"}}>Cancel</CButton>
-          </CModalFooter>
-      </CModal>
-      </form>
-    </CCardBody>
-    {/**end of card background */}
- </CCard>
-
-</div>
+                    'status':
+                    (item)=>(
+                        <td>
+                        <CBadge color={getBadge(item.status)}>
+                            {item.status}
+                        </CBadge>
+                        </td>
+                    ),
+                   'options':
+                    ()=>{
+                        return (
+                            <td className="py-2">
+                              <CDropdown>
+                                  <CDropdownToggle>more</CDropdownToggle>
+                                      <CDropdownMenu>
+                                        <CDropdownItem>Edit</CDropdownItem>
+                                        <CDropdownItem>Delete</CDropdownItem>
+                                      <CDropdownItem>Assign roles</CDropdownItem>
+                                   </CDropdownMenu>
+                               </CDropdown>
+                            </td>
+                    )}
+                }}
+            />
+       </CCard>
+  
+</CContainer>
         
+)}
 
-      
-    )
-}
-
-export default TheModal;
+export default TheUserManagement;
