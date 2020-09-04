@@ -43,7 +43,11 @@ const Login = () => {
                         </CInputGroupText>
                       </CInputGroupPrepend>
                       <CInput type="password" placeholder="Password" autoComplete="current-password" />
+                    
                     </CInputGroup>
+
+
+
                     <CRow>
                       <CCol xs="6">
                         <Link to ='/dashboard'>
@@ -51,7 +55,9 @@ const Login = () => {
                         </Link>
                       </CCol>
                       <CCol xs="6" className="text-right">
-                        <CButton color="link" className="px-0">Forgot password?</CButton>
+                        <Link to="./forgot">
+                        <CButton color="info" className="px-0" active tabIndex={-2} >Forgot password?</CButton> 
+                        </Link>
                       </CCol>
                     </CRow>
                   </CForm>
@@ -61,12 +67,15 @@ const Login = () => {
                 <CCardBody className="text-center">
                   <div>
                     <h2>Sign up</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
-                      labore et dolore magna aliqua.</p>
+                    <p> You can only register by the administrator</p>
                     <Link to="/register">
-                      <CButton color="primary" className="mt-3" active tabIndex={-1}>Register Now!</CButton>
+                      <CButton color="info" className="mt-3" active tabIndex={-1}>Register Now!</CButton>
                     </Link>
                   </div>
+
+                  
+
+
                 </CCardBody>
               </CCard>
             </CCardGroup>
