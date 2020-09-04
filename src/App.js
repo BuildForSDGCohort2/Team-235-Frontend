@@ -19,10 +19,7 @@ const Page404 = React.lazy(() => import('./views/pages/page404/Page404'));
 const Page500 = React.lazy(() => import('./views/pages/page500/Page500'));
  
  
- 
-
-class App extends Component {
-
+class App extends Component{
   render() {
     return (
       <HashRouter>
@@ -36,6 +33,7 @@ class App extends Component {
               <Route exact path="/categories" name="Categories" render={props => <TheLayout {...props}/>} />
               <Route exact path = "/management" name="User Management" render={props => <TheLayout {...props}/>}/>
               <Route exact path="/add" name="New User" render={props => <TheLayout {...props}/>} />
+              <Route exact path="/stock-details" name= "Stock Details" render={props => <TheLayout {...props}/>} />
             </Switch>
           </React.Suspense>
       </HashRouter>
