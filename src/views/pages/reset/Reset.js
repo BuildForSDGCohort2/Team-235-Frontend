@@ -3,7 +3,7 @@ import {
   CButton,
   CCard,
   CCardBody,
-  //CCardFooter,
+  
   CCol,
   CContainer,
   CForm,
@@ -14,7 +14,7 @@ import {
   CRow
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
-import { Link } from 'react-router-dom'
+//import { Link } from 'react-router-dom'
 
 const Reset = () => {
   return (
@@ -53,7 +53,7 @@ const Reset = () => {
                     <CInput type="password" placeholder="Confirm Password" autoComplete="password" />
                   </CInputGroup>
           
-                  <CButton color="success" block>Reset</CButton>
+                  <CButton color="success" block style={{ width: '50%', textAlign: "center" }} >Reset</CButton>
 
                 </CForm>
 
