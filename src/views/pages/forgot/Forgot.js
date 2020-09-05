@@ -14,7 +14,6 @@ import {
   CRow,
   CCardHeader
 } from '@coreui/react'
-
 import { Link } from 'react-router-dom'
 
 const Forgot = () => {
