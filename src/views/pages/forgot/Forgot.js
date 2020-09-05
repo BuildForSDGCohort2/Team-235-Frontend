@@ -14,11 +14,8 @@ import {
   CCardHeader,
   CCardFooter
 } from '@coreui/react'
-<<<<<<< HEAD
 import CIcon from '@coreui/icons-react'
 import { Link } from 'react-router-dom'
-=======
->>>>>>> e77f997b3c9a481c02d976d918a864391144ce3b
 
 const Forgot = () => {
   return (
@@ -29,25 +26,17 @@ const Forgot = () => {
           <CCol md="2" lg="4" xl="6">
           <CForm className="text-center">
             <CCard className="mx-1">
-<<<<<<< HEAD
               <CCardBody className="p-4">
                 <CForm>
 
 
                  <h1>Forgot Password</h1>   
-=======
-              <CCardHeader>
-              <div> <h1>Reset Password</h1> </div>
-              </CCardHeader>
-              <CCardBody className="p-4" >
->>>>>>> e77f997b3c9a481c02d976d918a864391144ce3b
                   <CInputGroup className="mb-2">
                     <CInputGroupPrepend>
                       <CInputGroupText>@</CInputGroupText>
                     </CInputGroupPrepend>   
                     <CInput type="text" placeholder="Enter your email" autoComplete="email" />
                   </CInputGroup>
-<<<<<<< HEAD
 
                   <Link to= "./reset"> 
                   <CButton color="primary" block>Click</CButton>
@@ -93,13 +82,6 @@ const Forgot = () => {
              
 
 
-=======
-                  <CButton className="btn btn-info" style={{marginTop:"20px"}} block>Submit</CButton>
-              </CCardBody>
-              <CCardFooter>
-                 <cilText>A link will be sent to your email to reset it</cilText>
-              </CCardFooter>
->>>>>>> e77f997b3c9a481c02d976d918a864391144ce3b
             </CCard>
             </CForm>
           </CCol>
