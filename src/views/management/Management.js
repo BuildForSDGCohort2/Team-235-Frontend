@@ -90,7 +90,7 @@ const TheUserManagement = () => {
                               <CDropdown>
                                   <CDropdownToggle>more</CDropdownToggle>
                                       <CDropdownMenu>
-                                        <CDropdownItem>nkrumah</CDropdownItem>
+                                        <CDropdownItem>Edit</CDropdownItem>
                                         <CDropdownItem>Delete</CDropdownItem>
                                       <CDropdownItem>Assign roles</CDropdownItem>
                                    </CDropdownMenu>
