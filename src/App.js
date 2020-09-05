@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { HashRouter, Route, Switch } from 'react-router-dom';
 import './scss/style.scss';
 import Forgot from './views/pages/forgot/Forgot';
+import Reset from './views/pages/reset/Reset';
 
 
 const loading = (
@@ -36,6 +37,10 @@ class App extends Component{
               <Route exact path = "/management" name="User Management" render={props => <TheLayout {...props}/>}/>
               <Route exact path="/add" name="New User" render={props => <TheLayout {...props}/>} />
               <Route exact path="/stock-details" name= "Stock Details" render={props => <TheLayout {...props}/>} />
+              <Route exact path="/reset" name="Reset Page" render={props => <Reset {...props}/>} />
+              <Route exact path="/login" name="Login Page" render={props => <Login {...props}/>} />
+
+
             </Switch>
           </React.Suspense>
       </HashRouter>
