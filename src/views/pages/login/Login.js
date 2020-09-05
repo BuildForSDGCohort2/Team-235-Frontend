@@ -18,7 +18,7 @@ import CIcon from '@coreui/icons-react'
  
 const Login = () => {
   return (
-    <div className="c-app c-default-layout flex-row align-items-center">
+    <div className="c-app c-default-layout flex-row align-items-center text-center">
       <CContainer>
         <CRow className="justify-content-center">
           <CCol md="8">
@@ -46,36 +46,18 @@ const Login = () => {
                     
                     </CInputGroup>
 
-
-
-                    <CRow>
-                      <CCol xs="6">
-                        <Link to ='/dashboard'>
-                        <CButton color="primary" className="px-4">Login</CButton>
-                        </Link>
-                      </CCol>
-                      <CCol xs="6" className="text-right">
-                        <Link to="./forgot">
-                        <CButton color="info" className="px-0" active tabIndex={-2} >Forgot password?</CButton> 
-                        </Link>
-                      </CCol>
-                    </CRow>
+                    <Link to ='/dashboard'>
+                      <CButton color="primary" className="px-4">Login</CButton>
+                    </Link><br/>
+                    <Link to="./forgot">
+                        <cilText>forgot password?</cilText>
+                    </Link>
                   </CForm>
                 </CCardBody>
               </CCard>
               <CCard className="text-white bg-primary py-5 d-md-down-none" style={{ width: '44%' }}>
                 <CCardBody className="text-center">
-                  <div>
-                    <h2>Sign up</h2>
-                    <p> You can only register by the administrator</p>
-                    <Link to="/register">
-                      <CButton color="info" className="mt-3" active tabIndex={-1}>Register Now!</CButton>
-                    </Link>
-                  </div>
-
-                  
-
-
+                    <CIcon name="sygnet" style={{height:"200px", width:"300px"}}></CIcon>
                 </CCardBody>
               </CCard>
             </CCardGroup>
