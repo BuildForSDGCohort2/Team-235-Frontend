@@ -42,10 +42,10 @@ const Forgot = () => {
                   
                   <em>A link will be sent to your email. Click to reset password</em>
                    <div>
-                     <CButton color="" style={{width:"120px", margin:"10px",color:"white", backgroundColor:"blue"}}>Send</CButton>
+                     <CButton color="primary" style={{width:"120px", margin:"10px"}}>Send</CButton>
                      <Link to="/login">
-                      <CButton color="danger" style={{width:"120px", margin:"10px"}}>Cancel</CButton>
-                  </Link>
+                        <CButton color="primary" style={{width:"120px", margin:"10px"}}>Cancel</CButton>
+                    </Link>
                    </div>
                  
                   
