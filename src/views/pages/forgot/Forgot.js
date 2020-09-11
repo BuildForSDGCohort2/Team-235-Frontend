@@ -3,7 +3,6 @@ import {
   CButton,
   CCard,
   CCardBody,
-  //CCardFooter,
   CCol,
   CContainer,
   CForm,
@@ -13,7 +12,6 @@ import {
   CInputGroupText,
   CRow,
   CCardHeader,
-  CCardFooter
 } from '@coreui/react'
 import { Link } from 'react-router-dom'
 
@@ -47,10 +45,6 @@ const Forgot = () => {
                         <CButton color="primary" style={{width:"120px", margin:"10px"}}>Cancel</CButton>
                     </Link>
                    </div>
-                 
-                  
-                  
-                    
               </CCardBody>
             </CCard>
             </CForm>
