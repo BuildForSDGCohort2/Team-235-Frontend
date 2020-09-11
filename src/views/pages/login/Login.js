@@ -19,7 +19,7 @@ import {gql, useMutation} from '@apollo/client'
  
 
 
-//mutation
+//mutation sent to the server
 const ADMIN_DATA = gql`
 mutation Signin($email: String!, $password: String!){
   signin( data: {email: $email, password: $password})
@@ -30,14 +30,12 @@ mutation Signin($email: String!, $password: String!){
 `;
 
 const Login = (props) => {
-
   const [signin] = useMutation(ADMIN_DATA);
 
       const [state, setState] = useState({
         state:{
           email: '',
           password: '',
-          loggedIn: false
         }
     })
 
@@ -60,14 +58,15 @@ const Login = (props) => {
        errorPolicy: "all"
       }) 
 
-      const token = response.data.signin.accessToken; //store accessToken in local storage
+      const token = response.data.signin.accessToken; // destructure reponse and store accessToken in local storage
       localStorage.setItem('token', JSON.stringify(token));
  
       const ACCESS_TOKEN = localStorage.getItem('token');
-     
-     if(ACCESS_TOKEN !== null){
+      const isValidToken = ACCESS_TOKEN !== null ? true : false;
+
+     if(isValidToken){
        props.history.push('/dashboard')
-     } 
+     } //refactor: catch an error here
   
     }catch(e){
       alert("invalid credentials") // there is a better to handle errors
