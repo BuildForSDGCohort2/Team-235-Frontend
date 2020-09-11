@@ -69,7 +69,7 @@ const Login = (props) => {
      } //refactor: catch an error here
   
     }catch(e){
-      alert("invalid credentials") // there is a better to handle errors
+      alert("invalid credentials") //refactor: there is a better to handle errors
     }
     
     

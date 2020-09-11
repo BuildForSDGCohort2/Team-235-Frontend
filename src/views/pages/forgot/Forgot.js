@@ -39,15 +39,17 @@ const Forgot = () => {
                       </CInputGroup>
                      </CCardBody>
                  
-                  <CCardFooter>
+                  
                   <em>A link will be sent to your email. Click to reset password</em>
-             
-                     <CButton color="info" style={{width:"120px", margin:"10px"}}>Send</CButton>
-                 
-                  <Link to="/login">
-                      <CButton color="info" style={{width:"120px", margin:"10px"}}>Cancel</CButton>
+                   <div>
+                     <CButton color="" style={{width:"120px", margin:"10px",color:"white", backgroundColor:"blue"}}>Send</CButton>
+                     <Link to="/login">
+                      <CButton color="danger" style={{width:"120px", margin:"10px"}}>Cancel</CButton>
                   </Link>
-                  </CCardFooter>
+                   </div>
+                 
+                  
+                  
                     
               </CCardBody>
             </CCard>
