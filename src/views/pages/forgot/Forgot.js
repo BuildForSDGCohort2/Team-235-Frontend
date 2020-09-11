@@ -12,65 +12,46 @@ import {
   CInputGroupPrepend,
   CInputGroupText,
   CRow,
-  CCardHeader
+  CCardHeader,
+  CCardFooter
 } from '@coreui/react'
 import { Link } from 'react-router-dom'
 
 const Forgot = () => {
   return (
     <div className="c-app c-default-layout flex-row align-items-center">
-
-        
       <CContainer>
 
         <CRow className="justify-content-center ">
           <CCol md="2" lg="4" xl="6">
+          <CForm>
             <CCard className="mx-1">
-              <CCardBody className="p-4">
-                <CForm>
-                    <CCardHeader className="bg-info"> 
-                 <div> <h1>Forgot Password</h1>  </div>
+              <CCardBody className="p-4 text-center" >
+                <CCardHeader> 
+                 <div> <h1> Reset Password </h1> </div>
                  </CCardHeader>
-                 
-                 <CCard className="text-white bg-info py-6 d-md-right-none" style={{ width: '100%'}}>  
                      <CCardBody>
-
-                     <CInputGroup className="mb-2">
-                    <CInputGroupPrepend>
-                      <CInputGroupText>@</CInputGroupText>
-                    </CInputGroupPrepend>   
-                    <CInput type="text" placeholder="Enter your email" autoComplete="email" />
-                  </CInputGroup>
-
-
+                        <CInputGroup className="mb-2">
+                        <CInputGroupPrepend>
+                          <CInputGroupText>@</CInputGroupText>
+                        </CInputGroupPrepend>   
+                        <CInput type="text" placeholder="Enter your email" autoComplete="email" />
+                      </CInputGroup>
                      </CCardBody>
-                 </CCard>
-                  
-
-                  
-
-                  <Link to= "./reset"> 
-                  <CButton color="primary" block style={{ width: '24%', alignItems: "self-end"  }} >Proceed</CButton>
-                  </Link>
-
-                  <Link to="/login">
-                      <CButton color="danger" className="mt-2" active tabIndex={-1} style={{ width: '24%' }} >Cancel!</CButton>
-                    </Link>
-                    
-
-                </CForm>
-              </CCardBody>
-              
-              
-                    
                  
-              
-              
+                  <CCardFooter>
+                  <em>A link will be sent to your email. Click to reset password</em>
+             
+                     <CButton color="info" style={{width:"120px", margin:"10px"}}>Send</CButton>
+                 
+                  <Link to="/login">
+                      <CButton color="info" style={{width:"120px", margin:"10px"}}>Cancel</CButton>
+                  </Link>
+                  </CCardFooter>
+                    
+              </CCardBody>
             </CCard>
-
-
-
-
+            </CForm>
           </CCol>
         </CRow>
       </CContainer>

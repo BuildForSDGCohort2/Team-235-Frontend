@@ -7,16 +7,31 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 
 import { icons } from './assets/icons'
-
 import { Provider } from 'react-redux'
 import store from './store'
-
+import {ApolloClient, InMemoryCache,ApolloProvider} from '@apollo/client'
+ 
 React.icons = icons
 
+const client = new ApolloClient({
+  request: (operation) => {
+      const token = localStorage.getItem("token");
+      operation.setContext({
+        headers: {
+          authorization: token ? `Bearer ${token}` : '' 
+        }
+      })
+  },
+   uri: "https://stock-tracker-team-235.herokuapp.com/graphql/",
+   cache: new InMemoryCache()
+});
+
 ReactDOM.render(
+  <ApolloProvider client={client}>
   <Provider store={store}>
     <App/>
-  </Provider>, 
+  </Provider>
+  </ApolloProvider>, 
   document.getElementById('root')
 );
 
