@@ -29,7 +29,7 @@ mutation Signin($email: String!, $password: String!){
 }
 `;
 
-const Login = () => {
+const Login = (props) => {
 
   const [signin] = useMutation(ADMIN_DATA);
 
@@ -41,8 +41,6 @@ const Login = () => {
         }
     })
 
-
-   
     function handleChange(e){
       const {name, value} = e.target;
       setState({...state,
@@ -51,24 +49,30 @@ const Login = () => {
     }
 
 
-
   const handleSubmit =  async (e) => {
     e.preventDefault();
     const {email, password} = state;
+    try {
+      const response = await signin({variables: {
+        email: email,
+        password: password
+      },
+       errorPolicy: "all"
+      }) 
+
+      const token = response.data.signin.accessToken; //store accessToken in local storage
+      localStorage.setItem('token', JSON.stringify(token));
+ 
+      const ACCESS_TOKEN = localStorage.getItem('token');
+     
+     if(ACCESS_TOKEN !== null){
+       props.history.push('/dashboard')
+     } 
+  
+    }catch(e){
+      alert("invalid credentials") // there is a better to handle errors
+    }
     
-    const response = await signin({variables: {
-      email: email,
-      password: password
-    },
-     errorPolicy: "all"
-    });
-
-
-     console.log(response);
-     const token = response.data.signin.accessToken; //store accessToken in local storage
-     localStorage.setItem('token', JSON.stringify(token));
-
-     //const ACCESS_TOKEN = localStorage.getItem('token');
     
     
     
