@@ -69,7 +69,7 @@ const Login = () => {
 
      //const ACCESS_TOKEN = localStorage.getItem('token');
     
-     e.persist();
+     e.preventDefault();
     
   }
 
