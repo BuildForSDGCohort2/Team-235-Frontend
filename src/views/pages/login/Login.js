@@ -53,6 +53,7 @@ const Login = () => {
 
 
   const handleSubmit =  async (e) => {
+    e.preventDefault();
     const {email, password} = state;
     
     const response = await signin({variables: {
@@ -69,7 +70,7 @@ const Login = () => {
 
      //const ACCESS_TOKEN = localStorage.getItem('token');
     
-     e.preventDefault();
+    
     
   }
 
