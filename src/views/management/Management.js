@@ -1,4 +1,4 @@
-import React from 'react' 
+import React, {useEffect} from 'react' 
 import {Link} from 'react-router-dom';
  
 import {
@@ -14,7 +14,8 @@ import {
     CContainer
   } from '@coreui/react'
  
-const TheUserManagement = () => { 
+const TheUserManagement = (props) => 
+{ 
     const usersData = [
         {id: 0, name: 'John Doe', email: 'kwakuboafo@gmail.com', phone: '0543243676', status: 'Pending'},
         {id: 1, name: 'Samppa Nori', email: 'kwakuboafo@gmail.com', phone: '0564438556', status: 'Active'},
@@ -52,6 +53,14 @@ const TheUserManagement = () => {
           default: return 'primary'
         }
       }
+
+
+      useEffect(() => {
+         const token = localStorage.getItem('token');
+         if(!token){
+            props.history.push('/404');
+         }
+      })
    
     return (
         <CContainer fluid>

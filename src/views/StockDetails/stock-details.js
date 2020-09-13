@@ -1,4 +1,4 @@
-import React  from 'react'
+import React, {useEffect}  from 'react'
 import {
             CCard,
             CCardHeader,
@@ -21,8 +21,15 @@ import {CIcon} from '@coreui/icons-react'
 
  
 
- const StockDetails = () => {
-     
+ const StockDetails = (props) => {
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if(!token){
+       props.history.push('/404');
+    }
+ })
+
+
     const stockData = [
         {name: "Paracetamol", dateAdded: "23/03/2020", lastUpdated:"04/07/2019", categories: "Drugs"},
         {name: "Paracetamol", dateAdded: "23/03/2020", lastUpdated:"04/07/2019", categories: "Drugs"},

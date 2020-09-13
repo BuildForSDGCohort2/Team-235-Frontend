@@ -34,7 +34,9 @@ class NewUser extends React.Component{
 
       this.handleChange = this.handleChange.bind(this);
       this.handleSubmit = this.handleSubmit.bind(this);
-      
+
+     
+  
    }
         
   
@@ -68,6 +70,13 @@ class NewUser extends React.Component{
        this.setState({error,[name] : value})
    }
 
+   componentDidMount = (() => {
+      const token = localStorage.getItem('token');
+      if(!token){
+         this.props.history.push('/404');
+      }
+   })
+
      handleSubmit(e){
       e.preventDefault();
       
@@ -81,7 +90,7 @@ class NewUser extends React.Component{
      
    }
 
-  
+ 
 
    render(){
   const {errorMessages} = this.state;

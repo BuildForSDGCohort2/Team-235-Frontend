@@ -11,12 +11,20 @@ import {
 
 import CIcon from '@coreui/icons-react'
 import {Link} from 'react-router-dom';
+ 
 
-// sidebar nav config
+ 
 
 const TheSidebar = () => {
   const dispatch = useDispatch()
   const show = useSelector(state => state.sidebarShow)
+
+
+  const clearStorage = () => {
+     localStorage.removeItem('token');
+  }
+
+  
 
   return (
     <CSidebar
@@ -107,11 +115,16 @@ const TheSidebar = () => {
          </div>
       
          <div className="c-sidebar-nav-item" style={{backgroundColor:"#24385e", marginTop:"30px"}}>
-            <CButton className="c-sidebar-nav-link c-sidebar-nav-link-danger" style={{border:"none", width:"100%"}}>
-              <Link to='/'>
-               <CIcon name="cil-user" style={{color:"white"}} /> <span style={{marginLeft:"20px",color:"white"}}>LOGOUT</span>
-              </Link>
+            <Link to='/'>
+            <CButton 
+            className="c-sidebar-nav-link c-sidebar-nav-link-danger" 
+            style={{border:"none", width:"100%"}}
+            onClick = {clearStorage}>
+               <CIcon name="cil-user" style={{color:"white"}} /> 
+               <span style={{marginLeft:"20px",color:"white"}}>LOGOUT</span>
             </CButton>
+            </Link>
+
          </div>
         {/**end of side bar items */ }
         

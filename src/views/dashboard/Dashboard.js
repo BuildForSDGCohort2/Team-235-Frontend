@@ -1,4 +1,4 @@
-import React, { lazy } from 'react'
+import React, { lazy, useEffect } from 'react'
 import {
   CBadge,
   CButton,
@@ -15,11 +15,24 @@ import {
 import CIcon from '@coreui/icons-react'
 
 import MainChartExample from '../charts/MainChartExample.js'
+ 
 
 const WidgetsDropdown = lazy(() => import('../widgets/WidgetsDropdown.js'))
 const WidgetsBrand = lazy(() => import('../widgets/WidgetsBrand.js'))
+ 
 
-const Dashboard = () => {
+const Dashboard = (props) => {
+
+  //prevents unauthorized access to webapp
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if(!token){
+       props.history.push('/404');
+    }
+ })
+  
+    
+
   return (
     <>
       <WidgetsDropdown />

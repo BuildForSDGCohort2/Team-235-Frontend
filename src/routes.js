@@ -11,9 +11,10 @@ const Charts = React.lazy(() => import('./views/charts/Charts'));
 const Dashboard = React.lazy(() => import('./views/dashboard/Dashboard'));
 const UserManagement = React.lazy(() => import('./views/management/Management'));
 const AddNewPage = React.lazy(() => import('./views/management/AddNewPage'))
+const Login = React.lazy(() => import('./views/pages/login/Login'))
 
 const routes = [
-  { path: '/', exact: true, name: 'Home' },
+  { path: '/', exact: true, name: 'Login Page', component: Login },
   { path: '/dashboard', name: 'Dashboard', component: Dashboard },
   { path: '/base/breadcrumbs',  name: 'Breadcrumbs', component: Breadcrumbs },
   { path: '/categories',  name: 'Categories', component: Categories },

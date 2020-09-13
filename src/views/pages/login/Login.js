@@ -18,8 +18,6 @@ import CIcon from '@coreui/icons-react'
 import {gql, useMutation} from '@apollo/client'
  
 
-
-//mutation sent to the server
 const ADMIN_DATA = gql`
 mutation Signin($email: String!, $password: String!){
   signin( data: {email: $email, password: $password})
@@ -29,9 +27,10 @@ mutation Signin($email: String!, $password: String!){
 }
 `;
 
+
+
 const Login = (props) => {
   const [signin] = useMutation(ADMIN_DATA);
-
       const [state, setState] = useState({
         state:{
           email: '',
@@ -44,41 +43,46 @@ const Login = (props) => {
       setState({...state,
         [name]: value
       });
+
+      console.log(state);
     }
 
-
+ 
+ 
   const handleSubmit =  async (e) => {
     e.preventDefault();
     const {email, password} = state;
+
     try {
-      const response = await signin({variables: {
-        email: email,
-        password: password
-      },
-       errorPolicy: "all"
-      }) 
+      const response = await signin(
+          {
+            variables: 
+            {
+            email: email,
+            password: password
+          },
+            errorPolicy: "all"
+          }) 
 
-      const token = response.data.signin.accessToken; // destructure reponse and store accessToken in local storage
+      const token = response.data.signin.accessToken; 
       localStorage.setItem('token', JSON.stringify(token));
- 
-      const ACCESS_TOKEN = localStorage.getItem('token');
-      const isValidToken = ACCESS_TOKEN !== null ? true : false;
 
+
+      //get the accesstoken from the localStorage
+      const ACCESS_TOKEN = localStorage.getItem('token');
+
+      const isValidToken = ACCESS_TOKEN !== null ? true : false
+    
      if(isValidToken){
-       props.history.push('/dashboard')
-     } //refactor: catch an error here
+      props.history.push('/dashboard')
+     }  
   
     }catch(e){
-      alert("invalid credentials") //refactor: there is a better to handle errors
+      alert(`invalid credentials`);
     }
-    
-    
-    
-    
   }
 
   return (
-
     <div className="c-app c-default-layout flex-row align-items-center text-center">
       <CContainer>
         <CRow className="justify-content-center">
