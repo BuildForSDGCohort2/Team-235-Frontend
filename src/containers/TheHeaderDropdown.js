@@ -9,6 +9,11 @@ import {
 import CIcon from '@coreui/icons-react'
 
 const TheHeaderDropdown = () => {
+
+  const logout = () => {
+    localStorage.removeItem('token');
+    window.location.href = '/';
+  }
   return (
     <CDropdown
       inNav
@@ -79,9 +84,9 @@ const TheHeaderDropdown = () => {
           <CBadge color="primary" className="mfs-auto">42</CBadge>
         </CDropdownItem> */}
         <CDropdownItem divider />
-        <CDropdownItem>
+        <CDropdownItem onClick={ () => logout()}>
           <CIcon name="cil-lock-locked" className="mfe-2" /> 
-          Lock Account
+           Logout
         </CDropdownItem>
       </CDropdownMenu>
     </CDropdown>

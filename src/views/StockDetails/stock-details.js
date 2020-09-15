@@ -18,6 +18,7 @@ import {
         } from '@coreui/react'
 
 import {CIcon} from '@coreui/icons-react'
+import {Link} from 'react-router-dom'
 
  
 
@@ -52,7 +53,9 @@ import {CIcon} from '@coreui/icons-react'
         <CContainer>
         <CCard className="text-center" style={{borderRadius:"5px"}}>
         <CCardHeader> 
+          <Link to='/addstock'>
             <CButton className="btn btn-info" style={{float:"right"}}>ADD NEW STOCK</CButton>
+          </Link>  
             <CButton className="btn btn-info" style={{float:"right", marginRight:"10px"}}>UPDATE EXISTING STOCK</CButton>
                     <CInputGroup style={{width:"30%", float:"left"}}>
                      <CInputGroupPrepend>
