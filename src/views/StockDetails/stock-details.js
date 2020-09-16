@@ -1,4 +1,4 @@
-import React, {useEffect}  from "react"
+import React, {useEffect}  from "react";
 import {
             CCard,
             CCardHeader,
@@ -15,10 +15,10 @@ import {
             CDropdownItem, 
             CDropdownMenu,
             CDropdownToggle,
-        } from "@coreui/react"
+        } from "@coreui/react";
 
-import {CIcon} from "@coreui/icons-react"
-import {Link} from "react-router-dom"
+import {CIcon} from "@coreui/icons-react";
+import {Link} from "react-router-dom";
 
  
 
@@ -27,7 +27,7 @@ import {Link} from "react-router-dom"
     const token = localStorage.getItem("token");
     if(!token){
        props.history.push("/404");
-    };
+    }
  });
 
 

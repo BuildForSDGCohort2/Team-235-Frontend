@@ -54,7 +54,7 @@ const AddStock = () => {
         setState({
             ...state,
             [name]: value
-        })
+        });
     };
 
 
