@@ -1,7 +1,7 @@
-import React, {useState} from 'react'
+import React, {useState} from 'react';
 import { CContainer, CRow, CCol, CCard, CCardHeader, CCardFooter, CCardBody,CButton } from '@coreui/react';
-import {Link} from 'react-router-dom'
-import Select from 'react-select'
+import {Link} from 'react-router-dom';
+import Select from 'react-select';
 
 const options = [
     {value:"Drug", label:"Drugs"},
@@ -26,31 +26,31 @@ const UserList = [
 const AddStock = () => {
 
     const [state, setState] = useState({
-        itemName: '',
-        facet: '',
-        dateAdded: '',
-        itemType: '',
-        dateManufactured: '',
-        expiryDate: '',
-        department: '',
-        itemCode: '',
-        link: '',
-        //addedBy: '',
-        totalNumber: '',
-        description: ''
+        itemName: "",
+        facet: "",
+        dateAdded: "",
+        itemType: "",
+        dateManufactured: "",
+        expiryDate: "",
+        department: "",
+        itemCode: "",
+        link: "",
+        //addedBy: "",
+        totalNumber: "",
+        description: ""
     })
 
     //TODO: create hooks for selectOptions and setSelectOptions
-    const [selectedOption, setSelectedOption] = useState(null) 
+    const [selectedOption, setSelectedOption] = useState(null);
 
     //TODO: refactor this code
-    const handleSelectedOption = e => {
+    const handleSelectedOption = (e) => {
         setSelectedOption(e)
         console.log(selectedOption)
     }
     
 
-    const handleChange = e => {
+    const handleChange = (e) => {
         const {name, value} = e.target;
         setState({
             ...state,
@@ -60,8 +60,8 @@ const AddStock = () => {
 
 
 
-    const handleSubmit = e => {
-        e.preventDefault()
+    const handleSubmit = (e) => {
+        e.preventDefault();
     }
    
     return(
@@ -250,4 +250,4 @@ const AddStock = () => {
     )
 }
 
-export default AddStock
+export default AddStock;
