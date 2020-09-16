@@ -1,14 +1,19 @@
-import React from 'react'
+import React from "react"
 import {
   CDropdown,
   CDropdownItem,
   CDropdownMenu,
   CDropdownToggle,
   CImg
-} from '@coreui/react'
-import CIcon from '@coreui/icons-react'
+} from "@coreui/react"
+import CIcon from "@coreui/icons-react"
 
 const TheHeaderDropdown = () => {
+
+  const logout = () => {
+    localStorage.removeItem("token");
+    window.location.href = "/";
+  }
   return (
     <CDropdown
       inNav
@@ -18,7 +23,7 @@ const TheHeaderDropdown = () => {
       <CDropdownToggle className="c-header-nav-link" caret={false}>
         <div className="c-avatar">
           <CImg
-            src={'avatars/6.jpg'}
+            src={"avatars/6.jpg"}
             className="c-avatar-img"
             alt="admin@bootstrapmaster.com"
           />
@@ -80,8 +85,12 @@ const TheHeaderDropdown = () => {
         </CDropdownItem> */}
         <CDropdownItem divider />
         <CDropdownItem>
+          <CIcon name="cil-user" className="mfe-2" /> 
+           Profile
+        </CDropdownItem>
+        <CDropdownItem onClick={ () => logout()}>
           <CIcon name="cil-lock-locked" className="mfe-2" /> 
-          Lock Account
+           Logout
         </CDropdownItem>
       </CDropdownMenu>
     </CDropdown>
