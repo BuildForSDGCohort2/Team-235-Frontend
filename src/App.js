@@ -25,16 +25,16 @@ const  App  = () => {
       <HashRouter>
           <React.Suspense fallback={loading}>
             <Switch>
-              <Route exact path="/" name="Login Page" render={props => <Login {...props}/>} />
-              <Route exact path="/forgot" name="Forgot Page" render={props => <Forgot {...props}/>} />
-              <Route exact path="/404" name="Page 404" render={props => <Page404 {...props}/>} />
-              <Route exact path="/500" name="Page 500" render={props => <Page500 {...props}/>} />
-              <Route exact path="/dashboard" name="Dashboard" render={props => <TheLayout {...props}/>}    />
-              <Route exact path="/categories" name="Categories" render={props => <TheLayout {...props}/>} />
-              <Route exact path = "/management" name="User Management" render={props => <TheLayout {...props}/>}/>
-              <Route exact path="/add" name="New User" render={props => <TheLayout {...props}/>} />
-              <Route exact path="/stock-details" name= "Stock Details" render={props => <TheLayout {...props}/>} />
-              <Route exact path="/addstock" name= "Add Stock" render={props => <TheLayout {...props}/>} />
+              <Route exact path="/" name="Login Page" render={(props) => <Login {...props}/>} />
+              <Route exact path="/forgot" name="Forgot Page" render={(props) => <Forgot {...props}/>} />
+              <Route exact path="/404" name="Page 404" render={(props) => <Page404 {...props}/>} />
+              <Route exact path="/500" name="Page 500" render={(props) => <Page500 {...props}/>} />
+              <Route exact path="/dashboard" name="Dashboard" render={(props) => <TheLayout {...props}/>}    />
+              <Route exact path="/categories" name="Categories" render={(props) => <TheLayout {...props}/>} />
+              <Route exact path = "/management" name="User Management" render={(props) => <TheLayout {...props}/>}/>
+              <Route exact path="/add" name="New User" render={(props) => <TheLayout {...props}/>} />
+              <Route exact path="/stock-details" name= "Stock Details" render={(props) => <TheLayout {...props}/>} />
+              <Route exact path="/addstock" name= "Add Stock" render={(props) => <TheLayout {...props}/>} />
             </Switch>
           </React.Suspense>
       </HashRouter>
