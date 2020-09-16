@@ -246,7 +246,7 @@ const AddStock = () => {
            </CCol>
         </CRow>
      </CContainer>
-    )
-}
+    );
+};
 
 export default AddStock;
