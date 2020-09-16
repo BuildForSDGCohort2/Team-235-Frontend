@@ -1,26 +1,26 @@
-import React, {useState} from 'react';
-import { CContainer, CRow, CCol, CCard, CCardHeader, CCardFooter, CCardBody,CButton } from '@coreui/react';
-import {Link} from 'react-router-dom';
-import Select from 'react-select';
+import React, {useState} from "react";
+import { CContainer, CRow, CCol, CCard, CCardHeader, CCardFooter, CCardBody,CButton } from "@coreui/react";
+import {Link} from "react-router-dom";
+import Select from "react-select";
 
 const options = [
     {value:"Drug", label:"Drugs"},
     {value: "Non-Drugs", label: "Non-Drugs"},
     {value: "Laboratory equipment", label: "Laboratory Equipment"}
-]
+];
 
 const facetList = [
     {value: "Electronics", label: "Electronics"},
     {value: "Ernest Pharmaceuticals", label: "Ernest Pharmaceuticals"},
     {value: "syrup", label: "Syrup"},
     {value: "tablet", label: "Tablet"}
-]
+];
 
 const UserList = [
     {value: "Admin", label: "Admin"},
     {value: "Amedzro Elikplim", label: "Amedzro Elikplim"},
     {value: "Betsy Nunu", label: "Betsy Nunu"}
-]
+];
 
 
 const AddStock = () => {
@@ -45,9 +45,8 @@ const AddStock = () => {
 
     //TODO: refactor this code
     const handleSelectedOption = (e) => {
-        setSelectedOption(e)
-        console.log(selectedOption)
-    }
+        setSelectedOption(e);
+    };
     
 
     const handleChange = (e) => {
@@ -56,13 +55,13 @@ const AddStock = () => {
             ...state,
             [name]: value
         })
-    }
+    };
 
 
 
     const handleSubmit = (e) => {
         e.preventDefault();
-    }
+    };
    
     return(
         <CContainer>
