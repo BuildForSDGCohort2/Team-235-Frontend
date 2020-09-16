@@ -3,7 +3,6 @@ import {
             CCard,
             CCardHeader,
             CCardBody,
-            CCardFooter,
             CContainer,
             CButton,
             CInputGroup,
@@ -60,7 +59,7 @@ import {Link} from "react-router-dom";
                     <CInputGroup style={{width:"30%", float:"left"}}>
                      <CInputGroupPrepend>
                         <CInputGroupText>
-                          <CIcon name="cil-user"/>
+                          <CIcon name="cil-magnifying-glass"/>
                         </CInputGroupText>
                       </CInputGroupPrepend>
                       <CInput type="text" placeholder="Search" />
@@ -91,8 +90,6 @@ import {Link} from "react-router-dom";
    
             </CDataTable>
         </CCardBody>
-
-        <CCardFooter><h1>CARD FOOTER</h1></CCardFooter>
        </CCard>
        </CContainer>
      );
