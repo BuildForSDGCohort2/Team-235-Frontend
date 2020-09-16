@@ -22,6 +22,7 @@ const UserList = [
     {value: "Betsy Nunu", label: "Betsy Nunu"}
 ]
 
+
 const AddStock = () => {
 
     const [state, setState] = useState({
@@ -34,12 +35,20 @@ const AddStock = () => {
         department: '',
         itemCode: '',
         link: '',
-        addedBy: '',
+        //addedBy: '',
         totalNumber: '',
         description: ''
     })
 
     //TODO: create hooks for selectOptions and setSelectOptions
+    const [selectedOption, setSelectedOption] = useState(null) 
+
+    //TODO: refactor this code
+    const handleSelectedOption = e => {
+        setSelectedOption(e)
+        console.log(selectedOption)
+    }
+    
 
     const handleChange = e => {
         const {name, value} = e.target;
@@ -84,6 +93,8 @@ const AddStock = () => {
                                         <label htmlFor="categoriesId">SELECT CATEGORIES</label>
                                         <Select type="text" 
                                         options = {options}
+                                        value={selectedOption}
+                                        onChange={handleSelectedOption}
                                        />
                                     </div>
                                   </CCol>
@@ -93,7 +104,8 @@ const AddStock = () => {
                                         <label htmlFor="facetId">ADD FACET</label>
                                         <Select isMulti type="text" 
                                         options = {facetList}
-                                        noValidate/>
+                                        noValidate
+                                       />
                                     </div>
                                   </CCol>
                                </CRow>

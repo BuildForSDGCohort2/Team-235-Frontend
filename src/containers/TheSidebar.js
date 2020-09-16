@@ -19,14 +19,7 @@ const TheSidebar = () => {
   const dispatch = useDispatch()
   const show = useSelector(state => state.sidebarShow)
 
-
-  const clearStorage = () => {
-     localStorage.removeItem('token');
-  }
-
-  
-
-  return (
+ return (
     <CSidebar
       show={show}
       onShowChange={(val) => dispatch({type: 'set', sidebarShow: val })}
@@ -118,10 +111,9 @@ const TheSidebar = () => {
             <Link to='/'>
             <CButton 
             className="c-sidebar-nav-link c-sidebar-nav-link-danger" 
-            style={{border:"none", width:"100%"}}
-            onClick = {clearStorage}>
-               <CIcon name="cil-user" style={{color:"white"}} /> 
-               <span style={{marginLeft:"20px",color:"white"}}>LOGOUT</span>
+            style={{border:"none", width:"100%"}}>
+               <CIcon name="cilGraph" style={{color:"white"}} /> 
+               <span style={{marginLeft:"20px",color:"white"}}>BOT REVIEW</span>
             </CButton>
             </Link>
 
