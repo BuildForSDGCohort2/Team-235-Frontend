@@ -10,9 +10,9 @@ const About = React.lazy(() => import("./views/about/About"));
 const Charts = React.lazy(() => import("./views/charts/Charts"));
 const Dashboard = React.lazy(() => import("./views/dashboard/Dashboard"));
 const UserManagement = React.lazy(() => import("./views/management/Management"));
-const AddNewPage = React.lazy(() => import("./views/management/AddNewPage"))
-const Login = React.lazy(() => import("./views/pages/login/Login"))
-const AddStock = React.lazy(() => import("./views/StockDetails/addStock"))
+const AddNewPage = React.lazy(() => import("./views/management/AddNewPage"));
+const Login = React.lazy(() => import("./views/pages/login/Login"));
+const AddStock = React.lazy(() => import("./views/StockDetails/addStock"));
 
 const routes = [
   { path: "/", exact: true, name: "Login Page", component: Login },

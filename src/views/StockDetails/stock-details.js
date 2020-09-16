@@ -1,4 +1,4 @@
-import React, {useEffect}  from 'react'
+import React, {useEffect}  from "react"
 import {
             CCard,
             CCardHeader,
@@ -15,20 +15,20 @@ import {
             CDropdownItem, 
             CDropdownMenu,
             CDropdownToggle,
-        } from '@coreui/react'
+        } from "@coreui/react"
 
-import {CIcon} from '@coreui/icons-react'
-import {Link} from 'react-router-dom'
+import {CIcon} from "@coreui/icons-react"
+import {Link} from "react-router-dom"
 
  
 
  const StockDetails = (props) => {
   useEffect(() => {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem("token");
     if(!token){
-       props.history.push('/404');
-    }
- })
+       props.history.push("/404");
+    };
+ });
 
 
     const stockData = [
@@ -38,7 +38,7 @@ import {Link} from 'react-router-dom'
         {name: "Paracetamol", dateAdded: "23/03/2020", lastUpdated:"04/07/2019", categories: "Drugs"},
         {name: "Paracetamol", dateAdded: "23/03/2020", lastUpdated:"04/07/2019", categories: "Drugs"},
         {name: "Paracetamol", dateAdded: "23/03/2020", lastUpdated:"04/07/2019", categories: "Drugs"}
-    ]
+    ];
 
     const tableFields = [
         {key: "name"},
@@ -47,7 +47,7 @@ import {Link} from 'react-router-dom'
         {key: "categories"},
         {key: "actions"},
         
-    ]
+    ];
 
      return(
         <CContainer>
@@ -95,7 +95,7 @@ import {Link} from 'react-router-dom'
         <CCardFooter><h1>CARD FOOTER</h1></CCardFooter>
        </CCard>
        </CContainer>
-     )
- }
+     );
+ };
 
  export default StockDetails

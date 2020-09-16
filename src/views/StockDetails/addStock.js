@@ -38,7 +38,7 @@ const AddStock = () => {
         //addedBy: "",
         totalNumber: "",
         description: ""
-    })
+    });
 
     //TODO: create hooks for selectOptions and setSelectOptions
     const [selectedOption, setSelectedOption] = useState(null);
