@@ -26,18 +26,18 @@ const UserList = [
 const AddStock = () => {
 
     const [state, setState] = useState({
-        itemName: '',
-        facet: '',
-        dateAdded: '',
-        itemType: '',
-        dateManufactured: '',
-        expiryDate: '',
-        department: '',
-        itemCode: '',
-        link: '',
-        //addedBy: '',
-        totalNumber: '',
-        description: ''
+        itemName: "",
+        facet: "",
+        dateAdded: "",
+        itemType: "",
+        dateManufactured: "",
+        expiryDate: "",
+        department: "",
+        itemCode: "",
+        link: "",
+        //addedBy: "",
+        totalNumber: "",
+        description: ""
     })
 
     //TODO: create hooks for selectOptions and setSelectOptions
@@ -46,7 +46,6 @@ const AddStock = () => {
     //TODO: refactor this code
     const handleSelectedOption = e => {
         setSelectedOption(e)
-        console.log(selectedOption)
     }
     
 
@@ -247,7 +246,7 @@ const AddStock = () => {
            </CCol>
         </CRow>
      </CContainer>
-    )
-}
+    );
+};
 
-export default AddStock
+export default AddStock;
