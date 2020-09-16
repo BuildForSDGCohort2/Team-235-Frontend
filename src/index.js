@@ -14,11 +14,10 @@ import {ApolloClient, InMemoryCache, ApolloProvider} from '@apollo/client'
 React.icons = icons
 
 
-
+//add authorization headers
 const client = new ApolloClient({
    uri: "https://stock-tracker-team-235.herokuapp.com/graphql",
    cache: new InMemoryCache(),
-   
 });
 
 ReactDOM.render(

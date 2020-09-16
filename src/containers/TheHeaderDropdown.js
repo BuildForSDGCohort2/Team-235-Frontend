@@ -1,12 +1,12 @@
-import React from "react"
+import React from "react";
 import {
   CDropdown,
   CDropdownItem,
   CDropdownMenu,
   CDropdownToggle,
   CImg
-} from "@coreui/react"
-import CIcon from "@coreui/icons-react"
+} from "@coreui/react";
+import CIcon from "@coreui/icons-react";
 
 const TheHeaderDropdown = () => {
 
