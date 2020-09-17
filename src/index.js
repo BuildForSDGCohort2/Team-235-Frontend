@@ -1,22 +1,37 @@
-import 'react-app-polyfill/ie11'; // For IE 11 support
-import 'react-app-polyfill/stable';
-import './polyfill'
-import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import "react-app-polyfill/ie11"; // For IE 11 support
+import "react-app-polyfill/stable";
+import "./polyfill"
+import React from "react";
+import ReactDOM from "react-dom";
+import App from "./App";
+import * as serviceWorker from "./serviceWorker";
 
-import { icons } from './assets/icons'
-import { Provider } from 'react-redux'
-import store from './store'
-import {ApolloClient, InMemoryCache, ApolloProvider} from '@apollo/client'
+import { icons } from "./assets/icons"
+import { Provider } from "react-redux"
+import store from "./store"
+import {ApolloClient, 
+   ApolloLink, HttpLink ,InMemoryCache, ApolloProvider} from "@apollo/client"
 
 React.icons = icons
+
+const httpLink = new HttpLink({
+  uri: "https://stock-tracker-team-235.herokuapp.com/graphql"
+});
+
+const authLink = new ApolloLink((operation, forward) => {
+   const token = localStorage.getItem("token");
+   operation.setContext({
+     headers: {
+      authorization: token ? `Bearer ${token}`: ""
+     }
+   });
+   return forward(operation);
+});
 
 
 //add authorization headers
 const client = new ApolloClient({
-   uri: "https://stock-tracker-team-235.herokuapp.com/graphql",
+   link: authLink.concat(httpLink),
    cache: new InMemoryCache(),
 });
 

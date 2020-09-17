@@ -10,7 +10,7 @@ const About = React.lazy(() => import("./views/about/About"));
 const Charts = React.lazy(() => import("./views/charts/Charts"));
 const Dashboard = React.lazy(() => import("./views/dashboard/Dashboard"));
 const UserManagement = React.lazy(() => import("./views/management/Management"));
-const AddNewPage = React.lazy(() => import("./views/management/AddNewPage"));
+const AddNewUser = React.lazy(() => import("./views/management/AddNewUser"));
 const Login = React.lazy(() => import("./views/pages/login/Login"));
 const AddStock = React.lazy(() => import("./views/StockDetails/addStock"));
 
@@ -26,7 +26,7 @@ const routes = [
   { path: "/about",  name: "About", component: About },
   { path: "/charts", name: "Charts", component: Charts },
   { path: "/management",  name: "User Management", component: UserManagement},
-  {path: "/add", name: "New User", component: AddNewPage},
+  {path: "/add", name: "New User", component: AddNewUser},
   {path: "/addstock", name: "Add Stock", component: AddStock}
   
 ];
