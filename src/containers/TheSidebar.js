@@ -93,7 +93,7 @@ const TheSidebar = () => {
 
          <div className="c-sidebar-nav-item" style={{backgroundColor:"#24385e", marginTop:"10px"}}>
             <CButton className="c-sidebar-nav-link" style={{border:"none", width:"100%"}}>
-               <Link to='./'>
+               <Link to='/permission'>
                <CIcon name="cilSettings" style={{color:"white"}} /> <span style={{marginLeft:"20px", color:"white"}}>ROLES AND PERMISSIONS</span>
                </Link>
             </CButton>

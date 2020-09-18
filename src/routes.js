@@ -13,6 +13,7 @@ const UserManagement = React.lazy(() => import("./views/management/Management"))
 const AddNewUser = React.lazy(() => import("./views/management/AddNewUser"));
 const Login = React.lazy(() => import("./views/pages/login/Login"));
 const AddStock = React.lazy(() => import("./views/StockDetails/addStock"));
+const Permission = React.lazy(() => import("./views/management/Permissions"));
 
 const routes = [
   { path: "/", exact: true, name: "Login Page", component: Login },
@@ -27,7 +28,8 @@ const routes = [
   { path: "/charts", name: "Charts", component: Charts },
   { path: "/management",  name: "User Management", component: UserManagement},
   {path: "/add", name: "New User", component: AddNewUser},
-  {path: "/addstock", name: "Add Stock", component: AddStock}
+  {path: "/addstock", name: "Add Stock", component: AddStock},
+  {path: "/permission", name: "Permission", component: Permission}
   
 ];
 

@@ -45,15 +45,6 @@ const isValidForm = ({...rest}) => {
 
 const NewUser = (props) =>  {
 
-
-   useEffect(() => {
-      const token = localStorage.getItem("token");
-      if(!token){
-         props.history.push("/404");
-      }
-   })
-    
-
    const [createUser] = useMutation(NEW_USER_DATA)
 
    const [state, setState] = useState({
@@ -102,6 +93,7 @@ const NewUser = (props) =>  {
        
      
    }
+
    return(
       <CContainer>
          <CRow>

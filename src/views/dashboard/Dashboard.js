@@ -13,7 +13,6 @@ import {
   CCallout
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
-
 import MainChartExample from '../charts/MainChartExample.js'
  
 
@@ -23,11 +22,13 @@ const WidgetsBrand = lazy(() => import('../widgets/WidgetsBrand.js'))
 
 const Dashboard = (props) => {
 
+
   //prevents unauthorized access to webapp
   useEffect(() => {
     const token = localStorage.getItem('token');
     if(!token){
        props.history.push('/404');
+       
     }
  })
   

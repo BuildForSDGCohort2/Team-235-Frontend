@@ -48,7 +48,7 @@ const TheUserManagement = (props) =>
          if(!token){
             props.history.push('/404');
          }
-      })
+      });
    
     return (
         <CContainer fluid>
