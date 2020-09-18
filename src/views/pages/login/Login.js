@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import {
   CButton,
   CCard,
@@ -13,9 +13,9 @@ import {
   CInputGroupPrepend,
   CInputGroupText,
   CRow
-} from '@coreui/react'
-import CIcon from '@coreui/icons-react'
-import {gql, useMutation} from '@apollo/client'
+} from "@coreui/react";
+import CIcon from "@coreui/icons-react";
+import {gql, useMutation} from "@apollo/client";
  
 
 const ADMIN_DATA = gql`
@@ -33,18 +33,16 @@ const Login = (props) => {
   const [signin] = useMutation(ADMIN_DATA);
       const [state, setState] = useState({
         state:{
-          email: '',
-          password: '',
+          email: "",
+          password: "",
         }
-    })
+    });
 
     function handleChange(e){
       const {name, value} = e.target;
       setState({...state,
         [name]: value
       });
-
-      console.log(state);
     }
 
  
@@ -62,23 +60,23 @@ const Login = (props) => {
             password: password
           },
             errorPolicy: "all"
-          }) 
+          });
 
       const token = response.data.signin.accessToken; 
-      localStorage.setItem('token', JSON.stringify(token));
+      localStorage.setItem("token", token);
 
 
       //get the accesstoken from the localStorage
-      const ACCESS_TOKEN = localStorage.getItem('token');
+      const ACCESS_TOKEN = localStorage.getItem("token");
 
       const isValidToken = ACCESS_TOKEN !== null ? true : false
     
      if(isValidToken){
-      props.history.push('/dashboard')
+      props.history.push("/dashboard");
      }  
   
     }catch(e){
-      alert(`invalid credentials`);
+      alert(e);
     }
   }
 
@@ -104,7 +102,7 @@ const Login = (props) => {
                       autoComplete="username" 
                       onChange = {handleChange} 
                       name="email"
-                      value = {state.email || ''}/>
+                      value = {state.email || ""}/>
                     </CInputGroup>
                     <CInputGroup className="mb-4">
                       <CInputGroupPrepend>
@@ -117,7 +115,7 @@ const Login = (props) => {
                       autoComplete="current-password" 
                       onChange = {handleChange}
                       name="password"
-                      value={state.password || ''} />
+                      value={state.password || ""} />
                     </CInputGroup>
                     <div>
                     <CButton color="primary" type="submit" className="px-4">Login</CButton>
@@ -130,7 +128,7 @@ const Login = (props) => {
                 </CCardBody>
               </CCard>
               
-              <CCard className="text-white bg-primary py-5 d-md-down-none" style={{ width: '44%' }}>
+              <CCard className="text-white bg-primary py-5 d-md-down-none" style={{ width: "44%" }}>
                 <CCardBody className="text-center">
                     <h1 style={{marginTop:"80px"}}>STOCK TRACKER</h1>
                 </CCardBody>

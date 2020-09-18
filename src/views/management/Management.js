@@ -20,19 +20,7 @@ const TheUserManagement = (props) =>
         {id: 0, name: 'John Doe', email: 'kwakuboafo@gmail.com', phone: '0543243676', status: 'Pending'},
         {id: 1, name: 'Samppa Nori', email: 'kwakuboafo@gmail.com', phone: '0564438556', status: 'Active'},
         {id: 2, name: 'Estavan Lykos', email: 'serwahasamoah@gmail.com', phone: '0278834566', status: 'Banned'},
-        {id: 3, name: 'Chetan Mohamed', email: 'serwahasamoah@gmail.com', phone: '0234456782', status: 'Inactive'},
-        {id: 4, name: 'Derick Maximinus', email: 'amakuma@gmail.com', phone: '0563325647', status: 'Pending'},
-        {id: 5, name: 'Friderik Dávid', email: 'sarpongemmanuel@gmail.com', phone: '0278834566', status: 'Active'},
-        {id: 6, name: 'Yiorgos Avraamu', email: 'kwakuboafo@gmail.com', phone: '0563325647', status: 'Active'},
-        {id: 7, name: 'Avram Tarasios', email: 'serwahasamoah@gmail.com', phone: '0278834566', status: 'Banned'},
-        {id: 0, name: 'John Doe', email: 'kwakuboafo@gmail.com', phone: '0543243676', status: 'Pending'},
-        {id: 1, name: 'Samppa Nori', email: 'kwakuboafo@gmail.com', phone: '0564438556', status: 'Active'},
-        {id: 2, name: 'Estavan Lykos', email: 'serwahasamoah@gmail.com', phone: '0278834566', status: 'Banned'},
-        {id: 3, name: 'Chetan Mohamed', email: 'serwahasamoah@gmail.com', phone: '0234456782', status: 'Inactive'},
-        {id: 4, name: 'Derick Maximinus', email: 'amakuma@gmail.com', phone: '0563325647', status: 'Pending'},
-        {id: 5, name: 'Friderik Dávid', email: 'sarpongemmanuel@gmail.com', phone: '0278834566', status: 'Active'},
-        {id: 6, name: 'Yiorgos Avraamu', email: 'kwakuboafo@gmail.com', phone: '0563325647', status: 'Active'},
-        {id: 7, name: 'Avram Tarasios', email: 'serwahasamoah@gmail.com', phone: '0278834566', status: 'Banned'}
+        {id: 3, name: 'Chetan Mohamed', email: 'serwahasamoah@gmail.com', phone: '0234456782', status: 'Inactive'}
         
       ]
     
