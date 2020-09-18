@@ -6,11 +6,11 @@ import ReactDOM from "react-dom";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 
-import { icons } from "./assets/icons"
-import { Provider } from "react-redux"
-import store from "./store"
+import { icons } from "./assets/icons";
+import { Provider } from "react-redux";
+import store from "./store";
 import {ApolloClient, 
-   ApolloLink, HttpLink ,InMemoryCache, ApolloProvider} from "@apollo/client"
+   ApolloLink, HttpLink ,InMemoryCache, ApolloProvider} from "@apollo/client";
 
 React.icons = icons
 
