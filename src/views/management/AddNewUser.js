@@ -94,7 +94,7 @@ const NewUser = (props) =>  {
                 errorPolicy: "all"
              });
 
-//              console.log(response);
+           console.log(response);
            }catch(e){
              alert(e);
            }
