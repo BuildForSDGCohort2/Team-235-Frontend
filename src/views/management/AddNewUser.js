@@ -51,10 +51,10 @@ const NewUser = (props) =>  {
       if(!token){
          props.history.push("/404");
       }
-   })
+   });
     
 
-   const [createUser] = useMutation(NEW_USER_DATA)
+   const [createUser] = useMutation(NEW_USER_DATA);
 
    const [state, setState] = useState({
       state : {
@@ -70,7 +70,7 @@ const NewUser = (props) =>  {
   
    const handleChange = (e) => {
       const {name, value} = e.target;
-       setState({...state, [name] : value})
+       setState({...state, [name] : value});
    }
 
  
@@ -80,23 +80,23 @@ const NewUser = (props) =>  {
       
       if(isValidForm(state)){
            const {firstName, lastName, email, password, phoneNumber} = state;
-           console.log(firstName, lastName, email, phoneNumber, password);
+//            console.log(firstName, lastName, email, phoneNumber, password);
            
            try{
              const response = await createUser({
                 variables: {
-                   firstName: firstName,
-                   lastName: lastName,
-                   email: email,
-                   phoneNumber: phoneNumber,
-                   password: password
+                   firstName,
+                   lastName,
+                   email,
+                   phoneNumber,
+                   password
                 }, 
                 errorPolicy: "all"
              });
 
-             console.log(response);
+//              console.log(response);
            }catch(e){
-             alert(e)
+             alert(e);
            }
       }   
        
