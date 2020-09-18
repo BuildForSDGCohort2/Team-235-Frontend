@@ -1,7 +1,7 @@
-import React, {useState} from 'react';
-import { CContainer, CRow, CCol, CCard, CCardHeader, CCardFooter, CCardBody,CButton } from '@coreui/react';
-import {Link} from 'react-router-dom';
-import { gql, useMutation, useEffect} from '@apollo/client';
+import React, {useState} from "react";
+import { CContainer, CRow, CCol, CCard, CCardHeader, CCardFooter, CCardBody,CButton } from "@coreui/react";
+import {Link} from "react-router-dom";
+import { gql, useMutation, useEffect} from "@apollo/client";
 
 
 
