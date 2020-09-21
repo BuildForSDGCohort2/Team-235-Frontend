@@ -1,6 +1,7 @@
 import React, {useEffect} from 'react' 
 import {Link} from 'react-router-dom';
  
+ 
 import {
     CButton,
     CCard,
@@ -13,9 +14,30 @@ import {
     CDropdownToggle,
     CContainer
   } from '@coreui/react'
+ import Swal from 'sweetalert2'
+ import {gql, useQuery, client, ApolloProvider} from '@apollo/client'
  
-const TheUserManagement = (props) => 
-{ 
+
+
+
+
+const USERS = gql`
+  query UserList {
+    getUsers{
+      id
+      firstName
+      lastName
+      email
+      blocked
+      isVerified
+      phoneNumber
+
+    }
+  }
+`
+
+const TheUserManagement = (props) => { 
+
     const usersData = [
         {id: 0, name: 'John Doe', email: 'kwakuboafo@gmail.com', phone: '0543243676', status: 'Pending'},
         {id: 1, name: 'Samppa Nori', email: 'kwakuboafo@gmail.com', phone: '0564438556', status: 'Active'},
@@ -32,7 +54,7 @@ const TheUserManagement = (props) =>
         {key: 'options', _style:{width: '20%'}}
       ]
     
-      const getBadge = (status)=>{
+      const getBadge = (status) => {
         switch (status) {
           case 'Active': return 'success'
           case 'Inactive': return 'secondary'
@@ -42,15 +64,19 @@ const TheUserManagement = (props) =>
         }
       }
 
-
       useEffect(() => {
          const token = localStorage.getItem('token');
          if(!token){
             props.history.push('/404');
          }
+
+        //fetchUserList
       });
+ 
    
     return (
+      
+        
         <CContainer fluid>
         {/**start of card background */}
         <CCard className="cards" style={{borderRadius:"10px", padding:"30px", marginTop:"-20px"}}>
@@ -85,11 +111,38 @@ const TheUserManagement = (props) =>
                         return (
                             <td className="py-2">
                               <CDropdown>
-                                  <CDropdownToggle>more</CDropdownToggle>
+                                  <CDropdownToggle>Actions</CDropdownToggle>
                                       <CDropdownMenu>
                                         <CDropdownItem>Edit</CDropdownItem>
-                                        <CDropdownItem>Delete</CDropdownItem>
-                                      <CDropdownItem>Assign roles</CDropdownItem>
+                                        <CDropdownItem onClick = {() =>  Swal.fire({
+                                        title: "Title",
+                                        text: "ARE YOU SURE YOU WANT TO DELETE",
+                                        icon: 'warning',
+                                        showCancelButton: true,
+                                        confirmButtonText:"YES",
+                                        cancelButtonText: "NO"
+                                     })
+                               // .then((result) => {
+                                //         // if (result.value) {
+                                //         //     // this.$store.dispatch(DELETE_ROLE, item.roleId).then(() => {
+                                //         //     //     this.$swal(
+                                //         //     //         this.$t('GENERAL.DEL'),
+                                //         //     //         item.name + ' '+ this.$t('GENERAL.BEEN'),
+                                //         //     //         'success'
+                                //         //     //     );
+                                //         //     //     this.$refs.table.refresh();
+                                //         //     }).catch((error) => {
+                                //         //         this.$swal(this.$t('GENERAL.FAILED'),
+                                //         //             this.$t('GENERAL.MESSAGE'),
+                                //         //             "warning");
+                                //         //     });
+                                //         }
+                                //     });
+                                       } 
+                                          
+                                       >
+                                          Delete</CDropdownItem>
+                                      <CDropdownItem onClick={() => props.history.push('/viewuser')}>View</CDropdownItem>
                                    </CDropdownMenu>
                                </CDropdown>
                             </td>

@@ -36,18 +36,18 @@ const CategoriesCard = () => {
 
     < CContainer style = {{paddingTop: '2rem'}}>
     <CRow>
-    <CCol sm = "6"lg = "3" >
-    <CWidgetDropdown color = "gradient-primary" header = "Drugs" text = "Save Drugs">
-    <CDropdown>
-    <CDropdownToggle color = "transparent" >
-    <CIcon name = "cil-settings"/>
-    </CDropdownToggle> 
-    <CDropdownMenu className = "pt-0"placement = "bottom-end" >
-    <CDropdownItem onClick = {toggle}> Add Drugs </CDropdownItem>
-    </CDropdownMenu> 
-    </CDropdown>
-    </CWidgetDropdown> 
-    </CCol>
+        <CCol sm = "6"lg = "3" >
+        <CWidgetDropdown color = "gradient-primary" header = "Drugs" text = "Save Drugs">
+        <CDropdown>
+        <CDropdownToggle color = "transparent" >
+        <CIcon name = "cil-settings"/>
+        </CDropdownToggle> 
+        <CDropdownMenu className = "pt-0"placement = "bottom-end" >
+        <CDropdownItem onClick = {toggle}> Add Drugs </CDropdownItem>
+        </CDropdownMenu> 
+        </CDropdown>
+        </CWidgetDropdown> 
+        </CCol>
 
     <CModal show = {modal} onClose = {toggle}>
     <CModalHeader toggle = {toggle}> Add Drugs </CModalHeader> 

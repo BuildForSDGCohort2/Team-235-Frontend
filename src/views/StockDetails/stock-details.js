@@ -18,6 +18,7 @@ import {
 
 import {CIcon} from "@coreui/icons-react";
 import {Link} from "react-router-dom";
+import Swal from 'sweetalert2'
 
  
 
@@ -55,7 +56,6 @@ import {Link} from "react-router-dom";
           <Link to='/addstock'>
             <CButton className="btn btn-info" style={{float:"right"}}>ADD NEW STOCK</CButton>
           </Link>  
-            <CButton className="btn btn-info" style={{float:"right", marginRight:"10px"}}>UPDATE EXISTING STOCK</CButton>
                     <CInputGroup style={{width:"30%", float:"left"}}>
                      <CInputGroupPrepend>
                         <CInputGroupText>
@@ -76,12 +76,37 @@ import {Link} from "react-router-dom";
                   return (
                   <td className="py-2">
                       <CDropdown>
-                        <CDropdownToggle>more</CDropdownToggle>
+                        <CDropdownToggle>Actions</CDropdownToggle>
                             <CDropdownMenu>
-                            <CDropdownItem>update</CDropdownItem>
-                            <CDropdownItem>delete</CDropdownItem>
-                            <CDropdownItem>update</CDropdownItem>
-                            <CDropdownItem>view facets</CDropdownItem>
+                            <CDropdownItem>Update</CDropdownItem>
+                            <CDropdownItem onClick = {() => 
+                               Swal.fire({
+                                title: "Title",
+                                text: "ARE YOU SURE YOU WANT TO DELETE",
+                                icon: 'warning',
+                                showCancelButton: true,
+                                confirmButtonText:"YES",
+                                cancelButtonText: "NO"
+                             })
+                       // .then((result) => {
+                        //         // if (result.value) {
+                        //         //     // this.$store.dispatch(DELETE_ROLE, item.roleId).then(() => {
+                        //         //     //     this.$swal(
+                        //         //     //         this.$t('GENERAL.DEL'),
+                        //         //     //         item.name + ' '+ this.$t('GENERAL.BEEN'),
+                        //         //     //         'success'
+                        //         //     //     );
+                        //         //     //     this.$refs.table.refresh();
+                        //         //     }).catch((error) => {
+                        //         //         this.$swal(this.$t('GENERAL.FAILED'),
+                        //         //             this.$t('GENERAL.MESSAGE'),
+                        //         //             "warning");
+                        //         //     });
+                        //         }
+                        //     });
+                            }
+                            >Delete</CDropdownItem>
+                            <CDropdownItem onClick = {() => props.history.push('/viewstock')}>View</CDropdownItem>
                         </CDropdownMenu>
                     </CDropdown>
                   </td>

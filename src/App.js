@@ -36,6 +36,12 @@ const  App  = () => {
               <Route exact path="/stock-details" name= "Stock Details" render={(props) => <TheLayout {...props}/>} />
               <Route exact path="/addstock" name= "Add Stock" render={(props) => <TheLayout {...props}/>} />
               <Route exact path="/permission" name= "Permission" render={(props) => <TheLayout {...props}/>} />
+              <Route exact path="/createrole" name= "Create New Role" render={(props) => <TheLayout {...props}/>} />
+              <Route exact path="/viewrole" name= "View User Role" render={(props) => <TheLayout {...props}/>} />
+              <Route exact path="/viewuser" name= "View User Profile" render={(props) => <TheLayout {...props}/>} />
+              <Route exact path="/viewstock" name= "View Stock Details" render={(props) => <TheLayout {...props}/>} />
+              
+
             </Switch>
           </React.Suspense>
       </HashRouter>

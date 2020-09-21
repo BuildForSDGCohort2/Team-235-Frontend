@@ -1,7 +1,8 @@
 import React, {useState} from 'react';
 import { CContainer, CRow, CCol, CCard, CCardHeader, CCardFooter, CCardBody,CButton } from '@coreui/react';
 import {Link} from 'react-router-dom';
-import { gql, useMutation, useEffect} from '@apollo/client';
+import { gql, useMutation} from '@apollo/client';
+import Select from 'react-select'
 
 
 
@@ -21,6 +22,7 @@ const NEW_USER_DATA = gql`
             email: $email,
             phoneNumber: $phoneNumber,
             password: $password
+
             
          }){
              firstName,
@@ -32,7 +34,13 @@ const NEW_USER_DATA = gql`
       }
 `;
 
+const rolesId = [
+   {value: "1", label: "1"},
+   {value: "2", label: "2"},
+   {value: "3", label: "3"}
+];
 
+ 
 
 const isValidForm = ({...rest}) => {
    const {firstName, lastName, email, phone} = rest;
@@ -46,6 +54,7 @@ const isValidForm = ({...rest}) => {
 const NewUser = (props) =>  {
 
    const [createUser] = useMutation(NEW_USER_DATA)
+   const [selectedOption, setSelectedOption] = useState(null)
 
    const [state, setState] = useState({
       state : {
@@ -64,6 +73,10 @@ const NewUser = (props) =>  {
        setState({...state, [name] : value})
    }
 
+
+   const handleOnSelectedOption = e => {
+      setSelectedOption(e)
+   }
  
 
     const handleSubmit = async (e) =>  {
@@ -98,7 +111,7 @@ const NewUser = (props) =>  {
       <CContainer>
          <CRow>
             <CCol>
-                  <CCard className="text-center" style={{marginTop:"-20px", marginLeft:"auto", marginRight:"auto", borderRadius:"10px", width:"500px"}}>
+                  <CCard  style={{marginTop:"-20px", marginLeft:"auto", marginRight:"auto", borderRadius:"10px", width:"500px"}}>
                       <CCardHeader><h4>ADD NEW USER</h4></CCardHeader>
                       <form onSubmit={handleSubmit}>
                       <CCardBody>
@@ -167,6 +180,16 @@ const NewUser = (props) =>  {
                                  noValidate/>
                                   
                            </div>
+
+                           <div className="form-group">
+                                        <label htmlFor="categoriesId">ADD ROLE</label>
+                                        <Select type="text" 
+                                        options = {rolesId}
+                                        value={selectedOption}
+                                        onChange = {handleOnSelectedOption}
+                                        
+                                       />
+                                    </div>
                         
                       </CCardBody>
                       <CCardFooter className="text-center">

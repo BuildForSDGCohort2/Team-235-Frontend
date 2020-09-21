@@ -14,6 +14,10 @@ const AddNewUser = React.lazy(() => import("./views/management/AddNewUser"));
 const Login = React.lazy(() => import("./views/pages/login/Login"));
 const AddStock = React.lazy(() => import("./views/StockDetails/addStock"));
 const Permission = React.lazy(() => import("./views/management/Permissions"));
+const CreateNewRole = React.lazy(() =>import("./views/management/CreateRole"));
+const ViewRole = React.lazy(() =>import("./views/management/ViewRole"));
+const ViewUser = React.lazy(() =>import("./views/management/ViewUser"));
+const ViewStock = React.lazy(() => import("./views/StockDetails/ViewStock"))
 
 const routes = [
   { path: "/", exact: true, name: "Login Page", component: Login },
@@ -29,8 +33,13 @@ const routes = [
   { path: "/management",  name: "User Management", component: UserManagement},
   {path: "/add", name: "New User", component: AddNewUser},
   {path: "/addstock", name: "Add Stock", component: AddStock},
-  {path: "/permission", name: "Permission", component: Permission}
-  
+  {path: "/permission", name: "Permission", component: Permission},
+  {path: "/createrole", name: "Create New Role", component: CreateNewRole},
+  {path: "/viewrole", name: "View User Role", component: ViewRole},
+  {path: "/viewuser", name: "View User Profile", component: ViewUser},
+  {path: "/viewstock", name: "View Stock Details", component: ViewStock}
 ];
+
+//make the dashboard the homepage
 
 export default routes;
