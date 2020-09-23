@@ -104,7 +104,7 @@ const NewUser = (props) =>  {
   //handle change
    const handleChange = (e) => {
       const {name, value} = e.target;
-       setState({...state, [name] : value})
+       setState({...state, [name] : value});
    }
 
 
@@ -139,9 +139,9 @@ const NewUser = (props) =>  {
                 errorPolicy: "all"
              });
 
-             console.log(response);
+           console.log(response);
            }catch(e){
-             alert(e)
+             alert(e);
            }
       }   
        
