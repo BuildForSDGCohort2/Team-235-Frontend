@@ -1,7 +1,6 @@
 import React, {useEffect} from 'react' 
 import {Link} from 'react-router-dom';
- 
- 
+
 import {
     CButton,
     CCard,
@@ -12,14 +11,12 @@ import {
     CDropdownItem,
     CDropdownMenu,
     CDropdownToggle,
-    CContainer
+    CContainer,
+    CCardBody
   } from '@coreui/react'
  import Swal from 'sweetalert2'
- import {gql, useQuery, client, ApolloProvider} from '@apollo/client'
+ import {gql, useQuery} from '@apollo/client'
  
-
-
-
 
 const USERS = gql`
   query UserList {
@@ -36,16 +33,10 @@ const USERS = gql`
   }
 `
 
+//todo private list 
+
 const TheUserManagement = (props) => { 
 
-    const usersData = [
-        {id: 0, name: 'John Doe', email: 'kwakuboafo@gmail.com', phone: '0543243676', status: 'Pending'},
-        {id: 1, name: 'Samppa Nori', email: 'kwakuboafo@gmail.com', phone: '0564438556', status: 'Active'},
-        {id: 2, name: 'Estavan Lykos', email: 'serwahasamoah@gmail.com', phone: '0278834566', status: 'Banned'},
-        {id: 3, name: 'Chetan Mohamed', email: 'serwahasamoah@gmail.com', phone: '0234456782', status: 'Inactive'}
-        
-      ]
-    
       const fields = [
         { key: 'name', _style: { width: '25%'} },
         {key:'email'},
@@ -63,41 +54,88 @@ const TheUserManagement = (props) => {
           default: return 'primary'
         }
       }
+ 
+      
+      
 
       useEffect(() => {
-         const token = localStorage.getItem('token');
-         if(!token){
-            props.history.push('/404');
-         }
-
-        //fetchUserList
+        const token = localStorage.getItem("token");
+        if(!token){
+          props.history.push("/404")
+        }
       });
- 
-   
+
+
+     const {loading, error, data} = useQuery(USERS);
+     const usersData = [];
+     try {
+      
+      if(loading){
+        return "loading"  
+      }
+
+      if(error){
+        console.log(error)
+      }
+
+      //TODO:use toast to display errors
+
+    
+      
+      //populate cdatatable for display on card
+      Object.values(data).forEach(val => {
+        val.map(item => {
+          const {id,firstName, lastName, email, phoneNumber, isVerified, blocked} = item;
+          const name = firstName + " " + lastName;
+
+          const status = [];
+
+          if(isVerified && !blocked){
+             status.push("Active")
+          }else if(isVerified && blocked){
+            status.push("Blocked")
+          }else if(!isVerified && !blocked){
+            status.push("Pending")
+          }
+
+          //TODO:create a role for users
+          usersData.push({id: id, name: name, email: email, phoneNumber: phoneNumber, status: status})
+
+        })
+
+      })
+       
+     }catch(e){
+        Swal.fire(e);
+     }
+     
+      //not available in place of undefined
+
+
+      // const usersData = [
+      //   {id: 0, name: 'John Doe', email: 'kwakuboafo@gmail.com', phone: '0543243676', status: 'Pending'},
+      //   {id: 1, name: 'Samppa Nori', email: 'kwakuboafo@gmail.com', phone: '0564438556', status: 'Active'},
+      //   {id: 2, name: 'Estavan Lykos', email: 'serwahasamoah@gmail.com', phone: '0278834566', status: 'Banned'},
+      //   {id: 3, name: 'Chetan Mohamed', email: 'serwahasamoah@gmail.com', phone: '0234456782', status: 'Inactive'} 
+      // ] 
+    
     return (
       
         
         <CContainer fluid>
         {/**start of card background */}
-        <CCard className="cards" style={{borderRadius:"10px", padding:"30px", marginTop:"-20px"}}>
+        <CCard className="cards" style={{borderRadius:"10px", marginTop:"-20px"}}>
            <CCardHeader>
                <Link to="./add" >
                <CButton style={{float:"right"}} color="info" className="mr-1">ADD NEW USER</CButton>
                </Link>
            </CCardHeader>
            {/* <CCardBody> */}
+           <CCardBody >
            <CDataTable 
-                    style
                     items={usersData}
                     fields={fields}
-                    tableFilter
-                    itemsPerPageSelect
-                    itemsPerPage={10}
-                    hover
-                    sorter
-                    pagination
                     scopedSlots = {{
-
                     'status':
                     (item)=>(
                         <td>
@@ -148,11 +186,14 @@ const TheUserManagement = (props) => {
                             </td>
                     )}
                 }}
-            />
+            ></CDataTable>
+            </CCardBody>
        </CCard>
   
 </CContainer>
         
 )}
+
+//todo private list query which will inherite the to do private list
 
 export default TheUserManagement;

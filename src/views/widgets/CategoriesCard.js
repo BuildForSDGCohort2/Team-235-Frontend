@@ -1,159 +1,109 @@
-import React from 'react'
+import React from "react"
 import {
   CWidgetDropdown,
   CContainer,
-  CModal,
-  CModalHeader,
-  CModalBody,
-  CForm,
-  CFormGroup,
-  CButton,
-  CInput,
   CRow,
   CCol,
-  CDropdown,
-  CDropdownMenu,
-  CDropdownItem,
-  CDropdownToggle
-} from '@coreui/react'
-import CIcon from '@coreui/icons-react'
+  CCardBody,
+  CCardHeader,
+  CCard
+} from "@coreui/react"
+import Swal from "sweetalert2"
+import {gql, useQuery,useMutation} from "@apollo/client"
+import CategoriesList from "./CategoriesList"
+
+
+
+const GET_CATEGORIES_LIST = gql `
+   query CategoriesList{
+       getCategories{
+         id
+         name
+         createdAt
+       }
+   }
+`
+
+const CREATE_CATEGORY = gql `
+  mutation CreateCategory($name: String!){
+    createCategory(data: {
+      name: $name
+    }){
+      id
+      name
+      createdAt
+    }
+  }
+`
+
 
 const CategoriesCard = () => {
-  //Manage state
-  const [modal, setModal] = React.useState(false)
-  const [setName] = React.useState('')
-
-  //Allow input changes
-  const handleChangeName = (e) =>
-    setName(e.target.value);
-
-  //toggle modal
-  const toggle = () => {
-    setModal(!modal)
+  const [createCategory] = useMutation(CREATE_CATEGORY);
+  const {loading, error, data} = useQuery(GET_CATEGORIES_LIST);
+  try{
+    if(loading){
+      return "loading";
+    }
+  
+    if(error){
+      console.log(error)
+    }
+  
+    
+  }catch(e){
+    console.log(e);
   }
-  // render
+  
+ //const {name} = data;
+
+ const show = () => {
+  Swal.fire({
+    inputPlaceholder: "category name",
+    input: "text"
+  }).then((result) => {
+     console.log(result.value)
+    
+     try {
+      const response = createCategory(
+        {
+          variables: {
+            name: result.value
+          },
+          errorPolicy: "all"
+        }
+      )
+      console.log(response);
+     }catch(e){
+       console.log(e);
+     }
+     
+  })   
+}
+
   return (
-
+   
     < CContainer style = {{paddingTop: '2rem'}}>
-    <CRow>
-        <CCol sm = "6"lg = "3" >
-        <CWidgetDropdown color = "gradient-primary" header = "Drugs" text = "Save Drugs">
-        <CDropdown>
-        <CDropdownToggle color = "transparent" >
-        <CIcon name = "cil-settings"/>
-        </CDropdownToggle> 
-        <CDropdownMenu className = "pt-0"placement = "bottom-end" >
-        <CDropdownItem onClick = {toggle}> Add Drugs </CDropdownItem>
-        </CDropdownMenu> 
-        </CDropdown>
-        </CWidgetDropdown> 
-        </CCol>
+      <CCard style={{marginTop: "-40px", height: "100%"}}>
 
-    <CModal show = {modal} onClose = {toggle}>
-    <CModalHeader toggle = {toggle}> Add Drugs </CModalHeader> 
-    <CModalBody>
-    <CForm onSubmit = {console.log("Add")}>
-    <CFormGroup>
-    <CInput type = "text" name = "name" id = "item" placeholder = "Add Drugs" onChange = { handleChangeName }/> 
-    <CButton color = "secondary" style = {{marginTop: '2rem'}} block> Add Drugs 
-    </CButton> 
-    </CFormGroup> 
-    </CForm> 
-    </CModalBody> 
-    </CModal>
-
-    <CCol sm = "6"lg = "3" >
-    <CWidgetDropdown color = "gradient-info"
-    header = "Bills"
-    text = "5,000 cedis">
-    <CDropdown >
-    <CDropdownToggle color = "transparent" >
-    <CIcon name = "cil-settings"/>
-    </CDropdownToggle> 
-    <CDropdownMenu className = "pt-0" placement = "bottom-end" >
-    <CDropdownItem onClick = {toggle} > Add Bills </CDropdownItem>
-
-    </CDropdownMenu> 
-    </CDropdown> 
-    </CWidgetDropdown> 
-    </CCol> 
-    <CModal show = { modal } onClose = {toggle} >
-    <CModalHeader toggle = { toggle }> Add Bills </CModalHeader> 
-    <CModalBody>
-    <CForm onSubmit = {console.log("Add")} >
-    <CFormGroup>
-    <CInput type = "text"name = "name"id = "item"placeholder = "Add Drugs"onChange = {handleChangeName} /> 
-    <CButton color = "secondary"style = {{marginTop: '2rem' }} block>Add Bills 
-    </CButton> 
-    </CFormGroup> 
-    </CForm> 
-    </CModalBody> 
-    </CModal>
-
-    <CCol sm = "6"lg = "3" >
-    <CWidgetDropdown color = "gradient-warning" header = "Nurses" text = "Mrs. Betsy">
-    <CDropdown>
-    <CDropdownToggle color = "transparent" >
-    <CIcon name = "cil-settings" />
-    </CDropdownToggle> 
-    <CDropdownMenu className = "pt-0" placement = "bottom-end" >
-    <CDropdownItem onClick = {toggle}> Add Nurse </CDropdownItem>
-
-    </CDropdownMenu> 
-    </CDropdown> 
-    </CWidgetDropdown> 
-    </CCol> 
-    <CModal show = {modal} onClose = {toggle}>
-    <CModalHeader toggle = {toggle}> Add Nurse </CModalHeader> 
-    <CModalBody>
-    <CForm onSubmit = {console.log("Add")}>
-    <CFormGroup>
-    <CInput type = "text"name = "name" id = "item" placeholder = "Add Nurse"onChange = {handleChangeName }/> 
-    <CButton color = "secondary" style = {{marginTop: '2rem'}} block >Add Nurse 
-    </CButton> 
-    </CFormGroup> 
-    </CForm> 
-    </CModalBody> 
-    </CModal> 
-    <CCol sm = "6" lg = "3" >
-    <CWidgetDropdown color = "gradient-danger" header = "Doctor"text = "Mr. Kumasi">
-    <CDropdown>
-    <CDropdownToggle caret className = "text-white" color = "transparent" >
-    <CIcon name = "cil-settings" />
-    </CDropdownToggle> 
-    <CDropdownMenu className = "pt-0" placement = "bottom-end" >
-    <CDropdownItem onClick = {toggle} > Add Doctor </CDropdownItem>
-
-    </CDropdownMenu> 
-    </CDropdown> 
-    </CWidgetDropdown> 
-    </CCol>
-
-    <CCol sm = "6"lg = "3">
-    <CWidgetDropdown color = "gradient-danger" header = "Doctor" text = "Mr. Kumasi">
-    <CDropdown>
-    <CDropdownToggle caret className = "text-white" color = "transparent" >
-    <CIcon name = "cil-settings" />
-    </CDropdownToggle> 
-    <CDropdownMenu className = "pt-0" placement = "bottom-end" >
-    <CDropdownItem onClick = {toggle} > Add Doctor </CDropdownItem>
-    </CDropdownMenu> 
-    </CDropdown> 
-    </CWidgetDropdown> 
-    </CCol> 
-    <CModal show = { modal} onClose = {toggle}>
-    <CModalHeader toggle = {toggle}> Add Doctor </CModalHeader> 
-    <CModalBody>
-    <CForm onSubmit = {console.log("Add")}>
-    <CFormGroup >
-    <CInput type = "text" name ="name"id = "item"placeholder = "Add Doctor" onChange = {handleChangeName}/> 
-    <CButton color = "secondary" style = {{marginTop: '2rem'}} block>Add Doctor 
-    </CButton> 
-    </CFormGroup> 
-    </CForm> 
-    </CModalBody> 
-    </CModal> 
-    </CRow> 
+        <CCardHeader className="text-center">
+          <CRow>
+            <CCol><h3>CATEGORIES OF STOCKS</h3></CCol>
+            <CCol><button type="button" onClick={() => show()} style={{float: "right"}} className="btn btn-info">ADD NEW CATEGORY</button></CCol>
+          </CRow>
+         </CCardHeader>
+        
+        <CCardBody style={{padding: "20px"}}>
+        <CRow>
+           
+                  {data.getCategories.map(item => ( 
+                      <CategoriesList key={item.id} name={item.name} />
+                  ))}
+                 
+            
+    
+        </CRow> 
+       </CCardBody>
+      </CCard>
     </CContainer>
 
   )

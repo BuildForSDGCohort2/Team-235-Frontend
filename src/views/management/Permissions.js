@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {
     CButton,
     CCard,
@@ -13,15 +13,33 @@ import {
 
 import {Link} from 'react-router-dom'
 import Swal from 'sweetalert2'
+import {gql, useQuery} from "@apollo/client"
 
+ 
+
+const LIST_OF_ROLES = gql `
+   query Roles{
+     getRoles{
+       id
+       name
+       description
+       permissions{
+         id
+         value
+         description
+       }
+       createdAt
+     }
+   }
+`
 
 const Permission = (props) => {
 
     const usersData = [
-        {id: 0, role: 'Administrator', createdBy: 'Administrator', description: 'Adminstrator controls all permission'},
-        {id: 1, role: 'Accountant', createdBy: "Administrator", description: 'Accounts tracks prices of the stock'},
-        {id: 2, role: 'Accountant', createdBy: "Administrator", description: 'Accounts tracks prices of the stock'},
-        {id: 3, role: 'Accountant', createdBy: "Administrator", description: 'Accounts tracks prices of the stock'}
+        // {id: 0, role: 'Administrator', createdBy: 'Administrator', description: 'Adminstrator controls all permission'},
+        // {id: 1, role: 'Accountant', createdBy: "Administrator", description: 'Accounts tracks prices of the stock'},
+        // {id: 2, role: 'Accountant', createdBy: "Administrator", description: 'Accounts tracks prices of the stock'},
+        // {id: 3, role: 'Accountant', createdBy: "Administrator", description: 'Accounts tracks prices of the stock'}
       ]
 
       const fields = [
@@ -30,6 +48,29 @@ const Permission = (props) => {
         { key: 'description'},
         {key: 'options', _style:{width: '20%'}}
       ]
+
+
+      const {loading, error, data} = useQuery(LIST_OF_ROLES);
+      const rolesData = [];
+
+      try{
+        if(loading){
+          return "loading"
+        }
+
+        if(error){
+          console.log(error);
+        }
+
+        Object.values(data).forEach(val => {
+          val.map(item => {
+            const {id, name, description, createdAt} = item;
+            rolesData.push({id: id, role: name, createdBy: createdAt, description: description})
+          })
+        })
+      }catch(e){
+        console.log(e);
+      }
     
       
     return(
@@ -44,7 +85,7 @@ const Permission = (props) => {
            {/* <CCardBody> */}
            <CDataTable 
                     style
-                    items={usersData}
+                    items={rolesData}
                     fields={fields}
                     tableFilter
                     itemsPerPageSelect
@@ -72,24 +113,7 @@ const Permission = (props) => {
                                         showCancelButton: true,
                                         confirmButtonText:"YES",
                                         cancelButtonText: "NO"
-                                     })
-                               // .then((result) => {
-                                //         // if (result.value) {
-                                //         //     // this.$store.dispatch(DELETE_ROLE, item.roleId).then(() => {
-                                //         //     //     this.$swal(
-                                //         //     //         this.$t('GENERAL.DEL'),
-                                //         //     //         item.name + ' '+ this.$t('GENERAL.BEEN'),
-                                //         //     //         'success'
-                                //         //     //     );
-                                //         //     //     this.$refs.table.refresh();
-                                //         //     }).catch((error) => {
-                                //         //         this.$swal(this.$t('GENERAL.FAILED'),
-                                //         //             this.$t('GENERAL.MESSAGE'),
-                                //         //             "warning");
-                                //         //     });
-                                //         }
-                                //     });
-                                       } >Delete
+                                     })} >Delete
                                       
                                      
                                      

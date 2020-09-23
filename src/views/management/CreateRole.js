@@ -2,33 +2,129 @@ import React, {useState} from 'react'
 import { CContainer, CRow, CCol, CCard, CCardHeader, CCardFooter, CCardBody,CButton } from "@coreui/react";
 import Select from 'react-select'
 import {Link} from 'react-router-dom'
+import {gql, useQuery, useMutation} from '@apollo/client'
 
-const CreateNewRole = e => {
+const GET_PERMISSIONS = gql `
+   query permissions {
+       getPermissions{
+           id
+           value
+           description
+       }
+   }
+`
+
+
+
+const CREATE_ROLE_MUTATION = gql`
+ mutation CreateRole($name: String!, $description: String!, $permissionIds: [Int!]!){
+     createRole(data: {
+         name: $name,
+         description: $description,
+         permissionIds: $permissionIds 
+     }){
+         id
+         name
+         description
+         createdAt
+        permissions{
+             id
+             value
+             description 
+         }
+     }
+ }
+`
+
+
+const ids = new Set();
+
+const CreateNewRole = () => {
+
+   const [createRole] = useMutation(CREATE_ROLE_MUTATION);
+   const [selectedValue, setSelectedValue] = useState(null)
+   
 
    const [state, setState] = useState({
        state :{
-         
-       
+         name: "",
+         description: ""
        }
-   })
-
-    const handleSubmit = e => {
-        e.preventDefault()
-    }
+   });
 
 
     const handleChange = e => {
-        const {name, value} = e.target
-        setState({...state, [name]: value})
+        const {name, value} = e.target;
+        setState({...state, [name]: value});
     }
 
-    const permissionList = [
-        {label: "create user", value: "create user"},
-        {label: "delete user", value: "delete user"},
-        {label: "update user", value: "update user"},
-        {label: "view", value: "view"}
-    ]
 
+    const handleSelectedValue = e => {
+        setSelectedValue(e);
+         
+        Object.values(e).map(item => {
+            ids.add(item.id);
+            
+        })
+        
+        console.log(Array.from(ids));
+        console.log(e)
+    }
+
+
+
+    const permissionList = [];
+    const {loading, error, data} = useQuery(GET_PERMISSIONS);
+    
+    try {
+        if(loading){
+            return "loading";
+        }
+    
+        if(error){
+            return error;
+        }
+    
+        Object.values(data).forEach(val => {
+          val.map(item => {
+              const {id, value, description} = item;
+              permissionList.push({id: id, label: description, value: value});
+          });
+        });
+    }catch(e){
+       console.log(e);
+    }
+    
+ 
+
+
+
+    //TODO: fix bug that pops up when user deletes the last selected item using the exit on the item itself
+     
+
+  
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        //write mutation and send to backend
+         
+        try{
+           const response = await createRole(
+               {
+                   variables: {
+                      name: state.name,
+                      description: state.description,
+                      permissionIds: Array.from(ids)
+                   },
+                   errorPolicy: "all"
+               });
+               console.log(response)
+
+        }catch(e){
+            console.log(e)
+        }
+    }
+
+  
     
 
     return(
@@ -44,8 +140,8 @@ const CreateNewRole = e => {
                                 <input type="text" 
                                 className="form-control" 
                                 id ="firstnameId" 
-                                name="firstName"
-                                value={state.firstName || ""}
+                                name="name"
+                                value={state.name || ""}
                                 onChange={handleChange}
                                 required
                                 noValidate/>
@@ -57,21 +153,21 @@ const CreateNewRole = e => {
                                 <textarea style={{height: "115px"}} type="text" 
                                 className="form-control" 
                                 id ="descriptionId" 
-                                name="itemname"
-                                value={state.description}
+                                name="description"
+                                value={state.description || ""}
                                 onChange={handleChange}
                                 noValidate/>
                                </div>
                            
                           <div className="form-group">
-                                       <label htmlFor="categoriesId">PERMISSIONS</label>
+                                       <label htmlFor="permissionIds">PERMISSIONS</label>
                                        <Select type="text" 
                                        options = {permissionList}
                                        isMulti
-                                    //    value={selectedOption}
-                                    //    onChange = {handleOnSelectedOption}
-                                       
-                                      />
+                                       isSearchable
+                                       onChange={handleSelectedValue}
+                                       value={selectedValue}
+                                        />
                                    </div>
                        
                      </CCardBody>

@@ -103,6 +103,8 @@ const Login = (props) => {
      }  
   
     }catch(e){
+      //TODO:catch error message in response
+      console.log(e.message.error)
       let timerInterval
       Swal.fire({
         title: 'Error',
@@ -126,6 +128,8 @@ const Login = (props) => {
       }) 
     }
   }
+
+
 
   return (
     <div className="c-app c-default-layout flex-row align-items-center text-center">
