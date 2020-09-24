@@ -1,5 +1,5 @@
-import React from "react"
-import { CFooter } from "@coreui/react"
+import React from "react";
+import { CFooter } from "@coreui/react";
 
 const TheFooter = () => {
   return (
@@ -16,4 +16,4 @@ const TheFooter = () => {
   )
 }
 
-export default React.memo(TheFooter)
+export default React.memo(TheFooter);
