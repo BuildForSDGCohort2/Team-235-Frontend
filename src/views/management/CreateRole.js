@@ -63,8 +63,9 @@ const CreateNewRole = () => {
         setSelectedValue(e);
          
         Object.values(e).map(item => {
-            ids.add(item.id);
-            
+            return(
+                ids.add(item.id)
+            )
         })
         
         console.log(Array.from(ids));
@@ -87,8 +88,9 @@ const CreateNewRole = () => {
     
         Object.values(data).forEach(val => {
           val.map(item => {
-              const {id, value, description} = item;
-              permissionList.push({id: id, label: description, value: value});
+            return(
+                permissionList.push({id: item.id, label: item.description, value: item.value})
+            ) 
           });
         });
     }catch(e){

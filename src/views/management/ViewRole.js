@@ -1,7 +1,7 @@
 import React from 'react';
-import { CContainer, CRow, CCol, CCard, CCardHeader, CCardFooter, CCardBody,CButton } from '@coreui/react';
+import { CContainer, CRow, CCol, CCard, CCardHeader, CCardBody } from '@coreui/react';
 
-const ViewRole = (props) => {
+const ViewRole = () => {
 
     
 

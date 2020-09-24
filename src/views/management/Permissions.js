@@ -57,8 +57,9 @@ const Permission = (props) => {
 
         Object.values(data).forEach(val => {
           val.map(item => {
-            const {id, name, description, createdAt} = item;
-            rolesData.push({id: id, role: name, createdBy: createdAt, description: description})
+            return (
+            rolesData.push({id: item.id, role: item.name, createdBy: item.createdAt, description: item.description})
+            )
           })
         })
       }catch(e){

@@ -98,7 +98,10 @@ const NewUser = (props) =>  {
    Object.values(data).forEach(val => {
       val.map(item => {
           const {id, name} = item;
-          listOfRoles.push({ label: name, value: id});
+          return(
+            listOfRoles.push({ label: name, value: id})
+          )
+          
       });
     });
 
@@ -113,7 +116,10 @@ const NewUser = (props) =>  {
    const handleOnSelectedOption = e => {
       setSelectedOption(e)
       Object.values(e).map(item => {
-          id.add(item.value);
+         return(
+            id.add(item.value)
+         )
+          
       })
        
       console.log(id);

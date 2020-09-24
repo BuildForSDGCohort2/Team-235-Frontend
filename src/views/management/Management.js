@@ -95,9 +95,12 @@ const TheUserManagement = (props) => {
           }else if(!isVerified && !blocked){
             status.push("Pending")
           }
-
+          
+          return(
+            usersData.push({id: id, name: name, email: email, phoneNumber: phoneNumber, status: status.toString()})
+          )
           //TODO:create a role for users
-          usersData.push({id: id, name: name, email: email, phoneNumber: phoneNumber, status: status.toString()});
+          
 
         })
 

@@ -1,5 +1,5 @@
 import React from "react";
-import { CContainer, CRow, CCol, CCard, CCardHeader, CCardFooter, CCardBody,CButton } from "@coreui/react";
+import { CContainer, CRow, CCol, CCard, CCardHeader, CCardFooter, CCardBody} from "@coreui/react";
 
 const ViewStock = () => {
     return (
