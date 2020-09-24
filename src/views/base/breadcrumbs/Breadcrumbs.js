@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react"
 import {
   CBreadcrumb,
   CBreadcrumbItem,
@@ -9,9 +9,9 @@ import {
   CLink,
   CCol,
   CRow
-} from '@coreui/react'
-import { DocsLink } from 'src/reusable'
-import routes from '../../../routes'
+} from "@coreui/react"
+import { DocsLink } from "src/reusable"
+import routes from "../../../routes"
 
 const Breadcrumbs = () => {
   return (

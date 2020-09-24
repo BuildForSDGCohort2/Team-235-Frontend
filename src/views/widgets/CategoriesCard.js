@@ -1,6 +1,5 @@
 import React from "react"
 import {
-  CWidgetDropdown,
   CContainer,
   CRow,
   CCol,
@@ -55,29 +54,38 @@ const CategoriesCard = () => {
   }
   
  //const {name} = data;
-
+//some hidden bug
  const show = () => {
-  Swal.fire({
-    inputPlaceholder: "category name",
-    input: "text"
-  }).then((result) => {
-     console.log(result.value)
-    
-     try {
-      const response = createCategory(
-        {
-          variables: {
-            name: result.value
-          },
-          errorPolicy: "all"
-        }
-      )
-      console.log(response);
-     }catch(e){
-       console.log(e);
-     }
-     
-  })   
+  try{
+    Swal.fire({
+      inputPlaceholder: "category name",
+      input: "text"
+    }).then((result) => {
+
+       if(Swal.DismissReason){
+         return
+       }
+      
+       try {
+        const response = createCategory(
+          {
+            variables: {
+              name: result.value
+            },
+            errorPolicy: "all"
+          }
+        )
+        console.log(response);
+       }catch(e){
+         console.log(e);
+       }
+       
+    })
+
+  }catch(e){
+    console.log(e); //use swal toast
+  }
+   
 }
 
   return (
@@ -94,13 +102,9 @@ const CategoriesCard = () => {
         
         <CCardBody style={{padding: "20px"}}>
         <CRow>
-           
                   {data.getCategories.map(item => ( 
                       <CategoriesList key={item.id} name={item.name} />
                   ))}
-                 
-            
-    
         </CRow> 
        </CCardBody>
       </CCard>

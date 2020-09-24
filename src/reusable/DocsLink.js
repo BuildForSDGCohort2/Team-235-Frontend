@@ -1,5 +1,5 @@
-import React from 'react'
-import { CLink } from '@coreui/react'
+import React from "react"
+import { CLink } from "@coreui/react"
 
 const DocsLink = props => {
   const {
@@ -19,7 +19,7 @@ const DocsLink = props => {
         target="_blank" 
         className="card-header-action"  
       >
-        <small className="text-muted">{ text || 'docs' }</small>
+        <small className="text-muted">{ text || "docs" }</small>
       </CLink>
     </div>
   )

@@ -1,5 +1,5 @@
-import React, {useEffect} from 'react' 
-import {Link} from 'react-router-dom';
+import React, {useEffect} from "react"; 
+import {Link} from "react-router-dom";
 
 import {
     CButton,
@@ -13,9 +13,9 @@ import {
     CDropdownToggle,
     CContainer,
     CCardBody
-  } from '@coreui/react'
- import Swal from 'sweetalert2'
- import {gql, useQuery} from '@apollo/client'
+  } from "@coreui/react";
+ import Swal from "sweetalert2";
+ import {gql, useQuery} from "@apollo/client";
  
 
 const USERS = gql`
@@ -38,26 +38,24 @@ const USERS = gql`
 const TheUserManagement = (props) => { 
 
       const fields = [
-        { key: 'name', _style: { width: '25%'} },
-        {key:'email'},
-        { key: 'phone', _style: { width: '20%'} },
-        { key: 'status', _style: { width: '20%'} },
-        {key: 'options', _style:{width: '20%'}}
-      ]
+        { key: "name", _style: { width: "25%"} },
+        {key:"email"},
+        { key: "phone", _style: { width: "20%"} },
+        { key: "status", _style: { width: "20%"} },
+        {key: "options", _style:{width: "20%"}}
+      ];
     
       const getBadge = (status) => {
         switch (status) {
-          case 'Active': return 'success'
-          case 'Inactive': return 'secondary'
-          case 'Pending': return 'warning'
-          case 'Banned': return 'danger'
-          default: return 'primary'
+          case "Active": return "success"
+          case "Inactive": return "secondary"
+          case "Pending": return "warning"
+          case "Banned": return "danger"
+           default: return "primary"
         }
-      }
+      };
  
       
-      
-
       useEffect(() => {
         const token = localStorage.getItem("token");
         if(!token){
@@ -87,7 +85,7 @@ const TheUserManagement = (props) => {
         val.map(item => {
           const {id,firstName, lastName, email, phoneNumber, isVerified, blocked} = item;
           const name = firstName + " " + lastName;
-
+         
           const status = [];
 
           if(isVerified && !blocked){
@@ -99,26 +97,17 @@ const TheUserManagement = (props) => {
           }
 
           //TODO:create a role for users
-          usersData.push({id: id, name: name, email: email, phoneNumber: phoneNumber, status: status})
+          usersData.push({id: id, name: name, email: email, phoneNumber: phoneNumber, status: status.toString()});
 
         })
 
       })
        
      }catch(e){
-        Swal.fire(e);
+        Swal.fire("no data available");
      }
      
       //not available in place of undefined
-
-
-      // const usersData = [
-      //   {id: 0, name: 'John Doe', email: 'kwakuboafo@gmail.com', phone: '0543243676', status: 'Pending'},
-      //   {id: 1, name: 'Samppa Nori', email: 'kwakuboafo@gmail.com', phone: '0564438556', status: 'Active'},
-      //   {id: 2, name: 'Estavan Lykos', email: 'serwahasamoah@gmail.com', phone: '0278834566', status: 'Banned'},
-      //   {id: 3, name: 'Chetan Mohamed', email: 'serwahasamoah@gmail.com', phone: '0234456782', status: 'Inactive'} 
-      // ] 
-    
     return (
       
         
@@ -132,11 +121,17 @@ const TheUserManagement = (props) => {
            </CCardHeader>
            {/* <CCardBody> */}
            <CCardBody >
-           <CDataTable 
+           <CDataTable
+                    tableFilter
+                    itemsPerPage ={10}
+                    hover
+                    itemsPerPageSelect
+                    sorter
+                    pagination 
                     items={usersData}
                     fields={fields}
                     scopedSlots = {{
-                    'status':
+                    "status":
                     (item)=>(
                         <td>
                         <CBadge color={getBadge(item.status)}>
@@ -144,7 +139,7 @@ const TheUserManagement = (props) => {
                         </CBadge>
                         </td>
                     ),
-                   'options':
+                   "options":
                     ()=>{
                         return (
                             <td className="py-2">
@@ -155,32 +150,14 @@ const TheUserManagement = (props) => {
                                         <CDropdownItem onClick = {() =>  Swal.fire({
                                         title: "Title",
                                         text: "ARE YOU SURE YOU WANT TO DELETE",
-                                        icon: 'warning',
+                                        icon: "warning",
                                         showCancelButton: true,
                                         confirmButtonText:"YES",
                                         cancelButtonText: "NO"
                                      })
-                               // .then((result) => {
-                                //         // if (result.value) {
-                                //         //     // this.$store.dispatch(DELETE_ROLE, item.roleId).then(() => {
-                                //         //     //     this.$swal(
-                                //         //     //         this.$t('GENERAL.DEL'),
-                                //         //     //         item.name + ' '+ this.$t('GENERAL.BEEN'),
-                                //         //     //         'success'
-                                //         //     //     );
-                                //         //     //     this.$refs.table.refresh();
-                                //         //     }).catch((error) => {
-                                //         //         this.$swal(this.$t('GENERAL.FAILED'),
-                                //         //             this.$t('GENERAL.MESSAGE'),
-                                //         //             "warning");
-                                //         //     });
-                                //         }
-                                //     });
-                                       } 
-                                          
-                                       >
+                                     }>
                                           Delete</CDropdownItem>
-                                      <CDropdownItem onClick={() => props.history.push('/viewuser')}>View</CDropdownItem>
+                                      <CDropdownItem onClick={() => props.history.push("/viewuser")}>View</CDropdownItem>
                                    </CDropdownMenu>
                                </CDropdown>
                             </td>
@@ -192,7 +169,7 @@ const TheUserManagement = (props) => {
   
 </CContainer>
         
-)}
+)};
 
 //todo private list query which will inherite the to do private list
 

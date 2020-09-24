@@ -1,8 +1,9 @@
-import React, {useState} from 'react';
-import { CContainer, CRow, CCol, CCard, CCardHeader, CCardFooter, CCardBody,CButton } from '@coreui/react';
-import {Link} from 'react-router-dom';
-import { gql, useMutation, useQuery} from '@apollo/client';
-import Select from 'react-select'
+import React, {useState} from "react";
+import { CContainer, CRow, CCol, CCard, CCardHeader, CCardFooter, CCardBody,CButton } from "@coreui/react";
+import {Link} from "react-router-dom";
+import { gql, useMutation, useQuery} from "@apollo/client";
+import Select from "react-select"
+import Swal from "sweetalert2"
 
 
 
@@ -61,7 +62,8 @@ const isValidForm = ({...rest}) => {
       return true;
    }
 
-   return false;
+     Swal.fire("please fill all fields correctly");
+     return false;
 }
 
 const NewUser = (props) =>  {
@@ -138,8 +140,11 @@ const NewUser = (props) =>  {
                 }, 
                 errorPolicy: "all"
              });
-
-           console.log(response);
+             console.log(response)
+            if(response){
+               Swal.fire("user created")
+               props.history.push("/management")
+            }
            }catch(e){
              alert(e);
            }
@@ -245,7 +250,5 @@ const NewUser = (props) =>  {
          </CRow>
       </CContainer>
    
-   )
- 
-}
+   )}
 export default NewUser;

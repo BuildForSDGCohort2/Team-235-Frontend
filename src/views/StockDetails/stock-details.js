@@ -18,7 +18,7 @@ import {
 
 import {CIcon} from "@coreui/icons-react";
 import {Link} from "react-router-dom";
-import Swal from 'sweetalert2'
+import Swal from "sweetalert2";
 
  
 
@@ -53,7 +53,7 @@ import Swal from 'sweetalert2'
         <CContainer>
         <CCard className="text-center" style={{borderRadius:"5px"}}>
         <CCardHeader> 
-          <Link to='/addstock'>
+          <Link to="/addstock">
             <CButton className="btn btn-info" style={{float:"right"}}>ADD NEW STOCK</CButton>
           </Link>  
                     <CInputGroup style={{width:"30%", float:"left"}}>
@@ -71,7 +71,7 @@ import Swal from 'sweetalert2'
             items={stockData}
             fields={tableFields}
             scopedSlots = {{
-              'actions':
+              "actions":
               () => {
                   return (
                   <td className="py-2">
@@ -83,30 +83,14 @@ import Swal from 'sweetalert2'
                                Swal.fire({
                                 title: "Title",
                                 text: "ARE YOU SURE YOU WANT TO DELETE",
-                                icon: 'warning',
+                                icon: "warning",
                                 showCancelButton: true,
                                 confirmButtonText:"YES",
                                 cancelButtonText: "NO"
                              })
-                       // .then((result) => {
-                        //         // if (result.value) {
-                        //         //     // this.$store.dispatch(DELETE_ROLE, item.roleId).then(() => {
-                        //         //     //     this.$swal(
-                        //         //     //         this.$t('GENERAL.DEL'),
-                        //         //     //         item.name + ' '+ this.$t('GENERAL.BEEN'),
-                        //         //     //         'success'
-                        //         //     //     );
-                        //         //     //     this.$refs.table.refresh();
-                        //         //     }).catch((error) => {
-                        //         //         this.$swal(this.$t('GENERAL.FAILED'),
-                        //         //             this.$t('GENERAL.MESSAGE'),
-                        //         //             "warning");
-                        //         //     });
-                        //         }
-                        //     });
                             }
                             >Delete</CDropdownItem>
-                            <CDropdownItem onClick = {() => props.history.push('/viewstock')}>View</CDropdownItem>
+                            <CDropdownItem onClick = {() => props.history.push("/viewstock")}>View</CDropdownItem>
                         </CDropdownMenu>
                     </CDropdown>
                   </td>
@@ -120,4 +104,4 @@ import Swal from 'sweetalert2'
      );
  };
 
- export default StockDetails
+ export default StockDetails;

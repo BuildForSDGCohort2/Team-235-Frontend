@@ -1,12 +1,7 @@
 import React from 'react';
 import {
     CWidgetDropdown,
-    CContainer,
-    CRow,
-    CCol,
-    CCardBody,
-    CCardHeader,
-    CCard
+    CCol
   } from "@coreui/react"
 
 

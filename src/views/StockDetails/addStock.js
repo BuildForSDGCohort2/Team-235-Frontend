@@ -236,7 +236,7 @@ const AddStock = () => {
                      </CCardBody>
                      <CCardFooter className="text-center">
                      <CButton  type="submit" color="info" style={{width:"150px", margin:"10px"}}>SAVE</CButton>
-                     <Link to='./stock-details'>
+                     <Link to="./stock-details">
                      <CButton color="secondary" style={{width:"150px"}}>CANCEL</CButton>
                      </Link>
                      </CCardFooter>
