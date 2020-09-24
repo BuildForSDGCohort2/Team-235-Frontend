@@ -1,5 +1,5 @@
-import React from 'react'
-import { useSelector, useDispatch } from 'react-redux'
+import React from "react";
+import { useSelector, useDispatch } from "react-redux";
 import {
   CButton,
   CSidebar,
@@ -7,10 +7,10 @@ import {
   CSidebarNav,
   CSidebarMinimizer,
   CSidebarNavItem,
-} from '@coreui/react'
+} from "@coreui/react";
 
-import CIcon from '@coreui/icons-react'
-import {Link} from 'react-router-dom';
+import CIcon from "@coreui/icons-react";
+import {Link} from "react-router-dom";
  
 
  
@@ -22,7 +22,7 @@ const TheSidebar = () => {
  return (
     <CSidebar
       show={show}
-      onShowChange={(val) => dispatch({type: 'set', sidebarShow: val })}
+      onShowChange={(val) => dispatch({type: "set", sidebarShow: val })}
     >
       <CSidebarBrand className="d-md-down-none" to="/">
         STOCK TRACKER
@@ -39,7 +39,7 @@ const TheSidebar = () => {
         <div>
             <div className ="c-sidebar-nav-item" style={{backgroundColor:"#24385e", marginTop:"10px"}}>
                <CButton className="c-sidebar-nav-link" style={{border:"none", width:"100%"}}>
-               <Link to='/dashboard'>
+               <Link to="/dashboard">
                   <CIcon name="cil-home" style={{color:"white"}} /> <span style={{marginLeft:"20px", color:"white"}}>DASHBOARD</span>
                </Link>
                </CButton>
@@ -49,7 +49,7 @@ const TheSidebar = () => {
          {/* * start categories *div */}
          <div className="c-sidebar-nav-item" style={{backgroundColor:"#24385e", marginTop:"10px"}}>
             <CButton className="c-sidebar-nav-link" style={{border:"none", width:"100%"}}>
-            <Link to='/categories'> 
+            <Link to="/categories"> 
                <CIcon name="cilListNumbered" style= {{color:"white"}} /> <span style={{marginLeft:"20px", color:"white"}}>CATEGORIES</span>
             </Link>   
             </CButton>
@@ -58,32 +58,18 @@ const TheSidebar = () => {
 
          <div className="c-sidebar-nav-item" style={{backgroundColor:"#24385e", marginTop:"10px"}}>
             <CButton className="c-sidebar-nav-link" style={{border:"none", width:"100%"}}>
-               <Link to='./stock-details'>
+               <Link to="./stock-details">
                <CIcon name="cilBasket" style={{color:"white"}} /> <span style={{marginLeft:"20px", color:"white"}}>STOCK</span>
                </Link>
             </CButton>
          </div>
 
-         {/* <div className="c-sidebar-nav-item" style={{backgroundColor:"#24385e", marginTop:"10px"}}>
-            <CButton className="c-sidebar-nav-link" style={{border:"none", width:"100%"}}>
-               
-               <CIcon name="cilBan" style={{color:"white"}} /> <span style={{marginLeft:"20px",color:"white"}}>SUPPLIES</span>
-              
-            </CButton>
-         </div>
-
-         <div className="c-sidebar-nav-item" style={{backgroundColor:"#24385e", marginTop:"10px"}}>
-            <CButton className="c-sidebar-nav-link" style={{border:"none", width:"100%"}}>
-             
-               <CIcon name="cilTags" style={{color:"white"}} /> <span style={{marginLeft:"20px", color:"white"}}>ASSETS COLUMN</span>
-             
-            </CButton>
-         </div> */}
+        
         
         {/**user management starts */}
          <div className="c-sidebar-nav-item" style={{backgroundColor:"#24385e", marginTop:"10px"}}>
             <CButton className="c-sidebar-nav-link" style={{border:"none", width:"100%"}}>
-            <Link to='/management'>
+            <Link to="/management">
                <CIcon name="cilNotes" style={{color:"white"}} /> <span style={{marginLeft:"20px", color:"white"}}>USER MANAGEMENT</span>
             </Link>
             </CButton>
@@ -93,20 +79,17 @@ const TheSidebar = () => {
 
          <div className="c-sidebar-nav-item" style={{backgroundColor:"#24385e", marginTop:"10px"}}>
             <CButton className="c-sidebar-nav-link" style={{border:"none", width:"100%"}}>
-               <Link to='./'>
+               <Link to="/permission">
                <CIcon name="cilSettings" style={{color:"white"}} /> <span style={{marginLeft:"20px", color:"white"}}>ROLES AND PERMISSIONS</span>
                </Link>
             </CButton>
          </div>
 
-         {/* <div className="c-sidebar-nav-item" style={{backgroundColor:"#24385e", marginTop:"10px"}}>
+         <div className="c-sidebar-nav-item" style={{backgroundColor:"#24385e", marginTop:"10px"}}>
             <CButton className="c-sidebar-nav-link" style={{border:"none", width:"100%"}}>
-               <Link to='./'>
-               <CIcon name="cil-code" style={{color:"white"}} /> <span style={{marginLeft:"20px", color:"white"}}>ABOUT</span>
-               </Link>
+               <CIcon name="cilBan" style={{color:"white"}} /> <span style={{marginLeft:"20px",color:"white"}}>STOCK REPORT</span>
             </CButton>
-         </div> */}
-        {/**end of side bar items */ }
+         </div>
         
          </CSidebarNavItem>
       </CSidebarNav>
@@ -115,4 +98,4 @@ const TheSidebar = () => {
   )
 }
 
-export default React.memo(TheSidebar)
+export default React.memo(TheSidebar);

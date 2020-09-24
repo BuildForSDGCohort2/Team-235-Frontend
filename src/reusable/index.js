@@ -1,4 +1,4 @@
-import DocsLink from './DocsLink'
+import DocsLink from "./DocsLink"
 
 export {
   DocsLink

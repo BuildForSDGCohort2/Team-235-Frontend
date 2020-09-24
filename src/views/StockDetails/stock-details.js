@@ -18,6 +18,7 @@ import {
 
 import {CIcon} from "@coreui/icons-react";
 import {Link} from "react-router-dom";
+import Swal from "sweetalert2";
 
  
 
@@ -52,10 +53,9 @@ import {Link} from "react-router-dom";
         <CContainer>
         <CCard className="text-center" style={{borderRadius:"5px"}}>
         <CCardHeader> 
-          <Link to='/addstock'>
+          <Link to="/addstock">
             <CButton className="btn btn-info" style={{float:"right"}}>ADD NEW STOCK</CButton>
           </Link>  
-            <CButton className="btn btn-info" style={{float:"right", marginRight:"10px"}}>UPDATE EXISTING STOCK</CButton>
                     <CInputGroup style={{width:"30%", float:"left"}}>
                      <CInputGroupPrepend>
                         <CInputGroupText>
@@ -71,17 +71,26 @@ import {Link} from "react-router-dom";
             items={stockData}
             fields={tableFields}
             scopedSlots = {{
-              'actions':
+              "actions":
               () => {
                   return (
                   <td className="py-2">
                       <CDropdown>
-                        <CDropdownToggle>more</CDropdownToggle>
+                        <CDropdownToggle>Actions</CDropdownToggle>
                             <CDropdownMenu>
-                            <CDropdownItem>update</CDropdownItem>
-                            <CDropdownItem>delete</CDropdownItem>
-                            <CDropdownItem>update</CDropdownItem>
-                            <CDropdownItem>view facets</CDropdownItem>
+                            <CDropdownItem>Update</CDropdownItem>
+                            <CDropdownItem onClick = {() => 
+                               Swal.fire({
+                                title: "Title",
+                                text: "ARE YOU SURE YOU WANT TO DELETE",
+                                icon: "warning",
+                                showCancelButton: true,
+                                confirmButtonText:"YES",
+                                cancelButtonText: "NO"
+                             })
+                            }
+                            >Delete</CDropdownItem>
+                            <CDropdownItem onClick = {() => props.history.push("/viewstock")}>View</CDropdownItem>
                         </CDropdownMenu>
                     </CDropdown>
                   </td>
@@ -95,4 +104,4 @@ import {Link} from "react-router-dom";
      );
  };
 
- export default StockDetails
+ export default StockDetails;

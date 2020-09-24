@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react";
 import {
   CCardGroup,
   CCardFooter,
@@ -10,14 +10,14 @@ import {
   CWidgetProgressIcon,
   CWidgetSimple,
   CProgress,
-} from '@coreui/react'
-import WidgetsBrand from './WidgetsBrand'
-import WidgetsDropdown from './WidgetsDropdown'
+} from "@coreui/react";
+import WidgetsBrand from "./WidgetsBrand";
+import WidgetsDropdown from "./WidgetsDropdown";
 
-import ChartLineSimple from '../charts/ChartLineSimple'
-import ChartBarSimple from '../charts/ChartBarSimple'
+import ChartLineSimple from "../charts/ChartLineSimple";
+import ChartBarSimple from "../charts/ChartBarSimple";
 
-import CIcon from '@coreui/icons-react'
+import CIcon from "@coreui/icons-react";
 
 const Widgets = () => {
   return (
@@ -334,32 +334,32 @@ const Widgets = () => {
       <CRow>
         <CCol sm="4" lg="2">
           <CWidgetSimple header="title" text="1,123">
-            <ChartLineSimple style={{ height: '40px' }} borderColor="danger"/>
+            <ChartLineSimple style={{ height: "40px" }} borderColor="danger"/>
           </CWidgetSimple>
         </CCol>
         <CCol sm="4" lg="2">
           <CWidgetSimple header="title" text="1,123">
-            <ChartLineSimple style={{ height: '40px' }} borderColor="primary"/>
+            <ChartLineSimple style={{ height: "40px" }} borderColor="primary"/>
           </CWidgetSimple>
         </CCol>
         <CCol sm="4" lg="2">
           <CWidgetSimple header="title" text="1,123">
-            <ChartLineSimple style={{ height: '40px' }} borderColor="success"/>
+            <ChartLineSimple style={{ height: "40px" }} borderColor="success"/>
           </CWidgetSimple>
         </CCol>
         <CCol sm="4" lg="2">
           <CWidgetSimple header="title" text="1,123">
-            <ChartBarSimple style={{ height: '40px' }} backgroundColor="danger"/>
+            <ChartBarSimple style={{ height: "40px" }} backgroundColor="danger"/>
           </CWidgetSimple>
         </CCol>
         <CCol sm="4" lg="2">
           <CWidgetSimple header="title" text="1,123">
-            <ChartBarSimple style={{ height: '40px' }} backgroundColor="primary"/>
+            <ChartBarSimple style={{ height: "40px" }} backgroundColor="primary"/>
           </CWidgetSimple>
         </CCol>
         <CCol sm="4" lg="2">
           <CWidgetSimple header="title" text="1,123">
-            <ChartBarSimple style={{ height: '40px' }} backgroundColor="success"/>
+            <ChartBarSimple style={{ height: "40px" }} backgroundColor="success"/>
           </CWidgetSimple>
         </CCol>
       </CRow>
@@ -367,4 +367,4 @@ const Widgets = () => {
   )
 }
 
-export default Widgets
+export default Widgets;

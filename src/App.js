@@ -1,7 +1,7 @@
-import React  from 'react';
-import { HashRouter, Route, Switch } from 'react-router-dom';
-import './scss/style.scss';
-import Forgot from './views/pages/forgot/Forgot';
+import React  from "react";
+import { HashRouter, Route, Switch } from "react-router-dom";
+import "./scss/style.scss";
+import Forgot from "./views/pages/forgot/Forgot";
 
 
 const loading = (
@@ -11,12 +11,12 @@ const loading = (
 )
 
 // Containers
-const TheLayout = React.lazy(() => import('./containers/TheLayout'));
+const TheLayout = React.lazy(() => import("./containers/TheLayout"));
  
 // Pages
-const Login = React.lazy(() => import('./views/pages/login/Login'));
-const Page404 = React.lazy(() => import('./views/pages/page404/Page404'));
-const Page500 = React.lazy(() => import('./views/pages/page500/Page500'));
+const Login = React.lazy(() => import("./views/pages/login/Login"));
+const Page404 = React.lazy(() => import("./views/pages/page404/Page404"));
+const Page500 = React.lazy(() => import("./views/pages/page500/Page500"));
  
  
 const  App  = () => {
@@ -35,6 +35,13 @@ const  App  = () => {
               <Route exact path="/add" name="New User" render={(props) => <TheLayout {...props}/>} />
               <Route exact path="/stock-details" name= "Stock Details" render={(props) => <TheLayout {...props}/>} />
               <Route exact path="/addstock" name= "Add Stock" render={(props) => <TheLayout {...props}/>} />
+              <Route exact path="/permission" name= "Permission" render={(props) => <TheLayout {...props}/>} />
+              <Route exact path="/createrole" name= "Create New Role" render={(props) => <TheLayout {...props}/>} />
+              <Route exact path="/viewrole" name= "View User Role" render={(props) => <TheLayout {...props}/>} />
+              <Route exact path="/viewuser" name= "View User Profile" render={(props) => <TheLayout {...props}/>} />
+              <Route exact path="/viewstock" name= "View Stock Details" render={(props) => <TheLayout {...props}/>} />
+              
+
             </Switch>
           </React.Suspense>
       </HashRouter>

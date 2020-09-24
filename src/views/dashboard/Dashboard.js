@@ -1,4 +1,4 @@
-import React, { lazy, useEffect } from 'react'
+import React, { lazy, useEffect } from "react"
 import {
   CBadge,
   CButton,
@@ -11,23 +11,24 @@ import {
   CProgress,
   CRow,
   CCallout
-} from '@coreui/react'
-import CIcon from '@coreui/icons-react'
-
-import MainChartExample from '../charts/MainChartExample.js'
+} from "@coreui/react"
+import CIcon from "@coreui/icons-react"
+import MainChartExample from "../charts/MainChartExample.js"
  
 
-const WidgetsDropdown = lazy(() => import('../widgets/WidgetsDropdown.js'))
-const WidgetsBrand = lazy(() => import('../widgets/WidgetsBrand.js'))
+const WidgetsDropdown = lazy(() => import("../widgets/WidgetsDropdown.js"))
+const WidgetsBrand = lazy(() => import("../widgets/WidgetsBrand.js"))
  
 
 const Dashboard = (props) => {
 
+
   //prevents unauthorized access to webapp
   useEffect(() => {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem("token");
     if(!token){
-       props.history.push('/404');
+       props.history.push("/404");
+       
     }
  })
   
@@ -49,12 +50,12 @@ const Dashboard = (props) => {
               </CButton>
               <CButtonGroup className="float-right mr-3">
                 {
-                  ['Day', 'Month', 'Year'].map(value => (
+                  ["Day", "Month", "Year"].map(value => (
                     <CButton
                       color="outline-secondary"
                       key={value}
                       className="mx-0"
-                      active={value === 'Month'}
+                      active={value === "Month"}
                     >
                       {value}
                     </CButton>
@@ -63,7 +64,7 @@ const Dashboard = (props) => {
               </CButtonGroup>
             </CCol>
           </CRow>
-          <MainChartExample style={{height: '300px', marginTop: '40px'}}/>
+          <MainChartExample style={{height: "300px", marginTop: "40px"}}/>
         </CCardBody>
         <CCardFooter>
           <CRow className="text-center">
@@ -126,7 +127,7 @@ const Dashboard = (props) => {
         <CCol>
           <CCard>
             <CCardHeader>
-              Traffic {' & '} Sales
+              Traffic {" & "} Sales
             </CCardHeader>
             <CCardBody>
               <CRow>
@@ -348,7 +349,7 @@ const Dashboard = (props) => {
                   <tr>
                     <td className="text-center">
                       <div className="c-avatar">
-                        <img src={'avatars/1.jpg'} className="c-avatar-img" alt="admin@bootstrapmaster.com" />
+                        <img src={"avatars/1.jpg"} className="c-avatar-img" alt="admin@bootstrapmaster.com" />
                         <span className="c-avatar-status bg-success"></span>
                       </div>
                     </td>
@@ -383,7 +384,7 @@ const Dashboard = (props) => {
                   <tr>
                     <td className="text-center">
                       <div className="c-avatar">
-                        <img src={'avatars/2.jpg'} className="c-avatar-img" alt="admin@bootstrapmaster.com" />
+                        <img src={"avatars/2.jpg"} className="c-avatar-img" alt="admin@bootstrapmaster.com" />
                         <span className="c-avatar-status bg-danger"></span>
                       </div>
                     </td>
@@ -419,7 +420,7 @@ const Dashboard = (props) => {
                   <tr>
                     <td className="text-center">
                       <div className="c-avatar">
-                        <img src={'avatars/3.jpg'} className="c-avatar-img" alt="admin@bootstrapmaster.com" />
+                        <img src={"avatars/3.jpg"} className="c-avatar-img" alt="admin@bootstrapmaster.com" />
                         <span className="c-avatar-status bg-warning"></span>
                       </div>
                     </td>
@@ -454,7 +455,7 @@ const Dashboard = (props) => {
                   <tr>
                     <td className="text-center">
                       <div className="c-avatar">
-                        <img src={'avatars/4.jpg'} className="c-avatar-img" alt="admin@bootstrapmaster.com" />
+                        <img src={"avatars/4.jpg"} className="c-avatar-img" alt="admin@bootstrapmaster.com" />
                         <span className="c-avatar-status bg-secondary"></span>
                       </div>
                     </td>
@@ -489,7 +490,7 @@ const Dashboard = (props) => {
                   <tr>
                     <td className="text-center">
                       <div className="c-avatar">
-                        <img src={'avatars/5.jpg'} className="c-avatar-img" alt="admin@bootstrapmaster.com" />
+                        <img src={"avatars/5.jpg"} className="c-avatar-img" alt="admin@bootstrapmaster.com" />
                         <span className="c-avatar-status bg-success"></span>
                       </div>
                     </td>
@@ -524,7 +525,7 @@ const Dashboard = (props) => {
                   <tr>
                     <td className="text-center">
                       <div className="c-avatar">
-                        <img src={'avatars/6.jpg'} className="c-avatar-img" alt="admin@bootstrapmaster.com" />
+                        <img src={"avatars/6.jpg"} className="c-avatar-img" alt="admin@bootstrapmaster.com" />
                         <span className="c-avatar-status bg-danger"></span>
                       </div>
                     </td>

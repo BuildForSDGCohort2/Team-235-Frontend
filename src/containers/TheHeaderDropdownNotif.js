@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react"
 import {
   CBadge,
   CDropdown,
@@ -6,8 +6,8 @@ import {
   CDropdownMenu,
   CDropdownToggle,
   CProgress
-} from '@coreui/react'
-import CIcon from '@coreui/icons-react'
+} from "@coreui/react"
+import CIcon from "@coreui/icons-react"
 
 const TheHeaderDropdownNotif = () => {
   const itemsCount = 5

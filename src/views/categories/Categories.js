@@ -10,6 +10,8 @@ const Categories = (props) =>  {
        props.history.push('/404');
     }
  })
+
+ 
     return (
       <CategoriesCard />
  

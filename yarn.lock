@@ -9659,7 +9659,7 @@ react-router@5.2.0:
     tiny-invariant "^1.0.2"
     tiny-warning "^1.0.0"
 
-react-scripts@^3.4.2:
+react-scripts@^3.4.3:
   version "3.4.3"
   resolved "https://registry.yarnpkg.com/react-scripts/-/react-scripts-3.4.3.tgz#21de5eb93de41ee92cd0b85b0e1298d0bb2e6c51"
   integrity sha512-oSnoWmii/iKdeQiwaO6map1lUaZLmG0xIUyb/HwCVFLT7gNbj8JZ9RmpvMCZ4fB98ZUMRfNmp/ft8uy/xD1RLA==
@@ -11089,6 +11089,11 @@ svgo@^1.0.0, svgo@^1.2.2:
     stable "^0.1.8"
     unquote "~1.1.1"
     util.promisify "~1.0.0"
+
+sweetalert2@^10.1.0:
+  version "10.1.0"
+  resolved "https://registry.yarnpkg.com/sweetalert2/-/sweetalert2-10.1.0.tgz#a782165d626d939f014ace1ec7edd986b910f914"
+  integrity sha512-r+hFEkHv90M32vmo+Q+qNTPcfcKuN8b3Pn6zcXGrkNLvZtIn1XzY2uLJTFZUQ8hR96mCxDmRcEMXzxX7sEgyWA==
 
 symbol-observable@^1.2.0:
   version "1.2.0"

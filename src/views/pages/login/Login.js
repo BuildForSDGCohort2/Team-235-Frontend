@@ -16,6 +16,7 @@ import {
 } from "@coreui/react";
 import CIcon from "@coreui/icons-react";
 import {gql, useMutation} from "@apollo/client";
+import Swal from "sweetalert2";
  
 
 const ADMIN_DATA = gql`
@@ -51,6 +52,32 @@ const Login = (props) => {
     e.preventDefault();
     const {email, password} = state;
 
+    if(email === null || password == null) {
+      let timerInterval
+        Swal.fire({
+          title: "Alert",
+          html: "Please fill the email and password fields",
+          timer: 2000,
+          timerProgressBar: false,
+          onBeforeOpen: () => {
+            timerInterval = setInterval(() => {
+              const content = Swal.getContent();
+              if (content) {
+                const b = content.querySelector("b");
+                if (b) {
+                  b.textContent = Swal.getTimerLeft();
+                }
+              }
+            }, 100)
+          },
+          onClose: () => {
+            clearInterval(timerInterval);
+          }
+        }) 
+        return;
+    }
+    
+
     try {
       const response = await signin(
           {
@@ -69,16 +96,40 @@ const Login = (props) => {
       //get the accesstoken from the localStorage
       const ACCESS_TOKEN = localStorage.getItem("token");
 
-      const isValidToken = ACCESS_TOKEN !== null ? true : false
+      const isValidToken = ACCESS_TOKEN !== null ? true : false;
     
      if(isValidToken){
       props.history.push("/dashboard");
      }  
   
     }catch(e){
-      alert(e);
+      //TODO:catch error message in response
+      console.log(e.message.error);
+      let timerInterval
+      Swal.fire({
+        title: "Error",
+        html:  e,
+        timer: 2000,
+        timerProgressBar: false,
+        onBeforeOpen: () => {
+          timerInterval = setInterval(() => {
+            const content = Swal.getContent();
+            if (content) {
+              const b = content.querySelector("b");
+              if (b) {
+                b.textContent = Swal.getTimerLeft();
+              }
+            }
+          }, 100)
+        },
+        onClose: () => {
+          clearInterval(timerInterval);
+        }
+      }) 
     }
   }
+
+
 
   return (
     <div className="c-app c-default-layout flex-row align-items-center text-center">
@@ -141,4 +192,4 @@ const Login = (props) => {
   )
 }
 
-export default Login
+export default Login;

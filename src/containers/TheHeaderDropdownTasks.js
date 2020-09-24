@@ -1,9 +1,9 @@
-import React from 'react'
+import React from "react"
 import {
   CDropdown,
   CDropdownItem,
   CDropdownMenu,
-} from '@coreui/react'
+} from "@coreui/react"
 
 const TheHeaderDropdownTasks = () => {
   const itemsCount = 5
