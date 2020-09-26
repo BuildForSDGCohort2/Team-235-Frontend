@@ -23,12 +23,10 @@ const LIST_OF_ROLES = gql `
        id
        name
        description
-       permissions{
-         id
-         value
-         description
+       createdBy{
+         firstName
+         lastName
        }
-       createdAt
      }
    }
 `
@@ -48,17 +46,55 @@ const Permission = (props) => {
 
       try{
         if(loading){
-          return "loading"
+          return `${ Swal.fire({
+            title: "Fetching",
+            html: "roles available...",
+            toast: true,
+            position: "top",
+            showConfirmButton: false,
+            icon: "info"
+         })}`
         }
 
         if(error){
-          console.log(error);
+          Swal.fire({
+            title: "Network problem",
+            html: " cannot fetch list of roles",
+            timer: 2000,
+            toast: true,
+            position: "top",
+            showConfirmButton: false,
+            icon: "error"
+         })
         }
+
+        Swal.close();
 
         Object.values(data).forEach(val => {
           val.map(item => {
+            //TODO: integrate update roles api
+            const creator = [];
+            if(item.createdBy === null){
+              creator.push("Not available");
+            }else{
+               const {firstName, lastName} = item.createdBy;
+               if(firstName === "Admin"){
+                 creator.push(firstName);
+               }else {
+                 creator.push(firstName + " " + lastName);
+               }
+            }
+
+             const descriptionOfRole = item.description === null ? "Has full access" : item.description;
+          
             return (
-            rolesData.push({id: item.id, role: item.name, createdBy: item.createdAt, description: item.description})
+                rolesData.push(
+                  {
+                   id: item.id, 
+                   role: item.name, 
+                   createdBy: creator.toString(), 
+                   description: descriptionOfRole
+                  })
             )
           })
         })

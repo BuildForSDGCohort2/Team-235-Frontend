@@ -58,11 +58,18 @@ const GET_ROLES = gql `
 
 const isValidForm = ({...rest}) => {
    const {firstName, lastName, email, phoneNumber} = rest;
-   if(firstName.length > 3 && lastName.length > 3 && checkEmail.test(email) && phoneNumber.length >= 10){
+   if(firstName.length > 3 && lastName.length > 3 && checkEmail.test(email) && phoneNumber.length >= 13){
       return true;
    }
 
-     Swal.fire("please fill all fields correctly");
+   Swal.fire({
+      html: "Incorrect entry!...phone number must include country code and at least 13 digits",
+      timer: 2000,
+      toast: true,
+      position: "top",
+      showConfirmButton: false,
+      icon: "error"
+   })       
      return false;
 }
 
@@ -86,24 +93,58 @@ const NewUser = (props) =>  {
 
    //fetch list of roles
    const {loading, error, data} = useQuery(GET_ROLES);
-   if(loading){
-      return "loading";
-   }
-
-   if(error){
-      console.log(error);
-   }
-
    const listOfRoles = [];
-   Object.values(data).forEach(val => {
-      val.map(item => {
-          const {id, name} = item;
-          return(
-            listOfRoles.push({ label: name, value: id})
-          )
-          
-      });
-    });
+
+   try{
+      if(loading){
+         return  `${ Swal.fire({
+            title: "Fetching",
+            html: "Roles...",
+            toast: true,
+            position: "top",
+            showConfirmButton: false,
+            icon: "info"
+         })}` ;
+      }
+   
+      if(error){
+         Swal.fire({
+            title: "Network problem",
+            html: " cannot fetch list of roles",
+            timer: 2000,
+            toast: true,
+            position: "top",
+            showConfirmButton: false,
+            icon: "error"
+         })
+      }
+   
+      
+     
+      Swal.close();
+      Swal.fire({
+         title: "Fetch",
+         html: "successful",
+         timer: 1000,
+         timerProgressBar: true,
+         toast: true,
+         position: "top",
+         showConfirmButton: false,
+         icon: "success"
+      })
+      
+      Object.values(data).forEach(val => {
+         val.map(item => {
+             const {id, name} = item;
+               return(
+                  listOfRoles.push({ label: name, value: id})
+                )
+         });
+       });
+   }catch(e){
+       console.log(e);
+   }
+   
 
 
   //handle change
@@ -121,9 +162,6 @@ const NewUser = (props) =>  {
          )
           
       })
-       
-      console.log(id);
-      
    }
  
 
@@ -146,13 +184,40 @@ const NewUser = (props) =>  {
                 }, 
                 errorPolicy: "all"
              });
-             console.log(response)
-            if(response){
-               Swal.fire("user created")
-               props.history.push("/management")
+              
+            if(response.data){
+               Swal.fire({
+                  html: "user created successfully",
+                  timer: 2000,
+                  toast: true,
+                  position: "top",
+                  showConfirmButton: false,
+                  icon: "success"
+               })  
+               props.history.push("/management");
+            }else{
+               const errorMessage = response.errors[0].message.message;
+               Swal.fire({
+                  html: errorMessage,
+                  timer: 2000,
+                  toast: true,
+                  position: "top",
+                  showConfirmButton: false,
+                  icon: "error"
+               })   
             }
+
+            
            }catch(e){
-             alert(e);
+            Swal.fire({
+               title: "fill all fields",
+               html: "",
+               timer: 2000,
+               toast: true,
+               position: "top",
+               showConfirmButton: false,
+               icon: "error"
+            }) 
            }
       }   
        

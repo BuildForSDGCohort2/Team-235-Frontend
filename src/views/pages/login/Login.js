@@ -53,27 +53,15 @@ const Login = (props) => {
     const {email, password} = state;
 
     if(email === null || password == null) {
-      let timerInterval
-        Swal.fire({
-          title: "Alert",
-          html: "Please fill the email and password fields",
-          timer: 2000,
-          timerProgressBar: false,
-          onBeforeOpen: () => {
-            timerInterval = setInterval(() => {
-              const content = Swal.getContent();
-              if (content) {
-                const b = content.querySelector("b");
-                if (b) {
-                  b.textContent = Swal.getTimerLeft();
-                }
-              }
-            }, 100)
-          },
-          onClose: () => {
-            clearInterval(timerInterval);
-          }
-        }) 
+      Swal.fire({
+        title: "Empty Fields",
+        html: "please fill all fields",
+        timer: 2000,
+        toast: true,
+        position: "top",
+        showConfirmButton: false,
+        icon: "info"
+     })
         return;
     }
     
@@ -88,44 +76,49 @@ const Login = (props) => {
           },
             errorPolicy: "all"
           });
+      
+      if(response.data){
+        const token = response.data.signin.accessToken; 
+        localStorage.setItem("token", token);
 
-      const token = response.data.signin.accessToken; 
-      localStorage.setItem("token", token);
+        const ACCESS_TOKEN = localStorage.getItem("token");
+        if(ACCESS_TOKEN){
+          Swal.fire({
+            title: "logged in sucessfully",
+            timer: 2000,
+            toast: true,
+            position: "top",
+            showConfirmButton: false,
+            icon: "success"
+         })
+          props.history.push("/dashboard");
+        } 
 
-
-      //get the accesstoken from the localStorage
-      const ACCESS_TOKEN = localStorage.getItem("token");
-
-      const isValidToken = ACCESS_TOKEN !== null ? true : false;
-    
-     if(isValidToken){
-      props.history.push("/dashboard");
-     }  
-  
-    }catch(e){
-      //TODO:catch error message in response
-      console.log(e.message.error);
-      let timerInterval
-      Swal.fire({
-        title: "Error",
-        html:  e,
-        timer: 2000,
-        timerProgressBar: false,
-        onBeforeOpen: () => {
-          timerInterval = setInterval(() => {
-            const content = Swal.getContent();
-            if (content) {
-              const b = content.querySelector("b");
-              if (b) {
-                b.textContent = Swal.getTimerLeft();
-              }
-            }
-          }, 100)
-        },
-        onClose: () => {
-          clearInterval(timerInterval);
+        }else{
+          Swal.fire({
+            title: "Alert:",
+            html: "email and password is not authorized",
+            timer: 2000,
+            toast: true,
+            position: "top",
+            showConfirmButton: false,
+            icon: "error"
+         })
         }
-      }) 
+       
+    }catch(e){
+      if(e){
+        Swal.fire({
+          title: "Network problem:",
+          html: " connect to the internet",
+          timer: 2000,
+          toast: true,
+          position: "top",
+          showConfirmButton: false,
+          icon: "info"
+       })
+      }
+       
     }
   }
 

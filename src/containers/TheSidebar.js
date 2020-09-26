@@ -79,17 +79,21 @@ const TheSidebar = () => {
 
          <div className="c-sidebar-nav-item" style={{backgroundColor:"#24385e", marginTop:"10px"}}>
             <CButton className="c-sidebar-nav-link" style={{border:"none", width:"100%"}}>
-               <Link to="/permission">
-               <CIcon name="cilSettings" style={{color:"white"}} /> <span style={{marginLeft:"20px", color:"white"}}>ROLES AND PERMISSIONS</span>
+               <Link>
+               <CIcon name="cilPrint" style={{color:"white"}} /> <span style={{marginLeft:"20px", color:"white"}}>REPORT</span>
                </Link>
             </CButton>
          </div>
 
+         
          <div className="c-sidebar-nav-item" style={{backgroundColor:"#24385e", marginTop:"10px"}}>
             <CButton className="c-sidebar-nav-link" style={{border:"none", width:"100%"}}>
-               <CIcon name="cilBan" style={{color:"white"}} /> <span style={{marginLeft:"20px",color:"white"}}>STOCK REPORT</span>
+               <Link to="/report">
+               <CIcon name="cilSettings" style={{color:"white"}} /> <span style={{marginLeft:"20px", color:"white"}}>ROLES AND PERMISSIONS</span>
+               </Link>
             </CButton>
          </div>
+          
         
          </CSidebarNavItem>
       </CSidebarNav>

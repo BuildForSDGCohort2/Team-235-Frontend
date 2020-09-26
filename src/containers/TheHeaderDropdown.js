@@ -7,12 +7,22 @@ import {
   CImg
 } from "@coreui/react";
 import CIcon from "@coreui/icons-react";
+import Swal from "sweetalert2";
 
 const TheHeaderDropdown = () => {
 
   const logout = () => {
     localStorage.removeItem("token");
     window.location.href = "/";
+    Swal.fire({
+      title: "Logged out",
+      html: "successfully",
+      timer: 2000,
+      toast: true,
+      position: "top",
+      showConfirmButton: false,
+      icon: "error"
+   })
   }
   return (
     <CDropdown
@@ -84,10 +94,12 @@ const TheHeaderDropdown = () => {
           <CBadge color="primary" className="mfs-auto">42</CBadge>
         </CDropdownItem> */}
         <CDropdownItem divider />
+         
         <CDropdownItem>
           <CIcon name="cil-user" className="mfe-2" /> 
            Profile
         </CDropdownItem>
+        
         <CDropdownItem onClick={ () => logout()}>
           <CIcon name="cil-lock-locked" className="mfe-2" /> 
            Logout

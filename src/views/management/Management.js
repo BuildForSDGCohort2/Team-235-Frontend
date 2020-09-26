@@ -25,10 +25,9 @@ const USERS = gql`
       firstName
       lastName
       email
+      phoneNumber
       blocked
       isVerified
-      phoneNumber
-
     }
   }
 `
@@ -40,7 +39,7 @@ const TheUserManagement = (props) => {
       const fields = [
         { key: "name", _style: { width: "25%"} },
         {key:"email"},
-        { key: "phone", _style: { width: "20%"} },
+        { key: "phoneNumber", _style: { width: "20%"} },
         { key: "status", _style: { width: "20%"} },
         {key: "options", _style:{width: "20%"}}
       ];
@@ -69,22 +68,29 @@ const TheUserManagement = (props) => {
      try {
       
       if(loading){
-        return "loading"  
+        return `${ Swal.fire({
+          title: "Fetching",
+          html: "List of Users...",
+          toast: true,
+          position: "top",
+          showConfirmButton: false,
+          icon: "info"
+       })}` 
       }
 
       if(error){
         console.log(error)
       }
 
-      //TODO:use toast to display errors
+      Swal.close();
 
-    
-      
-      //populate cdatatable for display on card
+
       Object.values(data).forEach(val => {
         val.map(item => {
           const {id,firstName, lastName, email, phoneNumber, isVerified, blocked} = item;
           const name = firstName + " " + lastName;
+
+          const phone = phoneNumber !== null ? phoneNumber : "not available";
          
           const status = [];
 
@@ -97,9 +103,16 @@ const TheUserManagement = (props) => {
           }
           
           return(
-            usersData.push({id: id, name: name, email: email, phoneNumber: phoneNumber, status: status.toString()})
+            usersData.push(
+              {
+                id: id, 
+                name: name, 
+                email: email, 
+                phoneNumber: phone, 
+                status: status.toString()
+              })
           )
-          //TODO:create a role for users
+          
           
 
         })

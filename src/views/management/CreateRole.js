@@ -1,8 +1,9 @@
-import React, {useState} from 'react'
+import React, {useState} from "react";
 import { CContainer, CRow, CCol, CCard, CCardHeader, CCardFooter, CCardBody,CButton } from "@coreui/react";
-import Select from 'react-select'
-import {Link} from 'react-router-dom'
-import {gql, useQuery, useMutation} from '@apollo/client'
+import Select from "react-select"
+import {Link} from "react-router-dom"
+import {gql, useQuery, useMutation} from "@apollo/client"
+import Swal from "sweetalert2"
 
 const GET_PERMISSIONS = gql `
    query permissions {
@@ -13,8 +14,6 @@ const GET_PERMISSIONS = gql `
        }
    }
 `
-
-
 
 const CREATE_ROLE_MUTATION = gql`
  mutation CreateRole($name: String!, $description: String!, $permissionIds: [Int!]!){
@@ -39,7 +38,7 @@ const CREATE_ROLE_MUTATION = gql`
 
 const ids = new Set();
 
-const CreateNewRole = () => {
+const CreateNewRole = (props) => {
 
    const [createRole] = useMutation(CREATE_ROLE_MUTATION);
    const [selectedValue, setSelectedValue] = useState(null)
@@ -67,9 +66,6 @@ const CreateNewRole = () => {
                 ids.add(item.id)
             )
         })
-        
-        console.log(Array.from(ids));
-        console.log(e)
     }
 
 
@@ -79,13 +75,30 @@ const CreateNewRole = () => {
     
     try {
         if(loading){
-            return "loading";
+            return `${ Swal.fire({
+                title: "Fetching",
+                html: "permissions...",
+                toast: true,
+                position: "top",
+                showConfirmButton: false,
+                icon: "info"
+             })}`
         }
     
         if(error){
-            return error;
+            Swal.fire({
+                title: "Network problem",
+                html: " cannot fetch list of roles",
+                timer: 2000,
+                toast: true,
+                position: "top",
+                showConfirmButton: false,
+                icon: "error"
+             })
         }
     
+        Swal.close();
+
         Object.values(data).forEach(val => {
           val.map(item => {
             return(
@@ -119,10 +132,39 @@ const CreateNewRole = () => {
                    },
                    errorPolicy: "all"
                });
-               console.log(response)
+
+               if(response.data){
+                Swal.fire({
+                    html: "role created successfully",
+                    timer: 2000,
+                    toast: true,
+                    position: "top",
+                    showConfirmButton: false,
+                    icon: "success"
+                 }) 
+                 props.history.push("/permission")
+               }else{
+                const errorMessage = response.errors[0].message.message;
+                Swal.fire({
+                   html: errorMessage,
+                   timer: 2000,
+                   toast: true,
+                   position: "top",
+                   showConfirmButton: false,
+                   icon: "error"
+                }) 
+               }
 
         }catch(e){
-            console.log(e)
+            Swal.fire({
+                title: "fill all fields",
+                html: "",
+                timer: 2000,
+                toast: true,
+                position: "top",
+                showConfirmButton: false,
+                icon: "error"
+             }) 
         }
     }
 
