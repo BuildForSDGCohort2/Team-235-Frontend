@@ -126,10 +126,9 @@ const CategoriesCard = () => {
         
         <CCardBody style={{padding: "20px"}}>
         <CRow>
-                  
-                     {data.getCategories.map(item => ( 
-                        <CategoriesList key={item.id} name={item.name} />
-                    ))}
+              {data.getCategories.map(item => ( 
+                <CategoriesList key={item.id} name={item.name} />
+            ))}
         </CRow> 
        </CCardBody>
       </CCard>

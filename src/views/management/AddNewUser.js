@@ -63,7 +63,8 @@ const isValidForm = ({...rest}) => {
    }
 
    Swal.fire({
-      html: "Incorrect entry!...phone number must include country code and at least 13 digits",
+      title: "Incorrect entry!...",
+      html: "phone number must include country code and at least 13 digits",
       timer: 2000,
       toast: true,
       position: "top",
@@ -121,17 +122,7 @@ const NewUser = (props) =>  {
    
       
      
-      Swal.close();
-      Swal.fire({
-         title: "Fetch",
-         html: "successful",
-         timer: 1000,
-         timerProgressBar: true,
-         toast: true,
-         position: "top",
-         showConfirmButton: false,
-         icon: "success"
-      })
+      Swal.close(); 
       
       Object.values(data).forEach(val => {
          val.map(item => {

@@ -8,8 +8,6 @@ import { CContainer, CRow, CCol, CCard, CCardHeader, CCardBody } from '@coreui/r
 const ViewRole = () => {
 
 
-    
-
     return (
         <CContainer>
         <CRow>
