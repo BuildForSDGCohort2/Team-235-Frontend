@@ -14,13 +14,14 @@ const TheHeaderDropdown = () => {
     localStorage.removeItem("token");
     window.location.href = "/";
   }
+
   return (
     <CDropdown
       inNav
       className="c-header-nav-items mx-2"
       direction="down"
     >
-      <CDropdownToggle className="c-header-nav-link" caret={false}>
+      <CDropdownToggle className="c-header-nav-link" caret={true}>
         <div className="c-avatar">
           <CImg
             src={"avatars/6.jpg"}
@@ -30,15 +31,6 @@ const TheHeaderDropdown = () => {
         </div>
       </CDropdownToggle>
       <CDropdownMenu className="pt-0" placement="bottom-end">
-        {/* <CDropdownItem
-          header
-          tag="div"
-          color="light"
-          className="text-center"
-        >
-          <strong>Account</strong>
-        </CDropdownItem> */}
-        <CDropdownItem divider />
          
         <CDropdownItem>
           <CIcon name="cil-user" className="mfe-2" /> 
@@ -49,6 +41,7 @@ const TheHeaderDropdown = () => {
           <CIcon name="cil-lock-locked" className="mfe-2" /> 
            Logout
         </CDropdownItem>
+
       </CDropdownMenu>
     </CDropdown>
   )};

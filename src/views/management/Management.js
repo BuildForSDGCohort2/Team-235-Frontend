@@ -137,7 +137,12 @@ const TheUserManagement = (props) => {
      
        
      }catch(e){
-        console.log(e)
+      Swal.fire({
+        title: e,
+        html: "to view list of users",
+        showConfirmButton: false,
+        icon: "danger"
+      });
      };
      
       //not available in place of undefined

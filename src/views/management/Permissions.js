@@ -54,7 +54,7 @@ const Permission = (props) => {
             showConfirmButton: false,
             icon: "info"
          })}`;
-        };
+        }
 
         if(error){
           Swal.fire({

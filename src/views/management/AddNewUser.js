@@ -205,8 +205,7 @@ const NewUser = (props) =>  {
             
            }catch(e){
             Swal.fire({
-               title: "fill all fields",
-               html: "",
+               title: e,
                timer: 2000,
                toast: true,
                position: "top",

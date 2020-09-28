@@ -120,14 +120,24 @@ const CategoriesCard = () => {
         icon: "warning",
         showConfirmButton: false,
       });
-    }else if(data && !error){
-      return(
-        data.getCategories.map(item => (
-          <CategoriesList key={item.id} name={item.name} />
-     )))};
-      
+    } else if (data && !error) {
+      return (
+        data.getCategories.map(item => {
+          return(
+            <CategoriesList key={item.id} name={item.name} />
+          )
+        } 
+          
+      )
+     )}; 
     } catch (error) {
-      console.log(error);
+      Swal.fire({
+        title: error,
+        icon: "warning",
+        toast: true,
+        timer: 2000,
+        showConfirmButton: false,
+      });
     }
   }
 
@@ -151,6 +161,7 @@ const CategoriesCard = () => {
       </CCard>
     </CContainer>
 
-  )};
+  )
+}
 
-export default CategoriesCard
+export default CategoriesCard;

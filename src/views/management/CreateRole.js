@@ -83,7 +83,7 @@ const CreateNewRole = (props) => {
                 showConfirmButton: false,
                 icon: "info"
              })}`;
-        };
+        }
     
         if(error){
             Swal.fire({
@@ -167,8 +167,7 @@ const CreateNewRole = (props) => {
 
         }catch(e){
             Swal.fire({
-                title: "fill all fields",
-                html: "",
+                title: error,
                 timer: 2000,
                 toast: true,
                 position: "top",
