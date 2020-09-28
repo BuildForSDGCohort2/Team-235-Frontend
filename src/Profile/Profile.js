@@ -1,7 +1,7 @@
-import React from 'react';
+import React from "react";
  
 
-const Profile = props => {
+const Profile = (props) => {
     return (
         <div>
              <h1>User info</h1>

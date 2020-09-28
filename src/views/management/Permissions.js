@@ -53,51 +53,63 @@ const Permission = (props) => {
             position: "top",
             showConfirmButton: false,
             icon: "info"
-         })}`
-        }
+         })}`;
+        };
 
         if(error){
           Swal.fire({
             title: "Network problem",
-            html: " cannot fetch list of roles",
+            html: " cannot display list of users",
             timer: 2000,
             toast: true,
             position: "top",
             showConfirmButton: false,
             icon: "error"
-         })
+         });
+        };
+
+        
+
+        if(data){
+          Swal.close();
+          Object.values(data).forEach(val => {
+            val.map(item => {
+              //TODO: integrate update roles api
+              const creator = [];
+              if(item.createdBy === null){
+                creator.push("Not available");
+              }else{
+                 const {firstName, lastName} = item.createdBy;
+                 if(firstName === "Admin"){
+                   creator.push(firstName);
+                 }else {
+                   creator.push(firstName + " " + lastName);
+                 }
+              }
+  
+               const descriptionOfRole = item.description === null ? "Has full access" : item.description;
+            
+              return (
+                  rolesData.push(
+                    {
+                     id: item.id, 
+                     role: item.name, 
+                     createdBy: creator.toString(), 
+                     description: descriptionOfRole
+                    })
+              )
+            });
+          });
+
+        }else if(!data && error){
+          Swal.fire({
+            title: "Not authorized",
+            html: "to view list of roles",
+            icon: "warning",
+            showConfirmButton: false
+          });
         }
-
-        Swal.close();
-
-        Object.values(data).forEach(val => {
-          val.map(item => {
-            //TODO: integrate update roles api
-            const creator = [];
-            if(item.createdBy === null){
-              creator.push("Not available");
-            }else{
-               const {firstName, lastName} = item.createdBy;
-               if(firstName === "Admin"){
-                 creator.push(firstName);
-               }else {
-                 creator.push(firstName + " " + lastName);
-               }
-            }
-
-             const descriptionOfRole = item.description === null ? "Has full access" : item.description;
-          
-            return (
-                rolesData.push(
-                  {
-                   id: item.id, 
-                   role: item.name, 
-                   createdBy: creator.toString(), 
-                   description: descriptionOfRole
-                  })
-            )
-          })
-        })
+        
       }catch(e){
         console.log(e);
       }
@@ -157,4 +169,4 @@ const Permission = (props) => {
 </CContainer>
 )};
 
-export default Permission
+export default Permission;

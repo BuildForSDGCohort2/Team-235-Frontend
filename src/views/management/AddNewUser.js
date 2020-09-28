@@ -2,8 +2,8 @@ import React, {useState} from "react";
 import { CContainer, CRow, CCol, CCard, CCardHeader, CCardFooter, CCardBody,CButton } from "@coreui/react";
 import {Link} from "react-router-dom";
 import { gql, useMutation, useQuery} from "@apollo/client";
-import Select from "react-select"
-import Swal from "sweetalert2"
+import Select from "react-select";
+import Swal from "sweetalert2";
 
 
 
@@ -45,16 +45,6 @@ const GET_ROLES = gql `
      }
   }
 `
-
-
-
-// const rolesId = [
-//    {value: "1", label: "1"},
-//    {value: "2", label: "2"},
-//    {value: "3", label: "3"}
-// ];
-
- 
 
 const isValidForm = ({...rest}) => {
    const {firstName, lastName, email, phoneNumber} = rest;
@@ -111,7 +101,7 @@ const NewUser = (props) =>  {
       if(error){
          Swal.fire({
             title: "Network problem",
-            html: " cannot fetch list of roles",
+            html: "check your internet connectivity",
             timer: 2000,
             toast: true,
             position: "top",
@@ -120,20 +110,34 @@ const NewUser = (props) =>  {
          })
       }
    
-      
      
-      Swal.close(); 
       
-      Object.values(data).forEach(val => {
-         val.map(item => {
-             const {id, name} = item;
-               return(
-                  listOfRoles.push({ label: name, value: id})
-                )
-         });
-       });
+      if(data){
+         Swal.close(); 
+         Object.values(data).forEach(val => {
+            val.map(item => {
+                const {id, name} = item;
+                  return(
+                     listOfRoles.push({ label: name, value: id})
+                   )
+            });
+          });
+      }else if(!data && error){
+         Swal.fire({
+            title: "Not authorized",
+            html: "to add users",
+            icon: "warning",
+            showConfirmButton: false,
+          })
+      }
+      
    }catch(e){
-       console.log(e);
+      Swal.fire({
+         title: error,
+         toast: true,
+         icon: "warning",
+         showConfirmButton: false,
+       })
    }
    
 
@@ -195,7 +199,7 @@ const NewUser = (props) =>  {
                   position: "top",
                   showConfirmButton: false,
                   icon: "error"
-               })   
+               });   
             }
 
             
@@ -208,7 +212,7 @@ const NewUser = (props) =>  {
                position: "top",
                showConfirmButton: false,
                icon: "error"
-            }) 
+            }); 
            }
       }   
        

@@ -75,16 +75,24 @@ const TheUserManagement = (props) => {
           position: "top",
           showConfirmButton: false,
           icon: "info"
-       })}` 
-      }
+       })}`; 
+      };
 
       if(error){
-        console.log(error)
-      }
+        Swal.fire({
+          title: "Network problem",
+          html: "cannot display list of users",
+          toast: true,
+          showConfirmButton: false,
+          timer: 2000,
+          icon: "error",
+          position: "top"
+        });
+      };
 
+
+    if(data){
       Swal.close();
-
-
       Object.values(data).forEach(val => {
         val.map(item => {
           const {id,firstName, lastName, email, phoneNumber, isVerified, blocked} = item;
@@ -105,23 +113,32 @@ const TheUserManagement = (props) => {
           return(
             usersData.push(
               {
-                id: id, 
-                name: name, 
-                email: email, 
+                id, 
+                name, 
+                email, 
                 phoneNumber: phone, 
                 status: status.toString()
               })
-          )
+          );
           
           
 
         })
 
       })
+    }else if(!data && error){
+      Swal.fire({
+        title: "Not authorized",
+        html: "to view list of users",
+        showConfirmButton: false,
+        icon: "danger"
+      });
+    };
+     
        
      }catch(e){
-        Swal.fire("no data available");
-     }
+        console.log(e)
+     };
      
       //not available in place of undefined
     return (
@@ -173,7 +190,9 @@ const TheUserManagement = (props) => {
                                      })
                                      }>
                                           Delete</CDropdownItem>
-                                      <CDropdownItem onClick={() => props.history.push("/viewuser")}>View</CDropdownItem>
+                                      <CDropdownItem onClick={() => props.history.push({
+                                        pathname: "/viewuser"
+                                      })}>View</CDropdownItem>
                                    </CDropdownMenu>
                                </CDropdown>
                             </td>
@@ -186,7 +205,5 @@ const TheUserManagement = (props) => {
 </CContainer>
         
 )};
-
-//todo private list query which will inherite the to do private list
 
 export default TheUserManagement;

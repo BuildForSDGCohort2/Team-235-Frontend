@@ -1,9 +1,9 @@
 import React, {useState} from "react";
 import { CContainer, CRow, CCol, CCard, CCardHeader, CCardFooter, CCardBody,CButton } from "@coreui/react";
-import Select from "react-select"
-import {Link} from "react-router-dom"
-import {gql, useQuery, useMutation} from "@apollo/client"
-import Swal from "sweetalert2"
+import Select from "react-select";
+import {Link} from "react-router-dom";
+import {gql, useQuery, useMutation} from "@apollo/client";
+import Swal from "sweetalert2";
 
 const GET_PERMISSIONS = gql `
    query permissions {
@@ -82,23 +82,25 @@ const CreateNewRole = (props) => {
                 position: "top",
                 showConfirmButton: false,
                 icon: "info"
-             })}`
-        }
+             })}`;
+        };
     
         if(error){
             Swal.fire({
                 title: "Network problem",
-                html: " cannot fetch list of roles",
+                html: " check your internet connectivity",
                 timer: 2000,
                 toast: true,
                 position: "top",
                 showConfirmButton: false,
                 icon: "error"
-             })
-        }
+             });
+        };
     
-        Swal.close();
+        
 
+        if(data){
+        Swal.close();
         Object.values(data).forEach(val => {
           val.map(item => {
             return(
@@ -106,6 +108,14 @@ const CreateNewRole = (props) => {
             ) 
           });
         });
+       }else if(!data && error){
+        Swal.fire({
+            title: "Not authorized",
+            html: "to create roles",
+            icon: "warning",
+            showConfirmButton: false,
+          })
+       }
     }catch(e){
        console.log(e);
     }
@@ -142,7 +152,7 @@ const CreateNewRole = (props) => {
                     showConfirmButton: false,
                     icon: "success"
                  }) 
-                 props.history.push("/permission")
+                 props.history.push("/permission");
                }else{
                 const errorMessage = response.errors[0].message.message;
                 Swal.fire({
@@ -217,7 +227,7 @@ const CreateNewRole = (props) => {
                      </CCardBody>
                      <CCardFooter className="text-center">
                      <CButton  type="submit" color="info" style={{width:"150px", margin:"10px"}}>SAVE</CButton>
-                     <Link to="/createrole">
+                     <Link to="/permission">
                      <CButton color="secondary" style={{width:"150px"}}>CANCEL</CButton>
                      </Link>
                      </CCardFooter>
@@ -226,7 +236,6 @@ const CreateNewRole = (props) => {
            </CCol>
         </CRow>
      </CContainer>
-    )
-}
+    )};
 
 export default CreateNewRole

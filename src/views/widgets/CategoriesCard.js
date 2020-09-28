@@ -1,4 +1,4 @@
-import React from "react"
+import React from "react";
 import {
   CContainer,
   CRow,
@@ -6,10 +6,10 @@ import {
   CCardBody,
   CCardHeader,
   CCard
-} from "@coreui/react"
-import Swal from "sweetalert2"
-import {gql, useQuery,useMutation} from "@apollo/client"
-import CategoriesList from "./CategoriesList"
+} from "@coreui/react";
+import Swal from "sweetalert2";
+import {gql, useQuery,useMutation} from "@apollo/client";
+import CategoriesList from "./CategoriesList";
 
 
 
@@ -62,7 +62,7 @@ const CategoriesCard = () => {
         position: "top",
         showConfirmButton: false,
         icon: "error"
-     })
+     });
     }
   
   }catch(e){
@@ -74,17 +74,16 @@ const CategoriesCard = () => {
     const {value: name} = await Swal.fire({
       input: "text",
       inputPlaceholder: "enter category name"
-    })
+    });
 
     if(name){
       const response = createCategory(
               {
                 variables: {
-                  name: name
+                  name
                 },
                 errorPolicy: "all"
-              }
-            )
+              });
         if((await response).data){
           Swal.fire({
             html:(await response).data.createCategory.name + " created successfully" ,
@@ -102,7 +101,7 @@ const CategoriesCard = () => {
             position: "top",
             showConfirmButton: false,
             icon: "error"
-         })
+         });
         } 
     }
 
@@ -111,6 +110,26 @@ const CategoriesCard = () => {
   }
    
 }
+
+  const displayCategories = (data) => {
+    try{
+    if(!data){
+      Swal.fire({
+        title: "Not authorized",
+        html: "to view categories",
+        icon: "warning",
+        showConfirmButton: false,
+      });
+    }else if(data && !error){
+      return(
+        data.getCategories.map(item => (
+          <CategoriesList key={item.id} name={item.name} />
+     )))};
+      
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   return (
    
@@ -126,15 +145,12 @@ const CategoriesCard = () => {
         
         <CCardBody style={{padding: "20px"}}>
         <CRow>
-              {data.getCategories.map(item => ( 
-                <CategoriesList key={item.id} name={item.name} />
-            ))}
+              {displayCategories(data)}  
         </CRow> 
        </CCardBody>
       </CCard>
     </CContainer>
 
-  )
-}
+  )};
 
 export default CategoriesCard
