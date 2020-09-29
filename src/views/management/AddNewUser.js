@@ -2,8 +2,8 @@ import React, {useState} from "react";
 import { CContainer, CRow, CCol, CCard, CCardHeader, CCardFooter, CCardBody,CButton } from "@coreui/react";
 import {Link} from "react-router-dom";
 import { gql, useMutation, useQuery} from "@apollo/client";
-import Select from "react-select"
-import Swal from "sweetalert2"
+import Select from "react-select";
+import Swal from "sweetalert2";
 
 
 
@@ -46,23 +46,21 @@ const GET_ROLES = gql `
   }
 `
 
-
-
-// const rolesId = [
-//    {value: "1", label: "1"},
-//    {value: "2", label: "2"},
-//    {value: "3", label: "3"}
-// ];
-
- 
-
 const isValidForm = ({...rest}) => {
    const {firstName, lastName, email, phoneNumber} = rest;
-   if(firstName.length > 3 && lastName.length > 3 && checkEmail.test(email) && phoneNumber.length >= 10){
+   if(firstName.length > 3 && lastName.length > 3 && checkEmail.test(email) && phoneNumber.length >= 13){
       return true;
    }
 
-     Swal.fire("please fill all fields correctly");
+   Swal.fire({
+      title: "Incorrect entry!...",
+      html: "phone number must include country code and at least 13 digits",
+      timer: 2000,
+      toast: true,
+      position: "top",
+      showConfirmButton: false,
+      icon: "error"
+   })       
      return false;
 }
 
@@ -86,24 +84,62 @@ const NewUser = (props) =>  {
 
    //fetch list of roles
    const {loading, error, data} = useQuery(GET_ROLES);
-   if(loading){
-      return "loading";
-   }
-
-   if(error){
-      console.log(error);
-   }
-
    const listOfRoles = [];
-   Object.values(data).forEach(val => {
-      val.map(item => {
-          const {id, name} = item;
-          return(
-            listOfRoles.push({ label: name, value: id})
-          )
-          
-      });
-    });
+
+   try{
+      if(loading){
+         return  `${ Swal.fire({
+            title: "Fetching",
+            html: "Roles...",
+            toast: true,
+            position: "top",
+            showConfirmButton: false,
+            icon: "info"
+         })}` ;
+      }
+   
+      if(error){
+         Swal.fire({
+            title: "Network problem",
+            html: "check your internet connectivity",
+            timer: 2000,
+            toast: true,
+            position: "top",
+            showConfirmButton: false,
+            icon: "error"
+         })
+      }
+   
+     
+      
+      if(data){
+         Swal.close(); 
+         Object.values(data).forEach(val => {
+            val.map(item => {
+                const {id, name} = item;
+                  return(
+                     listOfRoles.push({ label: name, value: id})
+                   )
+            });
+          });
+      }else if(!data && error){
+         Swal.fire({
+            title: "Not authorized",
+            html: "to add users",
+            icon: "warning",
+            showConfirmButton: false,
+          })
+      }
+      
+   }catch(e){
+      Swal.fire({
+         title: error,
+         toast: true,
+         icon: "warning",
+         showConfirmButton: false,
+       })
+   }
+   
 
 
   //handle change
@@ -121,9 +157,6 @@ const NewUser = (props) =>  {
          )
           
       })
-       
-      console.log(id);
-      
    }
  
 
@@ -146,13 +179,39 @@ const NewUser = (props) =>  {
                 }, 
                 errorPolicy: "all"
              });
-             console.log(response)
-            if(response){
-               Swal.fire("user created")
-               props.history.push("/management")
+              
+            if(response.data){
+               Swal.fire({
+                  html: "user created successfully",
+                  timer: 2000,
+                  toast: true,
+                  position: "top",
+                  showConfirmButton: false,
+                  icon: "success"
+               })  
+               props.history.push("/management");
+            }else{
+               const errorMessage = response.errors[0].message.message;
+               Swal.fire({
+                  html: errorMessage,
+                  timer: 2000,
+                  toast: true,
+                  position: "top",
+                  showConfirmButton: false,
+                  icon: "error"
+               });   
             }
+
+            
            }catch(e){
-             alert(e);
+            Swal.fire({
+               title: e,
+               timer: 2000,
+               toast: true,
+               position: "top",
+               showConfirmButton: false,
+               icon: "error"
+            }); 
            }
       }   
        

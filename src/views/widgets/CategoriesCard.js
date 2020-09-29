@@ -1,4 +1,4 @@
-import React from "react"
+import React from "react";
 import {
   CContainer,
   CRow,
@@ -6,10 +6,10 @@ import {
   CCardBody,
   CCardHeader,
   CCard
-} from "@coreui/react"
-import Swal from "sweetalert2"
-import {gql, useQuery,useMutation} from "@apollo/client"
-import CategoriesList from "./CategoriesList"
+} from "@coreui/react";
+import Swal from "sweetalert2";
+import {gql, useQuery,useMutation} from "@apollo/client";
+import CategoriesList from "./CategoriesList";
 
 
 
@@ -37,56 +37,109 @@ const CREATE_CATEGORY = gql `
 
 
 const CategoriesCard = () => {
+
   const [createCategory] = useMutation(CREATE_CATEGORY);
   const {loading, error, data} = useQuery(GET_CATEGORIES_LIST);
+
   try{
     if(loading){
-      return "loading";
+      return `${Swal.fire({
+        html: "Fetching categories...",
+        timer: 2000,
+        toast: true,
+        position: "top",
+        showConfirmButton: false,
+        icon: "info"
+     })}`;
     }
   
     if(error){
-      console.log(error)
+      Swal.fire({
+        title: "Network problem",
+        html: "cannot display list of categories",
+        timer: 2000,
+        toast: true,
+        position: "top",
+        showConfirmButton: false,
+        icon: "error"
+     });
     }
   
-    
   }catch(e){
     console.log(e);
   }
   
- //const {name} = data;
-//some hidden bug
- const show = () => {
+ const show =  async () => {
   try{
-    Swal.fire({
-      inputPlaceholder: "category name",
-      input: "text"
-    }).then((result) => {
+    const {value: name} = await Swal.fire({
+      input: "text",
+      inputPlaceholder: "enter category name"
+    });
 
-       if(Swal.DismissReason){
-         return
-       }
-      
-       try {
-        const response = createCategory(
-          {
-            variables: {
-              name: result.value
-            },
-            errorPolicy: "all"
-          }
-        )
-        console.log(response);
-       }catch(e){
-         console.log(e);
-       }
-       
-    })
+    if(name){
+      const response = createCategory(
+              {
+                variables: {
+                  name
+                },
+                errorPolicy: "all"
+              });
+        if((await response).data){
+          Swal.fire({
+            html:(await response).data.createCategory.name + " created successfully" ,
+            timer: 2000,
+            toast: true,
+            position: "top",
+            showConfirmButton: false,
+            icon: "success"
+         })
+        }else{
+          Swal.fire({
+            html: (await response).errors,
+            timer: 2000,
+            toast: true,
+            position: "top",
+            showConfirmButton: false,
+            icon: "error"
+         });
+        } 
+    }
 
   }catch(e){
     console.log(e); //use swal toast
   }
    
 }
+
+  const displayCategories = (data) => {
+    try{
+    if(!data){
+      Swal.fire({
+        title: "Not authorized",
+        html: "to view categories",
+        icon: "warning",
+        showConfirmButton: false,
+      });
+    } else if (data && !error) {
+      return (
+        data.getCategories.map(item => {
+          return(
+            <CategoriesList key={item.id} name={item.name} />
+          )
+        } 
+          
+      )
+     )}; 
+    } catch (error) {
+      Swal.fire({
+        title: error,
+        icon: "warning",
+        toast: true,
+        timer: 2000,
+        showConfirmButton: false,
+      });
+    }
+  }
 
   return (
    
@@ -95,16 +148,14 @@ const CategoriesCard = () => {
 
         <CCardHeader className="text-center">
           <CRow>
-            <CCol><h3>CATEGORIES OF STOCKS</h3></CCol>
+            <CCol><h3 id="cat">CATEGORIES OF STOCKS</h3></CCol>
             <CCol><button type="button" onClick={() => show()} style={{float: "right"}} className="btn btn-info">ADD NEW CATEGORY</button></CCol>
           </CRow>
          </CCardHeader>
         
         <CCardBody style={{padding: "20px"}}>
         <CRow>
-                  {data.getCategories.map(item => ( 
-                      <CategoriesList key={item.id} name={item.name} />
-                  ))}
+              {displayCategories(data)}  
         </CRow> 
        </CCardBody>
       </CCard>
@@ -113,4 +164,4 @@ const CategoriesCard = () => {
   )
 }
 
-export default CategoriesCard
+export default CategoriesCard;

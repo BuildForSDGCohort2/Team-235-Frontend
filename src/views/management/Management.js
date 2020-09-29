@@ -25,10 +25,9 @@ const USERS = gql`
       firstName
       lastName
       email
+      phoneNumber
       blocked
       isVerified
-      phoneNumber
-
     }
   }
 `
@@ -40,7 +39,7 @@ const TheUserManagement = (props) => {
       const fields = [
         { key: "name", _style: { width: "25%"} },
         {key:"email"},
-        { key: "phone", _style: { width: "20%"} },
+        { key: "phoneNumber", _style: { width: "20%"} },
         { key: "status", _style: { width: "20%"} },
         {key: "options", _style:{width: "20%"}}
       ];
@@ -69,22 +68,37 @@ const TheUserManagement = (props) => {
      try {
       
       if(loading){
-        return "loading"  
-      }
+        return `${ Swal.fire({
+          title: "Fetching",
+          html: "List of Users...",
+          toast: true,
+          position: "top",
+          showConfirmButton: false,
+          icon: "info"
+       })}`; 
+      };
 
       if(error){
-        console.log(error)
-      }
+        Swal.fire({
+          title: "Network problem",
+          html: "cannot display list of users",
+          toast: true,
+          showConfirmButton: false,
+          timer: 2000,
+          icon: "error",
+          position: "top"
+        });
+      };
 
-      //TODO:use toast to display errors
 
-    
-      
-      //populate cdatatable for display on card
+    if(data){
+      Swal.close();
       Object.values(data).forEach(val => {
         val.map(item => {
           const {id,firstName, lastName, email, phoneNumber, isVerified, blocked} = item;
           const name = firstName + " " + lastName;
+
+          const phone = phoneNumber !== null ? phoneNumber : "not available";
          
           const status = [];
 
@@ -97,18 +111,39 @@ const TheUserManagement = (props) => {
           }
           
           return(
-            usersData.push({id: id, name: name, email: email, phoneNumber: phoneNumber, status: status.toString()})
-          )
-          //TODO:create a role for users
+            usersData.push(
+              {
+                id, 
+                name, 
+                email, 
+                phoneNumber: phone, 
+                status: status.toString()
+              })
+          );
+          
           
 
         })
 
       })
+    }else if(!data && error){
+      Swal.fire({
+        title: "Not authorized",
+        html: "to view list of users",
+        showConfirmButton: false,
+        icon: "danger"
+      });
+    };
+     
        
      }catch(e){
-        Swal.fire("no data available");
-     }
+      Swal.fire({
+        title: e,
+        html: "to view list of users",
+        showConfirmButton: false,
+        icon: "danger"
+      });
+     };
      
       //not available in place of undefined
     return (
@@ -160,7 +195,9 @@ const TheUserManagement = (props) => {
                                      })
                                      }>
                                           Delete</CDropdownItem>
-                                      <CDropdownItem onClick={() => props.history.push("/viewuser")}>View</CDropdownItem>
+                                      <CDropdownItem onClick={() => props.history.push({
+                                        pathname: "/viewuser"
+                                      })}>View</CDropdownItem>
                                    </CDropdownMenu>
                                </CDropdown>
                             </td>
@@ -173,7 +210,5 @@ const TheUserManagement = (props) => {
 </CContainer>
         
 )};
-
-//todo private list query which will inherite the to do private list
 
 export default TheUserManagement;

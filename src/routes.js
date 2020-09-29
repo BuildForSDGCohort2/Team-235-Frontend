@@ -13,7 +13,7 @@ const Permission = React.lazy(() => import("./views/management/Permissions"));
 const CreateNewRole = React.lazy(() =>import("./views/management/CreateRole"));
 const ViewRole = React.lazy(() =>import("./views/management/ViewRole"));
 const ViewUser = React.lazy(() =>import("./views/management/ViewUser"));
-const ViewStock = React.lazy(() => import("./views/StockDetails/ViewStock"))
+const ViewStock = React.lazy(() => import("./views/StockDetails/ViewStock"));
 
 const routes = [
   { path: "/", exact: true, name: "Login Page", component: Login },

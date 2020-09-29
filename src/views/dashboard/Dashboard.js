@@ -22,8 +22,6 @@ const WidgetsBrand = lazy(() => import("../widgets/WidgetsBrand.js"))
 
 const Dashboard = (props) => {
 
-
-  //prevents unauthorized access to webapp
   useEffect(() => {
     const token = localStorage.getItem("token");
     if(!token){

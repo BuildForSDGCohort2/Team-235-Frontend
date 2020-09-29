@@ -40,8 +40,7 @@ const  App  = () => {
               <Route exact path="/viewrole" name= "View User Role" render={(props) => <TheLayout {...props}/>} />
               <Route exact path="/viewuser" name= "View User Profile" render={(props) => <TheLayout {...props}/>} />
               <Route exact path="/viewstock" name= "View Stock Details" render={(props) => <TheLayout {...props}/>} />
-              
-
+              <Route exact path="/viewstock" name= "View Stock Details" render={(props) => <TheLayout {...props}/>} />
             </Switch>
           </React.Suspense>
       </HashRouter>
