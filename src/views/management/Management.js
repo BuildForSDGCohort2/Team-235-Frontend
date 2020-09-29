@@ -129,7 +129,7 @@ const TheUserManagement = (props) => {
      
        
      }catch(e){
-       block = false
+       block = false;
       Swal.fire({
         title: e,
         showConfirmButton: false,
