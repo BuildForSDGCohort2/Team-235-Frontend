@@ -1,5 +1,7 @@
 import React, {useEffect} from "react"; 
 import {Link} from "react-router-dom";
+import BlockUi from "react-block-ui";
+import "react-block-ui/style.css";
 
 import {
     CButton,
@@ -16,7 +18,8 @@ import {
   } from "@coreui/react";
  import Swal from "sweetalert2";
  import {gql, useQuery} from "@apollo/client";
- 
+
+let block = false;
 
 const USERS = gql`
   query UserList {
@@ -63,22 +66,13 @@ const TheUserManagement = (props) => {
       });
 
 
-     const {loading, error, data} = useQuery(USERS);
+     const { error, data} = useQuery(USERS);
      const usersData = [];
      try {
-      
-      if(loading){
-        return `${ Swal.fire({
-          title: "Fetching",
-          html: "List of Users...",
-          toast: true,
-          position: "top",
-          showConfirmButton: false,
-          icon: "info"
-       })}`; 
-      };
-
-      if(error){
+      block = true; //toggles BlockUi to true when loading
+       
+      if(error && !data){
+        block = false;
         Swal.fire({
           title: "Network problem",
           html: "cannot display list of users",
@@ -92,7 +86,7 @@ const TheUserManagement = (props) => {
 
 
     if(data){
-      Swal.close();
+      block = false;
       Object.values(data).forEach(val => {
         val.map(item => {
           const {id,firstName, lastName, email, phoneNumber, isVerified, blocked} = item;
@@ -100,14 +94,14 @@ const TheUserManagement = (props) => {
 
           const phone = phoneNumber !== null ? phoneNumber : "not available";
          
-          const status = [];
+          let status = "";
 
           if(isVerified && !blocked){
-             status.push("Active")
+             status = "Active";
           }else if(isVerified && blocked){
-            status.push("Blocked")
+            status = "Blocked";
           }else if(!isVerified && !blocked){
-            status.push("Pending")
+            status = "Pending";
           }
           
           return(
@@ -117,16 +111,14 @@ const TheUserManagement = (props) => {
                 name, 
                 email, 
                 phoneNumber: phone, 
-                status: status.toString()
+                status
               })
           );
-          
-          
-
         })
 
       })
     }else if(!data && error){
+      block = false;
       Swal.fire({
         title: "Not authorized",
         html: "to view list of users",
@@ -137,18 +129,22 @@ const TheUserManagement = (props) => {
      
        
      }catch(e){
+       block = false;
       Swal.fire({
         title: e,
-        html: "to view list of users",
         showConfirmButton: false,
         icon: "danger"
       });
      };
+
+     
+     
+     
      
       //not available in place of undefined
     return (
       
-        
+      <BlockUi tag="div"  blocking={block}> 
         <CContainer fluid>
         {/**start of card background */}
         <CCard className="cards" style={{borderRadius:"10px", marginTop:"-20px"}}>
@@ -160,6 +156,7 @@ const TheUserManagement = (props) => {
            {/* <CCardBody> */}
            <CCardBody >
            <CDataTable
+                    id = "table"
                     tableFilter
                     itemsPerPage ={10}
                     hover
@@ -180,6 +177,7 @@ const TheUserManagement = (props) => {
                    "options":
                     ()=>{
                         return (
+                          
                             <td className="py-2">
                               <CDropdown>
                                   <CDropdownToggle>Actions</CDropdownToggle>
@@ -196,19 +194,25 @@ const TheUserManagement = (props) => {
                                      }>
                                           Delete</CDropdownItem>
                                       <CDropdownItem onClick={() => props.history.push({
-                                        pathname: "/viewuser"
+                                        pathname: "/viewuser",
+                                        something: {
+                                          data
+                                        }
                                       })}>View</CDropdownItem>
                                    </CDropdownMenu>
                                </CDropdown>
                             </td>
+                          
                     )}
                 }}
-            ></CDataTable>
+            >
+          
+            </CDataTable>
             </CCardBody>
        </CCard>
   
 </CContainer>
-        
+</BlockUi>   
 )};
 
 export default TheUserManagement;

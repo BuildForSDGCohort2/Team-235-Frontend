@@ -4,6 +4,10 @@ import Select from "react-select";
 import {Link} from "react-router-dom";
 import {gql, useQuery, useMutation} from "@apollo/client";
 import Swal from "sweetalert2";
+import BlockUi from "react-block-ui";
+import "react-block-ui/style.css";
+
+let block = false;
 
 const GET_PERMISSIONS = gql `
    query permissions {
@@ -71,19 +75,11 @@ const CreateNewRole = (props) => {
 
 
     const permissionList = [];
-    const {loading, error, data} = useQuery(GET_PERMISSIONS);
+    const {error, data} = useQuery(GET_PERMISSIONS);
     
     try {
-        if(loading){
-            return `${ Swal.fire({
-                title: "Fetching",
-                html: "permissions...",
-                toast: true,
-                position: "top",
-                showConfirmButton: false,
-                icon: "info"
-             })}`;
-        }
+        
+        block = true;
     
         if(error){
             Swal.fire({
@@ -100,7 +96,7 @@ const CreateNewRole = (props) => {
         
 
         if(data){
-        Swal.close();
+        block = false;
         Object.values(data).forEach(val => {
           val.map(item => {
             return(
@@ -109,6 +105,7 @@ const CreateNewRole = (props) => {
           });
         });
        }else if(!data && error){
+           block = false;
         Swal.fire({
             title: "Not authorized",
             html: "to create roles",
@@ -181,6 +178,7 @@ const CreateNewRole = (props) => {
     
 
     return(
+        <BlockUi tag="div" blocking={block}>
         <CContainer>
         <CRow>
            <CCol>
@@ -235,6 +233,7 @@ const CreateNewRole = (props) => {
            </CCol>
         </CRow>
      </CContainer>
+     </BlockUi> 
     )};
 
 export default CreateNewRole

@@ -26,12 +26,10 @@ const Dashboard = (props) => {
     const token = localStorage.getItem("token");
     if(!token){
        props.history.push("/404");
-       
     }
  })
   
     
-
   return (
     <>
       <WidgetsDropdown />

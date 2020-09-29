@@ -14,9 +14,10 @@ const CreateNewRole = React.lazy(() =>import("./views/management/CreateRole"));
 const ViewRole = React.lazy(() =>import("./views/management/ViewRole"));
 const ViewUser = React.lazy(() =>import("./views/management/ViewUser"));
 const ViewStock = React.lazy(() => import("./views/StockDetails/ViewStock"));
+const Report = React.lazy(() => import("./views/Report/Report"));
 
 const routes = [
-  { path: "/", exact: true, name: "Login Page", component: Login },
+  { path: "/", exact: true, name: "", component: Login },
   { path: "/dashboard", name: "Dashboard", component: Dashboard },
   { path: "/base/breadcrumbs",  name: "Breadcrumbs", component: Breadcrumbs },
   { path: "/categories",  name: "Categories", component: Categories },
@@ -29,7 +30,8 @@ const routes = [
   {path: "/createrole", name: "Create New Role", component: CreateNewRole},
   {path: "/viewrole", name: "View User Role", component: ViewRole},
   {path: "/viewuser", name: "View User Profile", component: ViewUser},
-  {path: "/viewstock", name: "View Stock Details", component: ViewStock}
+  {path: "/viewstock", name: "View Stock Details", component: ViewStock},
+  {path: "/report", name: "Report", component: Report}
 ];
 
 //make the dashboard the homepage
