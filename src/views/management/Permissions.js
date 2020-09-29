@@ -14,8 +14,11 @@ import {
 import {Link} from "react-router-dom";
 import Swal from "sweetalert2";
 import {gql, useQuery} from "@apollo/client";
+import BlockUi from "react-block-ui";
+import "react-block-ui/style.css";
 
- 
+
+let block = false;
 
 const LIST_OF_ROLES = gql `
    query Roles{
@@ -41,20 +44,12 @@ const Permission = (props) => {
       ];
 
 
-      const {loading, error, data} = useQuery(LIST_OF_ROLES);
+      const {error, data} = useQuery(LIST_OF_ROLES);
       const rolesData = [];
 
       try{
-        if(loading){
-          return `${ Swal.fire({
-            title: "Fetching",
-            html: "roles available...",
-            toast: true,
-            position: "top",
-            showConfirmButton: false,
-            icon: "info"
-         })}`;
-        }
+        
+        block = true;
 
         if(error){
           Swal.fire({
@@ -71,7 +66,7 @@ const Permission = (props) => {
         
 
         if(data){
-          Swal.close();
+          block = false;
           Object.values(data).forEach(val => {
             val.map(item => {
               //TODO: integrate update roles api
@@ -102,6 +97,7 @@ const Permission = (props) => {
           });
 
         }else if(!data && error){
+          block = false;
           Swal.fire({
             title: "Not authorized",
             html: "to view list of roles",
@@ -116,6 +112,7 @@ const Permission = (props) => {
     
       
     return(
+       <BlockUi tag="div" blocking={block} >
         <CContainer fluid>
         {/**start of card background */}
         <CCard className="cards" style={{borderRadius:"10px", padding:"30px", marginTop:"-20px"}}>
@@ -165,8 +162,8 @@ const Permission = (props) => {
                 }}
             />
        </CCard>
-  
 </CContainer>
+</BlockUi>
 )};
 
 export default Permission;

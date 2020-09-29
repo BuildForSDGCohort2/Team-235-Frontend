@@ -16,6 +16,4 @@ const CategoriesList = props => {
         </CCol> 
                
     )}
-
-
 export default CategoriesList;

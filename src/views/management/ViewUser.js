@@ -1,7 +1,14 @@
 import React from 'react';
 import { CContainer, CRow, CCol, CCard, CCardHeader, CCardFooter, CCardBody} from '@coreui/react';
+ 
+
 
 const ViewUser = props => {
+   
+    
+      console.log(props.location.something)
+
+
     return (
         <CContainer>
         <CRow>
@@ -11,7 +18,8 @@ const ViewUser = props => {
                  
                      <CCardBody>
                        
-                      <h1>View user here</h1>
+                     
+
                           
                        
                      </CCardBody>

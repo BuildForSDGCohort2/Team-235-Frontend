@@ -1,9 +1,9 @@
-import React from 'react'
+import React from "react"
 import {
   CCol,
   CContainer,
   CRow
-} from '@coreui/react'
+} from "@coreui/react"
 
 const Page404 = () => {
   return (
@@ -23,4 +23,4 @@ const Page404 = () => {
   )
 }
 
-export default Page404
+export default Page404;

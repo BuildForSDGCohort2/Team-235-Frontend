@@ -4,12 +4,15 @@ import {Link} from "react-router-dom";
 import { gql, useMutation, useQuery} from "@apollo/client";
 import Select from "react-select";
 import Swal from "sweetalert2";
+import BlockUi from "react-block-ui";
+import "react-block-ui/style.css";
 
 
 
 const checkEmail = RegExp(/^([a-z0-9_-]+)@([\da-z-]+)\.([a-z]{2,5})$/);
 
 const id = new Set();
+let block = false;
 
 const NEW_USER_DATA = gql`
    mutation CreateUser(
@@ -83,20 +86,12 @@ const NewUser = (props) =>  {
  
 
    //fetch list of roles
-   const {loading, error, data} = useQuery(GET_ROLES);
+   const { error, data} = useQuery(GET_ROLES);
    const listOfRoles = [];
 
    try{
-      if(loading){
-         return  `${ Swal.fire({
-            title: "Fetching",
-            html: "Roles...",
-            toast: true,
-            position: "top",
-            showConfirmButton: false,
-            icon: "info"
-         })}` ;
-      }
+       
+      block = true;
    
       if(error){
          Swal.fire({
@@ -113,7 +108,7 @@ const NewUser = (props) =>  {
      
       
       if(data){
-         Swal.close(); 
+         block = false;
          Object.values(data).forEach(val => {
             val.map(item => {
                 const {id, name} = item;
@@ -219,6 +214,7 @@ const NewUser = (props) =>  {
    }
 
    return(
+      <BlockUi tag="div" blocking={block}>
       <CContainer>
          <CRow>
             <CCol>
@@ -314,6 +310,7 @@ const NewUser = (props) =>  {
             </CCol>
          </CRow>
       </CContainer>
+      </BlockUi>
    
    )}
 export default NewUser;
