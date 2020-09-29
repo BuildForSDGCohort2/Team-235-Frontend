@@ -5,10 +5,6 @@ import { CContainer, CRow, CCol, CCard, CCardHeader, CCardFooter, CCardBody} fro
 
 const ViewUser = props => {
    
-    
-      console.log(props.location.something)
-
-
     return (
         <CContainer>
         <CRow>

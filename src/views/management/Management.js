@@ -72,7 +72,7 @@ const TheUserManagement = (props) => {
       block = true; //toggles BlockUi to true when loading
        
       if(error && !data){
-        block = false
+        block = false;
         Swal.fire({
           title: "Network problem",
           html: "cannot display list of users",
@@ -86,7 +86,6 @@ const TheUserManagement = (props) => {
 
 
     if(data){
-       
       block = false;
       Object.values(data).forEach(val => {
         val.map(item => {
