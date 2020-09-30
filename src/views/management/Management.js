@@ -119,7 +119,7 @@ const TheUserManagement = (props) => {
     } 
      
      }catch(e){
-       console.log(e);
+       
      };
 
      

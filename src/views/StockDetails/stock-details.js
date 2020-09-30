@@ -29,7 +29,7 @@ import Swal from "sweetalert2";
     if(!token || !tokenType){
        props.history.push("/404");
     }
- })
+ });
 
 
     const stockData = [

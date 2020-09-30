@@ -86,7 +86,6 @@ const NewUser = (props) =>  {
          email: "",
          password: "",
          phoneNumber: ""
-         
       }
    });
  
@@ -96,8 +95,6 @@ const NewUser = (props) =>  {
    const listOfRoles = [];
 
    try{
-
-   
       if(error){
          block = false;
          Swal.fire({
@@ -125,7 +122,7 @@ const NewUser = (props) =>  {
       } 
       
    }catch(e){
-       console.log(e);
+      
    }
    
 

@@ -42,7 +42,7 @@ const Permission = (props) => {
     if(!token || !tokenType){
        props.history.push("/404");
     }
- })
+ });
 
 
       const {error, data} = useQuery(LIST_OF_ROLES);

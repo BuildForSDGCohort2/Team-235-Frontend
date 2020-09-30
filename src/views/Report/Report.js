@@ -9,7 +9,7 @@ const Report = (props) => {
         if(!token || !tokenType){
            props.history.push("/404");
         }
-     })
+     });
 
 
     return (
