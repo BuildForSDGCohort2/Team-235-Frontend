@@ -12,7 +12,7 @@ import "react-block-ui/style.css";
 const checkEmail = RegExp(/^([a-z0-9_-]+)@([\da-z-]+)\.([a-z]{2,5})$/);
 
 const id = new Set();
-let block = false;
+let block = true;
 
 const NEW_USER_DATA = gql`
    mutation CreateUser(
@@ -67,6 +67,12 @@ const isValidForm = ({...rest}) => {
      return false;
 }
 
+
+
+
+
+
+
 const NewUser = (props) =>  {
 
    const [createUser] = useMutation(NEW_USER_DATA);
@@ -86,29 +92,28 @@ const NewUser = (props) =>  {
  
 
    //fetch list of roles
-   const { error, data} = useQuery(GET_ROLES);
+   const {error, data} = useQuery(GET_ROLES);
    const listOfRoles = [];
 
    try{
-       
-      block = true;
+
    
       if(error){
+         block = false;
          Swal.fire({
-            title: "Network problem",
-            html: "check your internet connectivity",
-            timer: 2000,
-            toast: true,
-            position: "top",
+            title: "Cannot add users",
+            html: "check internet connection or contact admin for",
+            icon: "warning",
             showConfirmButton: false,
-            icon: "error"
-         })
+            timer: 2000
+          })
       }
    
      
       
       if(data){
          block = false;
+         Swal.close(); 
          Object.values(data).forEach(val => {
             val.map(item => {
                 const {id, name} = item;
@@ -117,27 +122,15 @@ const NewUser = (props) =>  {
                    )
             });
           });
-      }else if(!data && error){
-         Swal.fire({
-            title: "Not authorized",
-            html: "to add users",
-            icon: "warning",
-            showConfirmButton: false,
-          })
-      }
+      } 
       
    }catch(e){
-      Swal.fire({
-         title: error,
-         toast: true,
-         icon: "warning",
-         showConfirmButton: false,
-       })
+       console.log(e);
    }
    
 
 
-  //handle change
+  
    const handleChange = (e) => {
       const {name, value} = e.target;
        setState({...state, [name] : value});
@@ -160,7 +153,7 @@ const NewUser = (props) =>  {
       
       if(isValidForm(state)){
            const {firstName, lastName, email, password, phoneNumber} = state;
-           //console.log(firstName, lastName, email, phoneNumber, password);
+           
            
            try{
              const response = await createUser({
@@ -201,7 +194,7 @@ const NewUser = (props) =>  {
            }catch(e){
             Swal.fire({
                title: e,
-               timer: 2000,
+               timer: 3000,
                toast: true,
                position: "top",
                showConfirmButton: false,
@@ -214,7 +207,7 @@ const NewUser = (props) =>  {
    }
 
    return(
-      <BlockUi tag="div" blocking={block}>
+      <BlockUi blocking={block} message ="Please wait...">
       <CContainer>
          <CRow>
             <CCol>

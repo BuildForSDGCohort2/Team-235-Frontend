@@ -24,6 +24,7 @@ mutation Signin($email: String!, $password: String!){
   signin( data: {email: $email, password: $password})
   {
     accessToken
+    tokenType
   }
 }
 `;
@@ -79,10 +80,11 @@ const Login = (props) => {
       
       if(response.data){
         const token = response.data.signin.accessToken; 
+        const tokenType = response.data.signin.tokenType;
         localStorage.setItem("token", token);
 
         const ACCESS_TOKEN = localStorage.getItem("token");
-        if(ACCESS_TOKEN){
+        if(ACCESS_TOKEN && tokenType === "Bearer"){
           Swal.fire({
             title: "logged in sucessfully",
             timer: 2000,

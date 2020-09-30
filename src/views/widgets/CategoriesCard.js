@@ -10,6 +10,8 @@ import {
 import Swal from "sweetalert2";
 import {gql, useQuery,useMutation} from "@apollo/client";
 import CategoriesList from "./CategoriesList";
+import BlockUi from "react-block-ui";
+import "react-block-ui/style.css";
 
 
 
@@ -35,40 +37,19 @@ const CREATE_CATEGORY = gql `
   }
 `
 
+let block = true;
+
+
 
 const CategoriesCard = () => {
 
   const [createCategory] = useMutation(CREATE_CATEGORY);
-  const {loading, error, data} = useQuery(GET_CATEGORIES_LIST);
+  const { error, data} = useQuery(GET_CATEGORIES_LIST);
 
-  try{
-    if(loading){
-      return `${Swal.fire({
-        html: "Fetching categories...",
-        timer: 2000,
-        toast: true,
-        position: "top",
-        showConfirmButton: false,
-        icon: "info"
-     })}`;
-    }
+
   
-    if(error){
-      Swal.fire({
-        title: "Network problem",
-        html: "cannot display list of categories",
-        timer: 2000,
-        toast: true,
-        position: "top",
-        showConfirmButton: false,
-        icon: "error"
-     });
-    }
-  
-  }catch(e){
-    console.log(e);
-  }
-  
+
+  // function triggers when user click on add new category button
  const show =  async () => {
   try{
     const {value: name} = await Swal.fire({
@@ -87,7 +68,7 @@ const CategoriesCard = () => {
         if((await response).data){
           Swal.fire({
             html:(await response).data.createCategory.name + " created successfully" ,
-            timer: 2000,
+            timer: 3000,
             toast: true,
             position: "top",
             showConfirmButton: false,
@@ -106,21 +87,20 @@ const CategoriesCard = () => {
     }
 
   }catch(e){
-    console.log(e); //use swal toast
+    console.log(e);  
   }
    
 }
 
-  const displayCategories = (data) => {
+ 
+
+  const displayCategories = (data, error, block) => {
+   
+
     try{
-    if(!data){
-      Swal.fire({
-        title: "Not authorized",
-        html: "to view categories",
-        icon: "warning",
-        showConfirmButton: false,
-      });
-    } else if (data && !error) {
+
+    if (data) {
+      block = false;
       return (
         data.getCategories.map(item => {
           return(
@@ -130,19 +110,26 @@ const CategoriesCard = () => {
           
       )
      )}; 
-    } catch (error) {
+
+     if(error){
+      block = false;
       Swal.fire({
-        title: error,
+        title: "Cannot display categories",
+        html: "check internet connection or contact admin for authorization",
         icon: "warning",
-        toast: true,
         timer: 2000,
         showConfirmButton: false,
       });
     }
+
+    } catch (e){
+      block = false;
+       console.log(e);
+    }
   }
 
   return (
-   
+    <BlockUi tag="div" blocking={block} message ="Please wait...">
     < CContainer style = {{paddingTop: '2rem'}}>
       <CCard style={{marginTop: "-40px", height: "100%"}}>
 
@@ -155,11 +142,12 @@ const CategoriesCard = () => {
         
         <CCardBody style={{padding: "20px"}}>
         <CRow>
-              {displayCategories(data)}  
+              {displayCategories(data, error, block)}  
         </CRow> 
        </CCardBody>
       </CCard>
     </CContainer>
+    </BlockUi>
 
   )
 }

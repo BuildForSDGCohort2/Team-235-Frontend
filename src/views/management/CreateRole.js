@@ -7,7 +7,7 @@ import Swal from "sweetalert2";
 import BlockUi from "react-block-ui";
 import "react-block-ui/style.css";
 
-let block = false;
+let block = true;
 
 const GET_PERMISSIONS = gql `
    query permissions {
@@ -79,22 +79,19 @@ const CreateNewRole = (props) => {
     
     try {
         
-        block = true;
     
         if(error){
+            block = false;
             Swal.fire({
-                title: "Network problem",
-                html: " check your internet connectivity",
-                timer: 2000,
-                toast: true,
-                position: "top",
+                title: "cannot create roles",
+                html: "check internet connection or contact admin for authorization",
+                icon: "warning",
                 showConfirmButton: false,
-                icon: "error"
-             });
+                timer: 3000
+              })
         };
     
         
-
         if(data){
         block = false;
         Object.values(data).forEach(val => {
@@ -104,30 +101,14 @@ const CreateNewRole = (props) => {
             ) 
           });
         });
-       }else if(!data && error){
-           block = false;
-        Swal.fire({
-            title: "Not authorized",
-            html: "to create roles",
-            icon: "warning",
-            showConfirmButton: false,
-          })
-       }
+       } 
     }catch(e){
        console.log(e);
     }
     
- 
-
-
-
-    //TODO: fix bug that pops up when user deletes the last selected item using the exit on the item itself
-     
-
   
     const handleSubmit = async (e) => {
         e.preventDefault();
-        //write mutation and send to backend
          
         try{
            const response = await createRole(
@@ -163,14 +144,7 @@ const CreateNewRole = (props) => {
                }
 
         }catch(e){
-            Swal.fire({
-                title: error,
-                timer: 2000,
-                toast: true,
-                position: "top",
-                showConfirmButton: false,
-                icon: "error"
-             }) 
+             console.log(e); 
         }
     }
 
@@ -178,7 +152,7 @@ const CreateNewRole = (props) => {
     
 
     return(
-        <BlockUi tag="div" blocking={block}>
+        <BlockUi tag="div" message= "Please wait..." blocking={block}>
         <CContainer>
         <CRow>
            <CCol>
