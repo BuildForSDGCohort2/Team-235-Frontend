@@ -12,6 +12,7 @@ const TheHeaderDropdown = () => {
 
   const logout = () => {
     localStorage.removeItem("token");
+    sessionStorage.removeItem("tokenType");
     window.location.href = "/dashboard";
   }
 

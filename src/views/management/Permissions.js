@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import {
     CButton,
     CCard,
@@ -35,6 +35,16 @@ const LIST_OF_ROLES = gql `
 `
 
 const Permission = (props) => {
+    
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    const tokenType = sessionStorage.getItem("tokenType");
+    if(!token || !tokenType){
+       props.history.push("/404");
+    }
+ })
+
+
       const {error, data} = useQuery(LIST_OF_ROLES);
       const rolesData = [];
 

@@ -8,7 +8,8 @@ const Categories = (props) =>  {
   
   useEffect(() => {
     const token = localStorage.getItem("token");
-    if(!token){
+    const tokenType = sessionStorage.getItem("tokenType");
+    if(!token || !tokenType){
        props.history.push("/404");
     }
  })

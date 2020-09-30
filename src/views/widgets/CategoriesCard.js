@@ -37,7 +37,7 @@ const CREATE_CATEGORY = gql `
   }
 `
 
-let block = true;
+let block = false;
 
 
 
@@ -94,13 +94,12 @@ const CategoriesCard = () => {
 
  
 
-  const displayCategories = (data, error, block) => {
+  const displayCategories = (data, error) => {
    
 
     try{
 
     if (data) {
-      block = false;
       return (
         data.getCategories.map(item => {
           return(
@@ -112,7 +111,6 @@ const CategoriesCard = () => {
      )}; 
 
      if(error){
-      block = false;
       Swal.fire({
         title: "Cannot display categories",
         html: "check internet connection or contact admin for authorization",
@@ -123,7 +121,6 @@ const CategoriesCard = () => {
     }
 
     } catch (e){
-      block = false;
        console.log(e);
     }
   }

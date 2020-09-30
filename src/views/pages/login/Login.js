@@ -82,9 +82,13 @@ const Login = (props) => {
         const token = response.data.signin.accessToken; 
         const tokenType = response.data.signin.tokenType;
         localStorage.setItem("token", token);
+        sessionStorage.setItem("tokenType", tokenType);
 
+         
         const ACCESS_TOKEN = localStorage.getItem("token");
-        if(ACCESS_TOKEN && tokenType === "Bearer"){
+        const TOKEN_TYPE = sessionStorage.getItem("tokenType");
+
+        if(ACCESS_TOKEN && TOKEN_TYPE){
           Swal.fire({
             title: "logged in sucessfully",
             timer: 2000,

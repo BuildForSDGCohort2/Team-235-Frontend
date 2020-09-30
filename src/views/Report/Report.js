@@ -1,7 +1,17 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { CContainer, CRow, CCol, CCard, CCardHeader, CCardFooter, CCardBody,CButton } from "@coreui/react";
 
 const Report = (props) => {
+ 
+    useEffect(() => {
+        const token = localStorage.getItem("token");
+        const tokenType = sessionStorage.getItem("tokenType");
+        if(!token || !tokenType){
+           props.history.push("/404");
+        }
+     })
+
+
     return (
         <CContainer>
         <CRow>

@@ -60,10 +60,11 @@ const TheUserManagement = (props) => {
       
       useEffect(() => {
         const token = localStorage.getItem("token");
-        if(!token){
-          props.history.push("/404")
+        const tokenType = sessionStorage.getItem("tokenType");
+        if(!token || !tokenType){
+           props.history.push("/404");
         }
-      });
+     })
 
 
      const { error, data} = useQuery(USERS);
