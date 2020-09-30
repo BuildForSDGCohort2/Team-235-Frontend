@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import {
     CButton,
     CCard,
@@ -18,7 +18,7 @@ import BlockUi from "react-block-ui";
 import "react-block-ui/style.css";
 
 
-let block = false;
+let block = true;
 
 const LIST_OF_ROLES = gql `
    query Roles{
@@ -35,6 +35,18 @@ const LIST_OF_ROLES = gql `
 `
 
 const Permission = (props) => {
+    
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    const tokenType = sessionStorage.getItem("tokenType");
+    if(!token || !tokenType){
+       props.history.push("/404");
+    }
+ });
+
+
+      const {error, data} = useQuery(LIST_OF_ROLES);
+      const rolesData = [];
 
       const fields = [
         { key: "role", _style: { width: "25%"} },
@@ -43,24 +55,17 @@ const Permission = (props) => {
         {key: "options", _style:{width: "20%"}}
       ];
 
-
-      const {error, data} = useQuery(LIST_OF_ROLES);
-      const rolesData = [];
-
       try{
         
-        block = true;
-
         if(error){
+          block = false;
           Swal.fire({
-            title: "Network problem",
-            html: " cannot display list of users",
-            timer: 2000,
-            toast: true,
-            position: "top",
+            title: "Cannot display roles",
+            html: "check internet connection or contact admin for authorization",
+            icon: "warning",
             showConfirmButton: false,
-            icon: "error"
-         });
+            timer: 3000
+          });
         };
 
         
@@ -69,17 +74,13 @@ const Permission = (props) => {
           block = false;
           Object.values(data).forEach(val => {
             val.map(item => {
-              //TODO: integrate update roles api
-              const creator = [];
+
+              let creator = "";
               if(item.createdBy === null){
-                creator.push("Not available");
+                creator = "Not available";
               }else{
                  const {firstName, lastName} = item.createdBy;
-                 if(firstName === "Admin"){
-                   creator.push(firstName);
-                 }else {
-                   creator.push(firstName + " " + lastName);
-                 }
+                 creator = firstName === "Admin" ? firstName : firstName + " " + lastName;
               }
   
                const descriptionOfRole = item.description === null ? "Has full access" : item.description;
@@ -89,30 +90,20 @@ const Permission = (props) => {
                     {
                      id: item.id, 
                      role: item.name, 
-                     createdBy: creator.toString(), 
+                     createdBy: creator, 
                      description: descriptionOfRole
-                    })
-              )
+                    }))
             });
           });
-
-        }else if(!data && error){
-          block = false;
-          Swal.fire({
-            title: "Not authorized",
-            html: "to view list of roles",
-            icon: "warning",
-            showConfirmButton: false
-          });
-        }
+        } 
         
       }catch(e){
-        console.log(e);
+         console.log(e);
       }
     
       
     return(
-       <BlockUi tag="div" blocking={block} >
+       <BlockUi message ="Please wait" blocking={block} >
         <CContainer fluid>
         {/**start of card background */}
         <CCard className="cards" style={{borderRadius:"10px", padding:"30px", marginTop:"-20px"}}>

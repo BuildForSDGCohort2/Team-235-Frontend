@@ -19,7 +19,7 @@ import {
  import Swal from "sweetalert2";
  import {gql, useQuery} from "@apollo/client";
 
-let block = false;
+let block = true;
 
 const USERS = gql`
   query UserList {
@@ -60,31 +60,30 @@ const TheUserManagement = (props) => {
       
       useEffect(() => {
         const token = localStorage.getItem("token");
-        if(!token){
-          props.history.push("/404")
+        const tokenType = sessionStorage.getItem("tokenType");
+        if(!token || !tokenType){
+           props.history.push("/404");
         }
-      });
+     })
 
 
      const { error, data} = useQuery(USERS);
      const usersData = [];
      try {
-      block = true; //toggles BlockUi to true when loading
        
-      if(error && !data){
+      if(error){
         block = false;
         Swal.fire({
-          title: "Network problem",
-          html: "cannot display list of users",
-          toast: true,
+          title: "Cannot display users",
+          html: "Check internet connection or contact admin for authorization",
           showConfirmButton: false,
-          timer: 2000,
           icon: "error",
-          position: "top"
+          timer: 3000
         });
       };
 
 
+    //condition executes when user data are fetch successfully
     if(data){
       block = false;
       Object.values(data).forEach(val => {
@@ -117,34 +116,18 @@ const TheUserManagement = (props) => {
         })
 
       })
-    }else if(!data && error){
-      block = false;
-      Swal.fire({
-        title: "Not authorized",
-        html: "to view list of users",
-        showConfirmButton: false,
-        icon: "danger"
-      });
-    };
+    } 
      
-       
      }catch(e){
-       block = false;
-      Swal.fire({
-        title: e,
-        showConfirmButton: false,
-        icon: "danger"
-      });
+       
      };
 
      
      
      
-     
-      //not available in place of undefined
     return (
       
-      <BlockUi tag="div"  blocking={block}> 
+      <BlockUi message= "Please wait..." blocking={block} > 
         <CContainer fluid>
         {/**start of card background */}
         <CCard className="cards" style={{borderRadius:"10px", marginTop:"-20px"}}>
