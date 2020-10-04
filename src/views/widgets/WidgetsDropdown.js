@@ -19,8 +19,8 @@ const WidgetsDropdown = () => {
       <CCol sm="6" lg="3">
         <CWidgetDropdown
           color="gradient-primary"
-          header="9.823"
-          text="Members online"
+          header="Drugs"
+          text="30"
           footerSlot={
             <ChartLineSimple
               pointed
@@ -50,8 +50,8 @@ const WidgetsDropdown = () => {
       <CCol sm="6" lg="3">
         <CWidgetDropdown
           color="gradient-info"
-          header="9.823"
-          text="Members online"
+          header="Lab Equipment"
+          text="456"
           footerSlot={
             <ChartLineSimple
               pointed
@@ -82,8 +82,8 @@ const WidgetsDropdown = () => {
       <CCol sm="6" lg="3">
         <CWidgetDropdown
           color="gradient-warning"
-          header="9.823"
-          text="Members online"
+          header="Surgical Tools"
+          text="302"
           footerSlot={
             <ChartLineSimple
               className="mt-3"
@@ -114,8 +114,8 @@ const WidgetsDropdown = () => {
       <CCol sm="6" lg="3">
         <CWidgetDropdown
           color="gradient-danger"
-          header="9.823"
-          text="Members online"
+          header="Beds"
+          text="234"
           footerSlot={
             <ChartBarSimple
               className="mt-3 mx-3"

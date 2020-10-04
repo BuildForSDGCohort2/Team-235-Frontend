@@ -5,7 +5,7 @@ import {
   } from "@coreui/react";
 
 
-const colors = ["primary","info", "success", "danger", "warning"];
+const colors = ["gradient-primary","gradient-info", "gradient-success", "gradient-danger", "gradient-warning"];
 
 
 const CategoriesList = props => {

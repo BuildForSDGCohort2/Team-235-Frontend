@@ -167,8 +167,9 @@ const NewUser = (props) =>  {
               
             if(response.data){
                Swal.fire({
-                  html: "user created successfully",
-                  timer: 2000,
+                  title: "user created successfully",
+                  html: "message has been sent to user for verification",
+                  timer: 2500,
                   toast: true,
                   position: "top",
                   showConfirmButton: false,

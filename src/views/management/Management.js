@@ -20,6 +20,7 @@ import {
  import {gql, useQuery} from "@apollo/client";
 
 let block = true;
+let userInfo = {};
 
 const USERS = gql`
   query UserList {
@@ -30,7 +31,13 @@ const USERS = gql`
       email
       phoneNumber
       blocked
-      isVerified
+      isVerified,
+      roles{
+        id
+        name
+        description
+        
+      }
     }
   }
 `
@@ -49,10 +56,10 @@ const TheUserManagement = (props) => {
     
       const getBadge = (status) => {
         switch (status) {
-          case "Active": return "success"
-          case "Inactive": return "secondary"
-          case "Pending": return "warning"
-          case "Banned": return "danger"
+          case "active": return "success"
+          case "inactive": return "secondary"
+          case "pending": return "warning"
+          case "banned": return "danger"
            default: return "primary"
         }
       };
@@ -67,10 +74,12 @@ const TheUserManagement = (props) => {
      })
 
 
-     const { error, data} = useQuery(USERS);
+     const { error, data, refetch} = useQuery(USERS);
      const usersData = [];
      try {
-       
+      
+      //refetch();
+
       if(error){
         block = false;
         Swal.fire({
@@ -88,7 +97,7 @@ const TheUserManagement = (props) => {
       block = false;
       Object.values(data).forEach(val => {
         val.map(item => {
-          const {id,firstName, lastName, email, phoneNumber, isVerified, blocked} = item;
+          const {id,firstName, lastName, email, phoneNumber, isVerified, blocked, roles, createdAt} = item;
           const name = firstName + " " + lastName;
 
           const phone = phoneNumber !== null ? phoneNumber : "not available";
@@ -96,11 +105,11 @@ const TheUserManagement = (props) => {
           let status = "";
 
           if(isVerified && !blocked){
-             status = "Active";
+             status = "active";
           }else if(isVerified && blocked){
-            status = "Blocked";
+            status = "blocked";
           }else if(!isVerified && !blocked){
-            status = "Pending";
+            status = "pending";
           }
           
           return(
@@ -110,7 +119,11 @@ const TheUserManagement = (props) => {
                 name, 
                 email, 
                 phoneNumber: phone, 
-                status
+                status,
+                roles,
+                isVerified,
+                blocked,
+                createdAt
               })
           );
         })
@@ -139,10 +152,13 @@ const TheUserManagement = (props) => {
            {/* <CCardBody> */}
            <CCardBody >
            <CDataTable
-                    id = "table"
+                    onRowClick={(e) => userInfo = e
+                    }
+                    responsive={true}
+                    hover ={true}
+                    striped = {true}
                     tableFilter
                     itemsPerPage ={10}
-                    hover
                     itemsPerPageSelect
                     sorter
                     pagination 
@@ -165,10 +181,10 @@ const TheUserManagement = (props) => {
                               <CDropdown>
                                   <CDropdownToggle>Actions</CDropdownToggle>
                                       <CDropdownMenu>
-                                        <CDropdownItem>Edit</CDropdownItem>
+                                        <CDropdownItem>Update</CDropdownItem>
                                         <CDropdownItem onClick = {() =>  Swal.fire({
-                                        title: "Title",
-                                        text: "ARE YOU SURE YOU WANT TO DELETE",
+                                        title: "Are you sure you want to delete",
+                                        width: "800px",
                                         icon: "warning",
                                         showCancelButton: true,
                                         confirmButtonText:"YES",
@@ -178,9 +194,7 @@ const TheUserManagement = (props) => {
                                           Delete</CDropdownItem>
                                       <CDropdownItem onClick={() => props.history.push({
                                         pathname: "/viewuser",
-                                        something: {
-                                          data
-                                        }
+                                         data: userInfo
                                       })}>View</CDropdownItem>
                                    </CDropdownMenu>
                                </CDropdown>

@@ -98,8 +98,17 @@ const CategoriesCard = () => {
    
 
     try{
+      Swal.fire({
+        toast: true,
+        title: "Please wait",
+        html: "loading...",
+        position: "top",
+        icon: "info",
+        showConfirmButton: false
+      })
 
     if (data) {
+      Swal.close();
       return (
         data.getCategories.map(item => {
           return(
@@ -145,8 +154,6 @@ const CategoriesCard = () => {
       </CCard>
     </CContainer>
     </BlockUi>
-
-  )
-}
+)}
 
 export default CategoriesCard;

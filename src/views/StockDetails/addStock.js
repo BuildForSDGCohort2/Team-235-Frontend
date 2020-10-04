@@ -2,51 +2,107 @@ import React, {useState} from "react";
 import { CContainer, CRow, CCol, CCard, CCardHeader, CCardFooter, CCardBody,CButton } from "@coreui/react";
 import {Link} from "react-router-dom";
 import Select from "react-select";
-
-const options = [
-    {value:"Drug", label:"Drugs"},
-    {value: "Non-Drugs", label: "Non-Drugs"},
-    {value: "Laboratory equipment", label: "Laboratory Equipment"}
-];
-
-const facetList = [
-    {value: "Electronics", label: "Electronics"},
-    {value: "Ernest Pharmaceuticals", label: "Ernest Pharmaceuticals"},
-    {value: "syrup", label: "Syrup"},
-    {value: "tablet", label: "Tablet"}
-];
-
-const UserList = [
-    {value: "Admin", label: "Admin"},
-    {value: "Amedzro Elikplim", label: "Amedzro Elikplim"},
-    {value: "Betsy Nunu", label: "Betsy Nunu"}
-];
+import {gql, useQuery,useMutation} from "@apollo/client";
 
 
-const AddStock = () => {
+const GET_CATEGORIES_LIST = gql `
+   query CategoriesList{
+       getCategories{
+         id
+         name
+         createdAt
+       }
+   }
+`
+
+const id = new Set();
+
+const CREATE_STOCK = gql `
+   mutation CreateStock($name: String!, $quantity: Float!, $categoryIds: [Int!]!){
+      createStock(data: {
+          name: $name, 
+          quantity: $quantity,
+          categoryIds: $categoryIds 
+      }){
+          id,
+          name,
+          quantity
+      }
+   }
+
+`
+
+
+
+
+
+// const facetList = [
+//     {value: "Electronics", label: "Electronics"},
+//     {value: "Ernest Pharmaceuticals", label: "Ernest Pharmaceuticals"},
+//     {value: "syrup", label: "Syrup"},
+//     {value: "tablet", label: "Tablet"}
+// ];
+
+// const UserList = [
+//     {value: "Admin", label: "Admin"},
+//     {value: "Amedzro Elikplim", label: "Amedzro Elikplim"},
+//     {value: "Betsy Nunu", label: "Betsy Nunu"}
+// ];
+
+
+const AddStock = (props) => {
+
+    const {loading, error, data} = useQuery(GET_CATEGORIES_LIST);
+    const [createStock] = useMutation(CREATE_STOCK);
 
     const [state, setState] = useState({
-        itemName: "",
-        facet: "",
-        dateAdded: "",
-        itemType: "",
-        dateManufactured: "",
-        expiryDate: "",
-        department: "",
-        itemCode: "",
-        link: "",
+        name: "",
+        // facet: "",
+        // dateAdded: "",
+        // itemType: "",
+        // dateManufactured: "",
+        // expiryDate: "",
+        // department: "",
+        // itemCode: "",
+        // link: "",
         //addedBy: "",
-        totalNumber: "",
-        description: ""
+        quantity: ""
+        // description: ""
     });
 
     //TODO: create hooks for selectOptions and setSelectOptions
     const [selectedOption, setSelectedOption] = useState(null);
+    const options = [];
 
     //TODO: refactor this code
     const handleSelectedOption = (e) => {
         setSelectedOption(e);
+        Object.values(e).map(item => {
+            return(
+               id.add(item.value)
+            )
+        })
     };
+
+
+    try{
+      if(loading){
+          return "loading";
+      }
+      if(error){
+          return alert(error);
+      }
+
+      if(data){
+            data.getCategories.map(item => {
+                return(
+                    options.push({label: item.name, value: item.id})
+                )
+            })
+      }
+    }catch(e){
+
+    }
     
 
     const handleChange = (e) => {
@@ -59,8 +115,30 @@ const AddStock = () => {
 
 
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
+        const {name, quantity} = state;
+        const quantityOfStock = parseFloat(quantity);
+        try{
+          const response = await createStock({
+              variables: {
+                  name,
+                  quantity: quantityOfStock,
+                  categoryIds: Array.from(id)
+              },
+              errorPolicy: "all"
+          })
+         
+          if(response.data){
+             props.history.push("/stock-details")
+          }
+
+          
+        }catch(e){
+
+        }
+
+
     };
    
     return(
@@ -79,8 +157,8 @@ const AddStock = () => {
                                 <input type="text" 
                                 className="form-control" 
                                 id ="itemnameId" 
-                                name="itemname"
-                                value={state.itemName}
+                                name="name"
+                                value={state.name}
                                 onChange={handleChange}
                                 noValidate/>
                              </div>
@@ -93,12 +171,13 @@ const AddStock = () => {
                                         <Select type="text" 
                                         options = {options}
                                         value={selectedOption}
+                                        isMulti
                                         onChange={handleSelectedOption}
                                        />
                                     </div>
                                   </CCol>
                                   
-                                   <CCol>
+                                   {/* <CCol>
                                     <div className="form-group">
                                         <label htmlFor="facetId">ADD FACET</label>
                                         <Select isMulti type="text" 
@@ -106,21 +185,21 @@ const AddStock = () => {
                                         noValidate
                                        />
                                     </div>
-                                  </CCol>
+                                  </CCol> */}
                                </CRow>
                               
-                               <div className="form-group">
+                               {/* <div className="form-group">
                                 <label htmlFor="dateAddedId">DATE ADDED</label>
-                                <input type="text" 
+                                <input type="date" 
                                 className="form-control" 
                                 id ="dateAddedId" 
                                 name="dateAdded"
                                 value={state.dateAdded}
                                 onChange={handleChange}
-                                noValidate/>
-                               </div>
+                                noValidate/> */}
+                               {/* </div> */}
 
-                               <div className="form-group">
+                               {/* <div className="form-group">
                                 <label htmlFor="itemtypeId">ITEM TYPE</label>
                                 <input type="text" 
                                 className="form-control" 
@@ -129,9 +208,9 @@ const AddStock = () => {
                                 value={state.itemType}
                                 onChange={handleChange}
                                 noValidate/>
-                               </div>
+                               </div> */}
 
-                               <div className="form-group">
+                               {/* <div className="form-group">
                                 <label htmlFor="dateManufacturedId">DATE MANUFACTURED (if applicable)</label>
                                 <input type="date" 
                                 className="form-control" 
@@ -151,7 +230,7 @@ const AddStock = () => {
                                 value={state.expiryDate}
                                 onChange={handleChange}
                                 noValidate/>
-                               </div>
+                               </div> */}
 
                              </CCol>
                             
@@ -159,7 +238,7 @@ const AddStock = () => {
                               {/**second column */}
                              <CCol>
 
-                             <div className="form-group">
+                             {/* <div className="form-group">
                                 <label htmlFor="departmentId">DEPARTMENT ACQUIRED FOR</label>
                                 <input type="text" 
                                 className="form-control" 
@@ -168,9 +247,9 @@ const AddStock = () => {
                                 value={state.department}
                                 onChange={handleChange}
                                 noValidate/>
-                             </div>
+                             </div> */}
                               
-                               <div className="form-group">
+                               {/* <div className="form-group">
                                 <label htmlFor="itemCodeId">ITEM CODE</label>
                                 <input type="text" 
                                 className="form-control" 
@@ -179,11 +258,11 @@ const AddStock = () => {
                                 value={state.itemCode}
                                 onChange={handleChange}
                                 noValidate/>
-                               </div>
+                               </div> */}
 
                             
 
-                               <div className="form-group">
+                               {/* <div className="form-group">
                                 <label htmlFor="linkId">USAGE GUIDE LINK</label>
                                 <input type="text" 
                                 className="form-control" 
@@ -192,32 +271,34 @@ const AddStock = () => {
                                 value={state.link}
                                 onChange={handleChange}
                                 noValidate/>
-                               </div>
+                               </div> */}
 
                                <CRow>
-                                   <CCol>
+
+                                   {/* <CCol>
                                     <div className="form-group">
                                         <label htmlFor="addedById">ADDED BY</label>
                                         <Select type="text" 
                                         options = {UserList}
                                         noValidate/>
                                     </div>
-                                  </CCol>
+                                  </CCol> */}
+
                                    <CCol>
                                     <div className="form-group">
-                                        <label htmlFor="totalNumberId">TOTAL NUMBER</label>
-                                        <input type="text" 
+                                        <label htmlFor="totalNumberId">QUANTITY</label>
+                                        <input type="number" 
                                         className="form-control" 
                                         id ="totalNumberId" 
-                                        name="facet"
-                                        value={state.totalNumber}
+                                        name="quantity"
+                                        value={state.quantity}
                                         onChange={handleChange}
                                         noValidate/>
                                     </div>
                                   </CCol>
                                </CRow>
  
-                               <div className="form-group">
+                               {/* <div className="form-group">
                                 <label htmlFor="descriptionId">DESCRIPTION</label>
                                 <textarea style={{height: "115px"}} type="text" 
                                 className="form-control" 
@@ -226,7 +307,7 @@ const AddStock = () => {
                                 value={state.description}
                                 onChange={handleChange}
                                 noValidate/>
-                               </div>
+                               </div> */}
                                
                              </CCol>
                          </CRow>

@@ -3,34 +3,53 @@ import { CContainer, CRow, CCol, CCard, CCardHeader, CCardBody } from '@coreui/r
  
 
  
+let role = {};
 
+const ViewRole = (props) => {
 
-const ViewRole = () => {
-
+    try{
+        role = props.location.data;
+        if(role){
+          localStorage.setItem("role", JSON.stringify(role));
+          console.log(role);
+        }
+    }catch(e){}
+    let info = JSON.parse(localStorage.getItem("role"));
 
     return (
         <CContainer>
         <CRow>
            <CCol>
                  <CCard  style={{marginTop:"-20px", marginLeft:"auto", marginRight:"auto", borderRadius:"10px"}}>
-                     <CCardHeader className="text-center"><h4>ROLE</h4></CCardHeader>
+                     <CCardHeader className="text-center"><h3>{info.role}</h3></CCardHeader>
                      
-                     <CCardBody>
-                         {/**
-                          * use for loop to render permission from backend
-                          */}
-                     <div class="form-group form-group-xs row">
-                            <label class="col-6 col-form-label">Role Name </label>
-                            <div class="col-6">
-                                <span class="form-control-plaintext">Nurse</span>
-                            </div>
-                            <label class="col-6 col-form-label">Permission</label>
-                            <div class="col-6">
-                                <span class="form-control-plaintext">create, delete and update</span>
-                            </div>
-                     </div>
+                     <CCardBody>                      
+                      <CRow>
+                        <CCol>
+                         <h6>CREATED AT</h6>
+                        </CCol>
+                        <CCol>
+                         <h5>{info.createdBy}</h5>
+                        </CCol>
+                      </CRow>
 
-                          
+                      <CRow>
+                        <CCol>
+                         <h6>DESCRIPTION</h6>
+                        </CCol>
+                        <CCol>
+                         <h5>{info.description}</h5>
+                        </CCol>
+                      </CRow>
+
+                      <CRow>
+                        <CCol>
+                         <h6>PERMISSIONS</h6>
+                        </CCol>
+                        <CCol>
+                         <h5>{info.permission.map(item => (item.description.concat(" , ")))}</h5>
+                        </CCol>
+                      </CRow>
                      </CCardBody>
                      
                  </CCard>

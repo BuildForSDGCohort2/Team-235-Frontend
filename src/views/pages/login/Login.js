@@ -12,11 +12,14 @@ import {
   CInputGroup,
   CInputGroupPrepend,
   CInputGroupText,
-  CRow
+  CRow,
+  CSpinner
 } from "@coreui/react";
 import CIcon from "@coreui/icons-react";
 import {gql, useMutation} from "@apollo/client";
 import Swal from "sweetalert2";
+import FontAwesome from 'react-fontawesome'
+ 
  
 
 const ADMIN_DATA = gql`
@@ -47,12 +50,18 @@ const Login = (props) => {
       });
     }
 
+
+    
+
  
  
   const handleSubmit =  async (e) => {
     e.preventDefault();
     const {email, password} = state;
 
+    var loginButton = document.getElementById("button");
+    
+   
     if(email === null || password == null) {
       Swal.fire({
         title: "Empty Fields",
@@ -65,6 +74,8 @@ const Login = (props) => {
      })
         return;
     }
+
+
     
 
     try {
@@ -168,7 +179,9 @@ const Login = (props) => {
                       value={state.password || ""} />
                     </CInputGroup>
                     <div>
-                    <CButton color="primary" type="submit" className="px-4">Login</CButton>
+                    <CButton id="button" color="primary" type="submit" className="px-4">
+                      Login
+                      </CButton>
                     </div>
                     <br/>
                     <Link to="/forgot">
