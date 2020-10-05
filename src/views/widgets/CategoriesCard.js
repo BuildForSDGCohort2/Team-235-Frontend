@@ -92,6 +92,8 @@ const CategoriesCard = () => {
    
 }
 
+
+
  
 
   const displayCategories = (data, error) => {
@@ -108,6 +110,7 @@ const CategoriesCard = () => {
       })
 
     if (data) {
+      console.log(data);
       Swal.close();
       return (
         data.getCategories.map(item => {
@@ -137,7 +140,7 @@ const CategoriesCard = () => {
   return (
     <BlockUi tag="div" blocking={block} message ="Please wait...">
     < CContainer style = {{paddingTop: '2rem'}}>
-      <CCard style={{marginTop: "-40px", height: "100%"}}>
+      <CCard style={{marginTop: "-40px", height: "100%"}} >
 
         <CCardHeader className="text-center">
           <CRow>

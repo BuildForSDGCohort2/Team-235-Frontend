@@ -22,6 +22,7 @@ import Swal from "sweetalert2";
 import {gql, useQuery} from "@apollo/client";
 import BlockUi from "react-block-ui";
 import "react-block-ui/style.css";
+ 
 
 let block = true;
 
@@ -43,7 +44,7 @@ const STOCKS = gql`
  
 
  const StockDetails = (props) => {
-  const {error, data, refetch} = useQuery(STOCKS, {
+  const {error, data} = useQuery(STOCKS, {
     notifyOnNetworkStatusChange : true
   });
 
@@ -72,8 +73,10 @@ const STOCKS = gql`
     const displayCategories = (categories) => {
       let i = [];
       categories.map(item => {
-        i.push(item.name);  
-      })   
+        return(
+          i.push(item.name)
+        )
+      }) ;  
       
       return i;
     }
@@ -127,7 +130,8 @@ const STOCKS = gql`
             responsive
             sorter
             pagination
-            itemsPerPageSelect={10}
+            itemsPerPageSelect
+            itemsPerPage = {10}
             scopedSlots = {{
               "options":
               () => {

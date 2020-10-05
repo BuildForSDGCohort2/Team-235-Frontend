@@ -49,7 +49,7 @@ const Permission = (props) => {
  });
 
 
-      const {error, data, refetch} = useQuery(LIST_OF_ROLES);
+      const {error, data} = useQuery(LIST_OF_ROLES);
       const rolesData = [];
 
       const fields = [

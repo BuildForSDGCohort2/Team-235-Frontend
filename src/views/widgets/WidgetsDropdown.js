@@ -1,4 +1,4 @@
-import React from "react"
+import React from "react";
 import {
   CWidgetDropdown,
   CRow,
@@ -7,10 +7,10 @@ import {
   CDropdownMenu,
   CDropdownItem,
   CDropdownToggle
-} from "@coreui/react"
-import CIcon from "@coreui/icons-react"
-import ChartLineSimple from "../charts/ChartLineSimple"
-import ChartBarSimple from "../charts/ChartBarSimple"
+} from "@coreui/react";
+import CIcon from "@coreui/icons-react";
+import ChartLineSimple from "../charts/ChartLineSimple";
+import ChartBarSimple from "../charts/ChartBarSimple";
 
 const WidgetsDropdown = () => {
   // render
@@ -38,10 +38,9 @@ const WidgetsDropdown = () => {
               <CIcon name="cil-settings"/>
             </CDropdownToggle>
             <CDropdownMenu className="pt-0" placement="bottom-end">
-              <CDropdownItem>Action</CDropdownItem>
-              <CDropdownItem>Another action</CDropdownItem>
-              <CDropdownItem>Something else here...</CDropdownItem>
-              <CDropdownItem disabled>Disabled action</CDropdownItem>
+              <CDropdownItem>View</CDropdownItem>
+              <CDropdownItem>Edit</CDropdownItem>
+              <CDropdownItem>Delete</CDropdownItem>
             </CDropdownMenu>
           </CDropdown>
         </CWidgetDropdown>
@@ -70,10 +69,9 @@ const WidgetsDropdown = () => {
               <CIcon name="cil-location-pin"/>
             </CDropdownToggle>
             <CDropdownMenu className="pt-0" placement="bottom-end">
-              <CDropdownItem>Action</CDropdownItem>
-              <CDropdownItem>Another action</CDropdownItem>
-              <CDropdownItem>Something else here...</CDropdownItem>
-              <CDropdownItem disabled>Disabled action</CDropdownItem>
+              <CDropdownItem>View</CDropdownItem>
+              <CDropdownItem>Edit</CDropdownItem>
+              <CDropdownItem>Delete</CDropdownItem>
             </CDropdownMenu>
           </CDropdown>
         </CWidgetDropdown>
@@ -102,10 +100,9 @@ const WidgetsDropdown = () => {
               <CIcon name="cil-settings"/>
             </CDropdownToggle>
             <CDropdownMenu className="pt-0" placement="bottom-end">
-              <CDropdownItem>Action</CDropdownItem>
-              <CDropdownItem>Another action</CDropdownItem>
-              <CDropdownItem>Something else here...</CDropdownItem>
-              <CDropdownItem disabled>Disabled action</CDropdownItem>
+              <CDropdownItem>View</CDropdownItem>
+              <CDropdownItem>Edit</CDropdownItem>
+              <CDropdownItem>Delete</CDropdownItem>
             </CDropdownMenu>
           </CDropdown>
         </CWidgetDropdown>
@@ -131,10 +128,9 @@ const WidgetsDropdown = () => {
               <CIcon name="cil-settings"/>
             </CDropdownToggle>
             <CDropdownMenu className="pt-0" placement="bottom-end">
-              <CDropdownItem>Action</CDropdownItem>
-              <CDropdownItem>Another action</CDropdownItem>
-              <CDropdownItem>Something else here...</CDropdownItem>
-              <CDropdownItem disabled>Disabled action</CDropdownItem>
+              <CDropdownItem>View</CDropdownItem>
+              <CDropdownItem>Edit</CDropdownItem>
+              <CDropdownItem>Delete</CDropdownItem>
             </CDropdownMenu>
           </CDropdown>
         </CWidgetDropdown>

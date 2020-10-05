@@ -3,6 +3,7 @@ import { CContainer, CRow, CCol, CCard, CCardHeader, CCardFooter, CCardBody,CBut
 import {Link} from "react-router-dom";
 import Select from "react-select";
 import {gql, useQuery,useMutation} from "@apollo/client";
+import Swal from "sweetalert2";
 
 
 const GET_CATEGORIES_LIST = gql `
@@ -31,9 +32,6 @@ const CREATE_STOCK = gql `
    }
 
 `
-
-
-
 
 
 // const facetList = [
@@ -117,6 +115,8 @@ const AddStock = (props) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        const button = document.getElementById("button");
+        button.innerHTML = "ADDING STOCK..";
         const {name, quantity} = state;
         const quantityOfStock = parseFloat(quantity);
         try{
@@ -130,12 +130,21 @@ const AddStock = (props) => {
           })
          
           if(response.data){
-             props.history.push("/stock-details")
+              button.innerHTML = "SAVE";
+             props.history.push("/stock-details");
           }
 
           
         }catch(e){
-
+            button.innerHTML = "SAVE";
+            Swal.fire({
+                html: e,
+                timer: 2000,
+                toast: true,
+                position: "top",
+                showConfirmButton: false,
+                icon: "error"
+             });
         }
 
 
@@ -174,6 +183,20 @@ const AddStock = (props) => {
                                         isMulti
                                         onChange={handleSelectedOption}
                                        />
+                                    </div>
+                                  </CCol>
+
+
+                                  <CCol>
+                                    <div className="form-group">
+                                        <label htmlFor="totalNumberId">QUANTITY</label>
+                                        <input type="number" 
+                                        className="form-control" 
+                                        id ="totalNumberId" 
+                                        name="quantity"
+                                        value={state.quantity}
+                                        onChange={handleChange}
+                                        noValidate/>
                                     </div>
                                   </CCol>
                                   
@@ -236,7 +259,7 @@ const AddStock = (props) => {
                             
 
                               {/**second column */}
-                             <CCol>
+                             {/* <CCol> */}
 
                              {/* <div className="form-group">
                                 <label htmlFor="departmentId">DEPARTMENT ACQUIRED FOR</label>
@@ -284,18 +307,7 @@ const AddStock = (props) => {
                                     </div>
                                   </CCol> */}
 
-                                   <CCol>
-                                    <div className="form-group">
-                                        <label htmlFor="totalNumberId">QUANTITY</label>
-                                        <input type="number" 
-                                        className="form-control" 
-                                        id ="totalNumberId" 
-                                        name="quantity"
-                                        value={state.quantity}
-                                        onChange={handleChange}
-                                        noValidate/>
-                                    </div>
-                                  </CCol>
+                                   
                                </CRow>
  
                                {/* <div className="form-group">
@@ -309,14 +321,14 @@ const AddStock = (props) => {
                                 noValidate/>
                                </div> */}
                                
-                             </CCol>
+                             {/* </CCol> */}
                          </CRow>
                        
                          
                            
                      </CCardBody>
                      <CCardFooter className="text-center">
-                     <CButton  type="submit" color="info" style={{width:"150px", margin:"10px"}}>SAVE</CButton>
+                     <CButton  type="submit" color="info" id="button" style={{width:"150px", margin:"10px"}}>SAVE</CButton>
                      <Link to="./stock-details">
                      <CButton color="secondary" style={{width:"150px"}}>CANCEL</CButton>
                      </Link>

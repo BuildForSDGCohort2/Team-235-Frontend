@@ -74,7 +74,7 @@ const TheUserManagement = (props) => {
      })
 
 
-     const { error, data, refetch} = useQuery(USERS);
+     const { error, data} = useQuery(USERS);
      const usersData = [];
      try {
       

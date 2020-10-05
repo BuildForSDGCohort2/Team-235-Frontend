@@ -1,23 +1,56 @@
 import React, { lazy, useEffect } from "react"
 import {
-  CBadge,
-  CButton,
-  CButtonGroup,
   CCard,
   CCardBody,
-  CCardFooter,
-  CCardHeader,
-  CCol,
-  CProgress,
   CRow,
-  CCallout
-} from "@coreui/react"
+  CCol
+} from "@coreui/react";
+import {CChart} from "@coreui/react-chartjs";
 //import CIcon from "@coreui/icons-react"
-import MainChartExample from "../charts/MainChartExample.js"
+//import MainChartExample from "../charts/MainChartExample.js"
  
 
 const WidgetsDropdown = lazy(() => import("../widgets/WidgetsDropdown.js"))
 //const WidgetsBrand = lazy(() => import("../widgets/WidgetsBrand.js"))
+
+const bar = {
+  labels: ["Drugs", "Surgical tools", "Lab Equipment", "Hand Gloves", "Food", "Beds"],
+  datasets: [
+    {
+      label: "Overview of categories",
+      backgroundColor: "#1b6be2",
+      hoverBackgroundColor: "#6da5f9",
+      hoverBorderColor: "rgba(255,99,132,1)",
+      data: [65, 59, 80, 65, 56, 55, 40, 70],
+    },
+  ],
+
+};
+
+
+
+const pie1 = {
+  labels: [
+    "Drugs",
+    "Lab equipment",
+    "Surgical tools",
+  ],
+  datasets: [
+    {
+      data: [300, 50, 100],
+      backgroundColor: [
+        "#FF6384",
+        "#36A2EB",
+        "#FFCE56",
+      ],
+      hoverBackgroundColor: [
+        "#FF6384",
+        "#36A2EB",
+        "#FFCE56",
+      ],
+    }],
+  };
+
  
 
 const Dashboard = (props) => {
@@ -29,18 +62,34 @@ const Dashboard = (props) => {
        props.history.push("/404");
     }
  })
+
+
+ 
+
+
+
+
+
+
   
     
   return (
     <>
-      <WidgetsDropdown />
       <CCard>
         <CCardBody>
-          <CRow>
-            <CCol sm="5">
+          <WidgetsDropdown />
+        </CCardBody>
+      </CCard>
+      
+      <CCard>
+        <CCardBody>
+          <div className="chart-wrapper">
+            <CChart type="bar" datasets={bar.datasets}   labels={bar.labels} style={{borderBlockStartWidth: "20px"}}/>
+           </div>
+            {/* <CCol sm="5">
               <h4 id="traffic" className="card-title mb-0">Overview of stocks</h4>
-              <div className="small text-muted">November 2020</div> {/**getdate and display */}
-            </CCol>
+              <div className="small text-muted">November 2020</div>  
+            </CCol> */}
             {/* <CCol sm="7" className="d-none d-md-block">
               <CButton color="primary" className="float-right">
                 <CIcon name="cil-cloud-download"/>
@@ -60,8 +109,8 @@ const Dashboard = (props) => {
                 }
               </CButtonGroup>
             </CCol> */}
-          </CRow>
-          <MainChartExample style={{height: "300px", marginTop: "40px"}}/>
+          
+          {/* <MainChartExample style={{height: "300px", marginTop: "40px"}}/>
         </CCardBody>
         <CCardFooter>
           <CRow className="text-center">
@@ -113,9 +162,27 @@ const Dashboard = (props) => {
                 precision={1}
                 value={40}
               />
+            </CCol> */}
+          
+        </CCardBody>
+      </CCard>
+
+
+      <CCard>
+        <CCardBody>
+          <CRow>
+            <CCol>
+            <div className="chart-wrapper">
+              <CChart type="doughnut" datasets={pie1.datasets} labels={pie1.labels}/>
+           </div>
+            </CCol>
+            <CCol>
+            <div className="chart-wrapper">
+              <CChart type="pie" datasets={pie1.datasets} labels={pie1.labels}/>
+           </div>
             </CCol>
           </CRow>
-        </CCardFooter>
+        </CCardBody>
       </CCard>
 
       {/* <WidgetsBrand withCharts/> */}

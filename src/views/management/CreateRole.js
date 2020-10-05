@@ -109,6 +109,9 @@ const CreateNewRole = (props) => {
   
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        const button = document.getElementById("button");
+        button.innerHTML = "CREATING ROLE...";
          
         try{
            const response = await createRole(
@@ -122,6 +125,7 @@ const CreateNewRole = (props) => {
                });
 
                if(response.data){
+                   button.innerHTML = "SAVE";
                 Swal.fire({
                     html: "role created successfully",
                     timer: 2000,
@@ -132,6 +136,8 @@ const CreateNewRole = (props) => {
                  }) 
                  props.history.push("/permission");
                }else{
+                
+                button.innerHTML = "SAVE";
                 const errorMessage = response.errors[0].message.message;
                 Swal.fire({
                    html: errorMessage,
@@ -144,11 +150,19 @@ const CreateNewRole = (props) => {
                }
 
         }catch(e){
-             console.log(e); 
+            button.innerHTML = "SAVE";
+            Swal.fire({
+                html: e,
+                timer: 2000,
+                toast: true,
+                position: "top",
+                showConfirmButton: false,
+                icon: "error"
+             }) 
+            }
         }
-    }
 
-  
+    
     
 
     return(
@@ -197,7 +211,7 @@ const CreateNewRole = (props) => {
                        
                      </CCardBody>
                      <CCardFooter className="text-center">
-                     <CButton  type="submit" color="info" style={{width:"150px", margin:"10px"}}>SAVE</CButton>
+                     <CButton id="button" type="submit" color="info" style={{width:"150px", margin:"10px"}}>SAVE</CButton>
                      <Link to="/permission">
                      <CButton color="secondary" style={{width:"150px"}}>CANCEL</CButton>
                      </Link>
