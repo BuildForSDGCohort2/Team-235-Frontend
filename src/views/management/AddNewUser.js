@@ -135,6 +135,7 @@ const NewUser = (props) =>  {
 
 
    const handleOnSelectedOption = e => {
+
       setSelectedOption(e)
       Object.values(e).map(item => {
          return(
@@ -146,6 +147,9 @@ const NewUser = (props) =>  {
  
 
     const handleSubmit = async (e) =>  {
+      const button = document.getElementById("button");
+      button.innerHTML = "ADDING USER....";
+
       e.preventDefault();
       
       if(isValidForm(state)){
@@ -166,9 +170,13 @@ const NewUser = (props) =>  {
              });
               
             if(response.data){
+
+               button.innerHTML = "SAVE";
+
                Swal.fire({
-                  html: "user created successfully",
-                  timer: 2000,
+                  title: "user created successfully",
+                  html: "message has been sent to user for verification",
+                  timer: 2500,
                   toast: true,
                   position: "top",
                   showConfirmButton: false,
@@ -176,6 +184,9 @@ const NewUser = (props) =>  {
                })  
                props.history.push("/management");
             }else{
+ 
+               button.innerHTML = "SAVE";
+
                const errorMessage = response.errors[0].message.message;
                Swal.fire({
                   html: errorMessage,
@@ -189,6 +200,9 @@ const NewUser = (props) =>  {
 
             
            }catch(e){
+
+            button.innerHTML = "SAVE";
+            
             Swal.fire({
                title: e,
                timer: 3000,
@@ -290,7 +304,7 @@ const NewUser = (props) =>  {
                         
                       </CCardBody>
                       <CCardFooter className="text-center">
-                      <CButton  type="submit" color="info" style={{width:"150px", margin:"10px"}}>SAVE</CButton>
+                      <CButton id="button" type="submit" color="info" style={{width:"150px", margin:"10px"}}>SAVE</CButton>
                       <Link to="./management">
                       <CButton color="secondary" style={{width:"150px"}}>CANCEL</CButton>
                       </Link>

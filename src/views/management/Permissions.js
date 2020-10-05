@@ -17,8 +17,9 @@ import {gql, useQuery} from "@apollo/client";
 import BlockUi from "react-block-ui";
 import "react-block-ui/style.css";
 
-
+   
 let block = true;
+let roleInfo = {};
 
 const LIST_OF_ROLES = gql `
    query Roles{
@@ -29,6 +30,9 @@ const LIST_OF_ROLES = gql `
        createdBy{
          firstName
          lastName
+       }
+       permissions{
+         description
        }
      }
    }
@@ -56,6 +60,9 @@ const Permission = (props) => {
       ];
 
       try{
+
+        //refetch();
+       
         
         if(error){
           block = false;
@@ -91,7 +98,8 @@ const Permission = (props) => {
                      id: item.id, 
                      role: item.name, 
                      createdBy: creator, 
-                     description: descriptionOfRole
+                     description: descriptionOfRole,
+                     permission: item.permissions
                     }))
             });
           });
@@ -103,7 +111,7 @@ const Permission = (props) => {
     
       
     return(
-       <BlockUi message ="Please wait" blocking={block} >
+       <BlockUi message ="Please wait..." blocking={block} >
         <CContainer fluid>
         {/**start of card background */}
         <CCard className="cards" style={{borderRadius:"10px", padding:"30px", marginTop:"-20px"}}>
@@ -114,13 +122,14 @@ const Permission = (props) => {
            </CCardHeader>
            {/* <CCardBody> */}
            <CDataTable 
-                    style
+                    onRowClick={(e) => roleInfo = e}
+                    hover = {true}
+                    striped ={true}
                     items={rolesData}
                     fields={fields}
                     tableFilter
                     itemsPerPageSelect
                     itemsPerPage={10}
-                    hover
                     sorter
                     pagination
                     scopedSlots = {{
@@ -133,13 +142,16 @@ const Permission = (props) => {
                                   <CDropdownToggle>actions</CDropdownToggle>
                                       <CDropdownMenu>
                                           {/**add a history of the user to the view module */}
-                                        <CDropdownItem onClick={() => props.history.push("/viewrole")}>View</CDropdownItem>
+                                        <CDropdownItem onClick={() => props.history.push({
+                                          pathname: "/viewrole",
+                                          data: roleInfo
+                                        })}>View</CDropdownItem>
                                         <CDropdownItem>Update</CDropdownItem>
                                         
                                      <CDropdownItem onClick = {() =>  Swal.fire({
-                                        title: "Title",
-                                        text: "ARE YOU SURE YOU WANT TO DELETE",
+                                        title: "ARE YOU SURE YOU WANT TO DELETE?",
                                         icon: "warning",
+                                        width: "800px",
                                         showCancelButton: true,
                                         confirmButtonText:"YES",
                                         cancelButtonText: "NO"

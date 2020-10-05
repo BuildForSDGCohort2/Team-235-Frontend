@@ -19,6 +19,7 @@ import {gql, useMutation} from "@apollo/client";
 import Swal from "sweetalert2";
  
 
+ 
 const ADMIN_DATA = gql`
 mutation Signin($email: String!, $password: String!){
   signin( data: {email: $email, password: $password})
@@ -31,103 +32,154 @@ mutation Signin($email: String!, $password: String!){
 
 
 
+ 
+
+
+/**
+ * 
+ * @param {*} signin 
+ * @param {*} email 
+ * @param {*} password 
+ * @param {*} props 
+ * 
+ * Allows user added by admin to signin into stock tracker
+ */
+const signUserIntoStockTracker = async (signin, email, password, props, button) => {
+    
+  try {
+    const response = await signin(
+        {
+          variables: 
+          {
+          email: email,
+          password: password
+        },
+          errorPolicy: "all"
+        });
+    
+    if(response.data){
+      const token = response.data.signin.accessToken;    
+      const tokenType = response.data.signin.tokenType;
+      localStorage.setItem("token", token);
+      sessionStorage.setItem("tokenType", tokenType);
+
+      const ACCESS_TOKEN = localStorage.getItem("token");
+      const TOKEN_TYPE = sessionStorage.getItem("tokenType");
+
+       
+       
+      if(ACCESS_TOKEN && TOKEN_TYPE){
+        button.innerHTML = "Login";
+        Swal.fire({
+          title: "logged in sucessfully",
+          timer: 2000,
+          toast: true,
+          position: "top",
+          showConfirmButton: false,
+          icon: "success"
+       })
+        props.history.push("/dashboard");
+      } 
+
+      }else{
+        button.innerHTML = "Login";
+        Swal.fire({
+          title: "Alert:",
+          html: "email and password is not authorized",
+          timer: 2000,
+          toast: true,
+          position: "top",
+          showConfirmButton: false,
+          icon: "error"
+       })
+      }
+     
+  }catch(e){
+    
+    handleAndDisplayError(e, button); 
+  }
+
+
+   
+ 
+}
+
+const handleAndDisplayError = (e, button) => {
+  /**
+   * Based on error messages from the server
+   * The first words are taken and error are displayed accordingly
+   * Eg. "Failed to fetch" means there is a network problem....so based on that "check your connection" message is displayed to user
+   */
+  
+  button.innerHTML = "Login";
+  var firstWordInErrorMessage = JSON.stringify(e.message).replace(/ .*/,'"');
+  switch(JSON.parse(firstWordInErrorMessage)){
+    case "Failed": 
+      Swal.fire({
+        toast: true,
+        title: "network problem",
+        html: "check your internet connection",
+        icon: "warning",
+        timer: 2000,
+        position: "top",
+        showConfirmButton: false
+      });
+      break;
+
+    case "Response":
+      
+      Swal.fire({
+        toast: true,
+        title: "Fill all fields",
+        html: "email and password must not be empty",
+        icon: "warning",
+        timer: 2000,
+        position: "top",
+        showConfirmButton: false,
+        width: "480px"
+      });
+      break;
+
+    default: 
+       break;
+  }
+ 
+}
+
+
+
 const Login = (props) => {
+
   const [signin] = useMutation(ADMIN_DATA);
-      const [state, setState] = useState({
+
+    const [state, setState] = useState({
         state:{
           email: "",
           password: "",
         }
     });
 
-    function handleChange(e){
+  
+
+    const handleChange = (e) => {
       const {name, value} = e.target;
       setState({...state,
         [name]: value
       });
     }
 
- 
- 
-  const handleSubmit =  async (e) => {
-    e.preventDefault();
-    const {email, password} = state;
-
-    if(email === null || password == null) {
-      Swal.fire({
-        title: "Empty Fields",
-        html: "please fill all fields",
-        timer: 2000,
-        toast: true,
-        position: "top",
-        showConfirmButton: false,
-        icon: "info"
-     })
-        return;
-    }
     
 
-    try {
-      const response = await signin(
-          {
-            variables: 
-            {
-            email: email,
-            password: password
-          },
-            errorPolicy: "all"
-          });
+    const handleSubmit =  (e) => {
+
+      let button = document.getElementById("button");
+      button.innerHTML = "loading...";
+
+      e.preventDefault();
+      const {email, password} = state;
+      signUserIntoStockTracker(signin, email, password, props, button);
       
-      if(response.data){
-        const token = response.data.signin.accessToken; 
-        const tokenType = response.data.signin.tokenType;
-        localStorage.setItem("token", token);
-        sessionStorage.setItem("tokenType", tokenType);
-
-         
-        const ACCESS_TOKEN = localStorage.getItem("token");
-        const TOKEN_TYPE = sessionStorage.getItem("tokenType");
-
-        if(ACCESS_TOKEN && TOKEN_TYPE){
-          Swal.fire({
-            title: "logged in sucessfully",
-            timer: 2000,
-            toast: true,
-            position: "top",
-            showConfirmButton: false,
-            icon: "success"
-         })
-          props.history.push("/dashboard");
-        } 
-
-        }else{
-          Swal.fire({
-            title: "Alert:",
-            html: "email and password is not authorized",
-            timer: 2000,
-            toast: true,
-            position: "top",
-            showConfirmButton: false,
-            icon: "error"
-         })
-        }
-       
-    }catch(e){
-      if(e){
-        Swal.fire({
-          title: "Network problem:",
-          html: " connect to the internet",
-          timer: 2000,
-          toast: true,
-          position: "top",
-          showConfirmButton: false,
-          icon: "info"
-       })
-      }
-       
     }
-  }
-
 
 
   return (
@@ -136,7 +188,7 @@ const Login = (props) => {
         <CRow className="justify-content-center">
           <CCol md="8">
             <CCardGroup>
-              <CCard className="p-4">
+              <CCard className="p-4" style={{boxShadow: "3px 3px 15px gray"}}>
                 <CCardBody>
                   <CForm onSubmit = {handleSubmit}>
                     <h1>Login</h1>
@@ -168,7 +220,9 @@ const Login = (props) => {
                       value={state.password || ""} />
                     </CInputGroup>
                     <div>
-                    <CButton color="primary" type="submit" className="px-4">Login</CButton>
+                        <CButton id="button" color="primary" type="submit" className="px-4">
+                            Login
+                        </CButton>
                     </div>
                     <br/>
                     <Link to="/forgot">
@@ -189,6 +243,7 @@ const Login = (props) => {
       </CContainer>
     </div>
   )
+ 
 }
 
 export default Login;
