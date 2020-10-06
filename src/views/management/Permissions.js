@@ -59,11 +59,7 @@ const Permission = (props) => {
         {key: "options", _style:{width: "20%"}}
       ];
 
-      try{
-
-        //refetch();
-       
-        
+      try{     
         if(error){
           block = false;
           Swal.fire({
@@ -141,7 +137,6 @@ const Permission = (props) => {
                               <CDropdown>
                                   <CDropdownToggle>actions</CDropdownToggle>
                                       <CDropdownMenu>
-                                          {/**add a history of the user to the view module */}
                                         <CDropdownItem onClick={() => props.history.push({
                                           pathname: "/viewrole",
                                           data: roleInfo

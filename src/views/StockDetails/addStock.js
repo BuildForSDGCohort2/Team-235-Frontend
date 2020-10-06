@@ -14,7 +14,7 @@ const GET_CATEGORIES_LIST = gql `
          createdAt
        }
    }
-`
+`;
 
 const id = new Set();
 
@@ -98,9 +98,7 @@ const AddStock = (props) => {
                 )
             })
       }
-    }catch(e){
-
-    }
+    }catch(e){}
     
 
     const handleChange = (e) => {
