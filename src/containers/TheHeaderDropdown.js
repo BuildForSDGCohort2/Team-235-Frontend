@@ -7,7 +7,6 @@ import {
   CImg
 } from "@coreui/react";
 import CIcon from "@coreui/icons-react";
-import Login from "../views/pages/login/Login";
 
 const TheHeaderDropdown = () => {
 
