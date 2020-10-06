@@ -7,14 +7,18 @@ import {
   CImg
 } from "@coreui/react";
 import CIcon from "@coreui/icons-react";
+import Login from "../views/pages/login/Login";
 
 const TheHeaderDropdown = () => {
 
   const logout = () => {
     localStorage.removeItem("token");
     sessionStorage.removeItem("tokenType");
-    window.location.href = "/dashboard";
+    window.location.href = "/";
   }
+
+
+   
 
   return (
     <CDropdown
