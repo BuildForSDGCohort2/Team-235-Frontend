@@ -188,7 +188,7 @@ const Login = (props) => {
         <CRow className="justify-content-center">
           <CCol md="8">
             <CCardGroup>
-              <CCard className="p-4" style={{boxShadow: "3px 3px 15px gray"}}>
+              <CCard className="p-4">
                 <CCardBody>
                   <CForm onSubmit = {handleSubmit}>
                     <h1>Login</h1>

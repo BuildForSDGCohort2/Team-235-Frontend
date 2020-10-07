@@ -138,6 +138,7 @@ const CategoriesCard = () => {
   }
 
   return (
+    <>
     <BlockUi tag="div" blocking={block} message ="Please wait...">
     < CContainer style = {{paddingTop: '2rem'}}>
       <CCard style={{marginTop: "-40px", height: "100%"}} >
@@ -157,6 +158,7 @@ const CategoriesCard = () => {
       </CCard>
     </CContainer>
     </BlockUi>
-)}
+    </>
+)};
 
 export default CategoriesCard;
