@@ -4,7 +4,7 @@ let user = {};
 
 const style = {
   backgroundColor: "white"
-}
+};
 
 const ViewUser = props => {
 
