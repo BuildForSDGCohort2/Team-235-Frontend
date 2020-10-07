@@ -139,7 +139,7 @@ const TheUserManagement = (props) => {
      
      
     return (
-      
+      <>
       <BlockUi message= "Please wait..." blocking={block} > 
         <CContainer fluid>
         {/**start of card background */}
@@ -209,7 +209,8 @@ const TheUserManagement = (props) => {
        </CCard>
   
 </CContainer>
-</BlockUi>   
+</BlockUi>  
+</> 
 )};
 
 export default TheUserManagement;

@@ -12,7 +12,24 @@ import {
 import CIcon from "@coreui/icons-react";
 import {Link} from "react-router-dom";
  
+const sideBarNavStyle =  {
+    backgroundColor: "#24385e",
+    marginTop: "10px"
+}
 
+const buttonStyle = {
+   border: "none",
+   width: "100%"
+}
+
+const iconStyle = {
+   color: "white"
+}
+
+const spanStyle = {
+   marginLeft: "20px",
+   color: "white"
+}
  
 
 const TheSidebar = () => {
@@ -24,7 +41,7 @@ const TheSidebar = () => {
       show={show}
       onShowChange={(val) => dispatch({type: "set", sidebarShow: val })}
     >
-      <CSidebarBrand className="d-md-down-none" to="/">
+      <CSidebarBrand className="d-md-down-none">
         STOCK TRACKER
         <CIcon
           className="c-sidebar-brand-minimized"
@@ -37,10 +54,10 @@ const TheSidebar = () => {
 
         {/**start of side bar items */}
         <div>
-            <div className ="c-sidebar-nav-item" style={{backgroundColor:"#24385e", marginTop:"10px"}}>
-               <CButton className="c-sidebar-nav-link" style={{border:"none", width:"100%"}}>
+            <div className ="c-sidebar-nav-item" style={sideBarNavStyle}>
+               <CButton className="c-sidebar-nav-link" style={buttonStyle}>
                <Link to="/dashboard">
-                  <CIcon name="cil-home" style={{color:"white"}} /> <span style={{marginLeft:"20px", color:"white"}}>DASHBOARD</span>
+                  <CIcon name="cil-home" style={iconStyle} /> <span style={spanStyle}>DASHBOARD</span>
                </Link>
                </CButton>
             </div >

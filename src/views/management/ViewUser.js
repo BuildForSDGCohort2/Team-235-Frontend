@@ -1,8 +1,10 @@
 import React from 'react';
 import { CContainer, CRow, CCol, CCard, CCardHeader, CCardBody} from '@coreui/react';
-
 let user = {};
 
+const style = {
+  backgroundColor: "white"
+}
 
 const ViewUser = props => {
 
@@ -18,7 +20,7 @@ let info = JSON.parse(localStorage.getItem("user"));
         <CContainer>
         <CRow>
            <CCol>
-                 <CCard  style={{marginTop:"-20px", marginLeft:"auto", marginRight:"auto", borderRadius:"10px"}}>
+                 <CCard style={style}>
                     <CCardHeader className="text-center"><h2>{info.name}</h2></CCardHeader>
                  
                      <CCardBody>
