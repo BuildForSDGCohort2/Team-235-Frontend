@@ -181,7 +181,10 @@ const TheUserManagement = (props) => {
                               <CDropdown>
                                   <CDropdownToggle>Actions</CDropdownToggle>
                                       <CDropdownMenu>
-                                        <CDropdownItem>Update</CDropdownItem>
+                                        <CDropdownItem onClick = {() => props.history.push({
+                                          pathname: "/updateuser",
+                                          data: userInfo
+                                        })}>Update</CDropdownItem>
                                         <CDropdownItem onClick = {() =>  Swal.fire({
                                         title: "Are you sure you want to delete",
                                         width: "800px",

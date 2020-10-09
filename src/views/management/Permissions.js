@@ -141,7 +141,10 @@ const Permission = (props) => {
                                           pathname: "/viewrole",
                                           data: roleInfo
                                         })}>View</CDropdownItem>
-                                        <CDropdownItem>Update</CDropdownItem>
+                                        <CDropdownItem onClick = {() => props.history.push({
+                                          pathname: "/updaterole",
+                                          data: roleInfo
+                                        })}>Update</CDropdownItem>
                                         
                                      <CDropdownItem onClick = {() =>  Swal.fire({
                                         title: "ARE YOU SURE YOU WANT TO DELETE?",

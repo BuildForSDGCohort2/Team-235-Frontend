@@ -15,6 +15,8 @@ const ViewRole = React.lazy(() =>import("./views/management/ViewRole"));
 const ViewUser = React.lazy(() =>import("./views/management/ViewUser"));
 const ViewStock = React.lazy(() => import("./views/StockDetails/ViewStock"));
 const Report = React.lazy(() => import("./views/Report/Report"));
+const UpdateUser = React.lazy(() => import("./views/update/UpdateUser"));
+const UpdateRole = React.lazy(() => import("./views/update/UpdateRole"));
 
 const routes = [
   { path: "/", exact: true, name: "", component: Login },
@@ -31,9 +33,11 @@ const routes = [
   {path: "/viewrole", name: "View User Role", component: ViewRole},
   {path: "/viewuser", name: "View User Profile", component: ViewUser},
   {path: "/viewstock", name: "View Stock Details", component: ViewStock},
-  {path: "/report", name: "Report", component: Report}
+  {path: "/report", name: "Report", component: Report},
+  {path: "/updateuser", name: "UpdateUser", component: UpdateUser},
+  {path: "/updaterole", name: "UpdateRole", component: UpdateRole}
 ];
 
-//make the dashboard the homepage
+
 
 export default routes;

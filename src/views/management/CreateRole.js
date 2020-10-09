@@ -17,7 +17,7 @@ const GET_PERMISSIONS = gql `
            description
        }
    }
-`
+`;
 
 const CREATE_ROLE_MUTATION = gql`
  mutation CreateRole($name: String!, $description: String!, $permissionIds: [Int!]!){
@@ -37,7 +37,7 @@ const CREATE_ROLE_MUTATION = gql`
          }
      }
  }
-`
+`;
 
 
 const ids = new Set();
@@ -45,7 +45,7 @@ const ids = new Set();
 const CreateNewRole = (props) => {
 
    const [createRole] = useMutation(CREATE_ROLE_MUTATION);
-   const [selectedValue, setSelectedValue] = useState(null)
+   const [selectedValue, setSelectedValue] = useState(null);
    
 
    const [state, setState] = useState({
@@ -59,18 +59,20 @@ const CreateNewRole = (props) => {
     const handleChange = e => {
         const {name, value} = e.target;
         setState({...state, [name]: value});
-    }
+    };
 
 
     const handleSelectedValue = e => {
-        setSelectedValue(e);
-         
-        Object.values(e).map(item => {
-            return(
-                ids.add(item.id)
-            )
-        })
-    }
+        setSelectedValue(e); 
+        if(!e === null){
+            e.map(item => {
+                return(
+                    ids.add(item.id)
+                )
+            });
+        }
+        
+    };
 
 
 
@@ -206,6 +208,7 @@ const CreateNewRole = (props) => {
                                        isSearchable
                                        onChange={handleSelectedValue}
                                        value={selectedValue}
+                                       isClearable
                                         />
                                    </div>
                        
