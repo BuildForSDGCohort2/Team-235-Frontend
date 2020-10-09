@@ -55,41 +55,41 @@ const TheSidebar = () => {
         {/**start of side bar items */}
         <div>
             <div className ="c-sidebar-nav-item" style={sideBarNavStyle}>
+            <Link to="/dashboard">
                <CButton className="c-sidebar-nav-link" style={buttonStyle}>
-               <Link to="/dashboard">
                   <CIcon name="cil-home" style={iconStyle} /> <span style={spanStyle}>DASHBOARD</span>
-               </Link>
                </CButton>
+            </Link>
             </div >
         </div>
          
          {/* * start categories *div */}
          <div className="c-sidebar-nav-item" style={{backgroundColor:"#24385e", marginTop:"10px"}}>
+         <Link to="/categories"> 
             <CButton className="c-sidebar-nav-link" style={{border:"none", width:"100%"}}>
-            <Link to="/categories"> 
                <CIcon name="cilListNumbered" style= {{color:"white"}} /> <span style={{marginLeft:"20px", color:"white"}}>CATEGORIES</span>
-            </Link>   
             </CButton>
+            </Link> 
          </div>
          {/* {/** end categories */}
 
          <div className="c-sidebar-nav-item" style={{backgroundColor:"#24385e", marginTop:"10px"}}>
+         <Link to="./stock-details">
             <CButton className="c-sidebar-nav-link" style={{border:"none", width:"100%"}}>
-               <Link to="./stock-details">
                <CIcon name="cilBasket" style={{color:"white"}} /> <span style={{marginLeft:"20px", color:"white"}}>STOCK</span>
-               </Link>
             </CButton>
+         </Link>
          </div>
 
         
         
         {/**user management starts */}
          <div className="c-sidebar-nav-item" style={{backgroundColor:"#24385e", marginTop:"10px"}}>
+         <Link to="/management">
             <CButton className="c-sidebar-nav-link" style={{border:"none", width:"100%"}}>
-            <Link to="/management">
                <CIcon name="cilNotes" style={{color:"white"}} /> <span style={{marginLeft:"20px", color:"white"}}>USER MANAGEMENT</span>
-            </Link>
             </CButton>
+         </Link> 
          </div>
          {/**user management ends */}
          
@@ -104,11 +104,11 @@ const TheSidebar = () => {
 
          
          <div className="c-sidebar-nav-item" style={{backgroundColor:"#24385e", marginTop:"10px"}}>
+          <Link to="/permission"> 
             <CButton className="c-sidebar-nav-link" style={{border:"none", width:"100%"}}>
-               <Link to="/permission">
                <CIcon name="cilSettings" style={{color:"white"}} /> <span style={{marginLeft:"20px", color:"white"}}>ROLES AND PERMISSIONS</span>
-               </Link>
             </CButton>
+          </Link>   
          </div>
           
         

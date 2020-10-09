@@ -83,10 +83,15 @@ const STOCKS = gql`
  
 
     try{
-       
-   
-     
-      if(error) return alert(error);
+      if(error){
+        block = false;
+        Swal.fire({
+          title: "Cannot display users",
+          html: "Check internet connection or contact admin for authorization",
+          showConfirmButton: false,
+          icon: "error"
+        });
+      };
 
       if(data){
         block = false;

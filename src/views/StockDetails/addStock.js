@@ -4,6 +4,8 @@ import {Link} from "react-router-dom";
 import Select from "react-select";
 import {gql, useQuery,useMutation} from "@apollo/client";
 import Swal from "sweetalert2";
+import BlockUi from "react-block-ui";
+import "react-block-ui/style.css";
 
 
 const GET_CATEGORIES_LIST = gql `
@@ -16,6 +18,7 @@ const GET_CATEGORIES_LIST = gql `
    }
 `;
 
+let block = true;
 const id = new Set();
 
 const CREATE_STOCK = gql `
@@ -30,8 +33,7 @@ const CREATE_STOCK = gql `
           quantity
       }
    }
-
-`
+`;
 
 
 // const facetList = [
@@ -50,7 +52,7 @@ const CREATE_STOCK = gql `
 
 const AddStock = (props) => {
 
-    const {loading, error, data} = useQuery(GET_CATEGORIES_LIST);
+    const {error, data} = useQuery(GET_CATEGORIES_LIST);
     const [createStock] = useMutation(CREATE_STOCK);
 
     const [state, setState] = useState({
@@ -68,33 +70,40 @@ const AddStock = (props) => {
         // description: ""
     });
 
-    //TODO: create hooks for selectOptions and setSelectOptions
     const [selectedOption, setSelectedOption] = useState(null);
     const options = [];
 
-    //TODO: refactor this code
+   
     const handleSelectedOption = (e) => {
         setSelectedOption(e);
-        Object.values(e).map(item => {
-            return(
-               id.add(item.value)
-            )
-        })
+        if(!e === null){
+            Object.values(e).map(item => {
+                return(
+                   id.add(item.value)
+                )
+            });
+        }
     };
 
 
     try{
-      if(loading){
-          return "loading";
-      }
+      
       if(error){
-          return alert(error);
+          block = false;
+          Swal.fire({
+            title: "cannot add stocks",
+            html: "check internet connection or contact admin for authorization",
+            icon: "warning",
+            showConfirmButton: false,
+            timer: 3000
+          })
       }
 
       if(data){
-            data.getCategories.map(item => {
+          block = false;          
+           data.getCategories.map(item => {
                 return(
-                    options.push({label: item.name, value: item.id})
+                  options.push({label: item.name, value: item.id})
                 )
             })
       }
@@ -149,6 +158,7 @@ const AddStock = (props) => {
     };
    
     return(
+        <BlockUi message = "Please wait" blocking={block}>
         <CContainer>
         <CRow>
            <CCol>
@@ -180,6 +190,8 @@ const AddStock = (props) => {
                                         value={selectedOption}
                                         isMulti
                                         onChange={handleSelectedOption}
+                                        isClearable
+                                        isSearchable
                                        />
                                     </div>
                                   </CCol>
@@ -337,6 +349,7 @@ const AddStock = (props) => {
            </CCol>
         </CRow>
      </CContainer>
+     </BlockUi>
     );
 };
 

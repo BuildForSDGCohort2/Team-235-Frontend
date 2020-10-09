@@ -30,11 +30,6 @@ mutation Signin($email: String!, $password: String!){
 }
 `;
 
-
-
- 
-
-
 /**
  * 
  * @param {*} signin 

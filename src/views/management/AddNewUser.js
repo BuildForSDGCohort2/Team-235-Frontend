@@ -135,14 +135,14 @@ const NewUser = (props) =>  {
 
 
    const handleOnSelectedOption = e => {
-
       setSelectedOption(e)
-      Object.values(e).map(item => {
-         return(
-            id.add(item.value)
-         )
-          
-      })
+      if(!e === null){
+         Object.values(e).map(item => {
+            return(
+               id.add(item.value)
+            )
+         });
+      }
    }
  
 
