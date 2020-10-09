@@ -52,7 +52,7 @@ const CREATE_STOCK = gql `
 
 const AddStock = (props) => {
 
-    const {loading, error, data} = useQuery(GET_CATEGORIES_LIST);
+    const {error, data} = useQuery(GET_CATEGORIES_LIST);
     const [createStock] = useMutation(CREATE_STOCK);
 
     const [state, setState] = useState({
