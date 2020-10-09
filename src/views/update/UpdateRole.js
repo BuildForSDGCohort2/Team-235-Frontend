@@ -46,7 +46,7 @@ const handleChange = (e) => {
    setState({...state, [name]: value});
 }
 
-const handleSelectedValue = e => {
+const handleSelectedValue = (e) => {
     setSelectedValue(e);
 };
 
@@ -178,7 +178,7 @@ const handleSubmit = async (e) => {
            </CCol>
         </CRow>
      </CContainer>
-    )
+    );
  
 };
 

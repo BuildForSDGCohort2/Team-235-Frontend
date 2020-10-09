@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState} from "react";
 import { CContainer, CRow, CCol, CCard, CCardHeader, CCardFooter, CCardBody,CButton } from "@coreui/react";
 import Select from "react-select";
 import {Link} from "react-router-dom";
@@ -63,6 +63,47 @@ const UpdateUser = (props) => {
        setState({...state, [name] : value});
      }
 
+     const handleAndDisplayError = (e, button) => {
+      /**
+       * Based on error messages from the server
+       * The first words are taken and error are displayed accordingly
+       * Eg. "Failed to fetch" means there is a network problem....so based on that "check your connection" message is displayed to user
+       */
+      
+      button.innerHTML = "UPDATE";
+      var firstWordInErrorMessage = JSON.stringify(e.message).replace(/ .*/,'"');
+      switch(JSON.parse(firstWordInErrorMessage)){
+        case "Failed": 
+          Swal.fire({
+            toast: true,
+            title: "network problem",
+            html: "check your internet connection",
+            icon: "warning",
+            timer: 2000,
+            position: "top",
+            showConfirmButton: false
+          });
+          break;
+    
+        case "Response":
+          Swal.fire({
+            toast: true,
+            title: "Fill all fields",
+            html: "correctly",
+            icon: "warning",
+            timer: 2000,
+            position: "top",
+            showConfirmButton: false,
+            width: "480px"
+          });
+          break;
+    
+        default: 
+           break;
+      }
+     
+    }
+
       
 
     const handleSubmit = async (e) => {
@@ -100,49 +141,8 @@ const UpdateUser = (props) => {
          
     }
 
-    const handleAndDisplayError = (e, button) => {
-        /**
-         * Based on error messages from the server
-         * The first words are taken and error are displayed accordingly
-         * Eg. "Failed to fetch" means there is a network problem....so based on that "check your connection" message is displayed to user
-         */
-        
-        button.innerHTML = "UPDATE";
-        var firstWordInErrorMessage = JSON.stringify(e.message).replace(/ .*/,'"');
-        switch(JSON.parse(firstWordInErrorMessage)){
-          case "Failed": 
-            Swal.fire({
-              toast: true,
-              title: "network problem",
-              html: "check your internet connection",
-              icon: "warning",
-              timer: 2000,
-              position: "top",
-              showConfirmButton: false
-            });
-            break;
-      
-          case "Response":
-            Swal.fire({
-              toast: true,
-              title: "Fill all fields",
-              html: "correctly",
-              icon: "warning",
-              timer: 2000,
-              position: "top",
-              showConfirmButton: false,
-              width: "480px"
-            });
-            break;
-      
-          default: 
-             break;
-        }
-       
-      }
 
-
-    const handleOnSelectedOption = e => {
+    const handleOnSelectedOption = (e) => {
         setSelectedOption(e);
      }
 
