@@ -47,7 +47,7 @@ const GET_ROLES = gql `
         name
      }
   }
-`
+`;
 
 const isValidForm = ({...rest}) => {
    const {firstName, lastName, email, phoneNumber} = rest;

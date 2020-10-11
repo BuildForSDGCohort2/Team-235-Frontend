@@ -11,8 +11,8 @@ import CIcon from "@coreui/icons-react";
 const TheHeaderDropdown = () => {
 
   const logout = () => {
-    localStorage.removeItem("token");
-    sessionStorage.removeItem("tokenType");
+    localStorage.clear();
+    sessionStorage.clear();
     window.location.href = "/";
   }
 

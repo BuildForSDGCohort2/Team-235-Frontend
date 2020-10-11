@@ -5,7 +5,7 @@ import {Link} from "react-router-dom";
 import {gql, useMutation} from "@apollo/client";
 import Swal from "sweetalert2";
 
-let userRole = {};
+
 const UPDATE_ROLE = gql `
   mutation UpdateRole(
       $id: Float!,
@@ -23,16 +23,10 @@ const UPDATE_ROLE = gql `
   }
 `;
 
-const UpdateRole = (props) => {
+let userRole = {};
+const currentRolePermissions = [];
 
-const [updateRole] = useMutation(UPDATE_ROLE);
-const [selectedValue, setSelectedValue] = useState(null);
-const [state, setState] = useState({
-    state: {
-        name: "",
-        description: ""
-    }
-});
+const UpdateRole = (props) => {
 
 userRole = props.location.data;
 if(userRole){
@@ -40,15 +34,32 @@ if(userRole){
 }
 let info = JSON.parse(localStorage.getItem("role"));
 
+info.permission.map(item => {
+    return(
+        currentRolePermissions.push({label: item.description, value: item.id})
+    )
+})
+ 
+
+const [updateRole] = useMutation(UPDATE_ROLE);
+//const [selectedValue, setSelectedValue] = useState(null);
+const [state, setState] = useState({
+    state: {
+        name: "" ,
+        description: ""
+    }
+});
+
+
 
 const handleChange = (e) => {
    const {name, value} = e.target;
    setState({...state, [name]: value});
 }
 
-const handleSelectedValue = (e) => {
-    setSelectedValue(e);
-};
+// const handleSelectedValue = (e) => {
+//     setSelectedValue(e);
+// };
 
 const handleAndDisplayError = (e, button) => {
     button.innerHTML = "UPDATE";
@@ -89,18 +100,21 @@ const handleAndDisplayError = (e, button) => {
 
 const handleSubmit = async (e) => {
    e.preventDefault();
+   
    const button = document.getElementById("button");
    button.innerHTML = "UPDATING ROLE...";
+   const roleId = parseFloat(info.id);
   
    try {
        const response = await updateRole({
            variables: {
-               id: info.id,
+               id: roleId,
                name: state.name,
                description: state.description
            },
            errorPolicy: "all"
        });
+
 
        if(response.data){
            button.innerHTML = "UPDATE";
@@ -115,9 +129,26 @@ const handleSubmit = async (e) => {
         });
         props.history.push("/permission");
        }
-   } catch (error) {
-       handleAndDisplayError(e, button);
+
+       if(response.errors){
+           button.innerHTML = "UPDATE";
+           Swal.fire({
+               toast: true,
+               title: "Error",
+               html: response.errors[0].message.message,
+               showConfirmButton: false,
+               position: "top",
+               timer: 2000,
+               icon: "error"
+           })
+       }
+
+        
+   } catch (e) {
+        handleAndDisplayError(e, button);
    }
+
+     
 
 }
 
@@ -156,15 +187,15 @@ const handleSubmit = async (e) => {
                                </div>
                            
                           <div className="form-group">
-                                       <label htmlFor="permissionIds">PERMISSIONS</label>
-                                       <Select type="text" 
-                                       isMulti
-                                       isSearchable
-                                       onChange={handleSelectedValue}
-                                       value={selectedValue}
-                                       isClearable
-                                        />
-                                   </div>
+                                <label htmlFor="permissionIds">PERMISSIONS</label>
+                                <Select type="text" 
+                                isMulti
+                                isSearchable
+                                // onChange={handleSelectedValue}
+                                defaultValue={currentRolePermissions}
+                                isClearable
+                                />
+                            </div>
                        
                      </CCardBody>
                      <CCardFooter className="text-center">
