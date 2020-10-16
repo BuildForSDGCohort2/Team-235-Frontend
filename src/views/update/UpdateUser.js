@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState} from "react";
 import { CContainer, CRow, CCol, CCard, CCardHeader, CCardFooter, CCardBody,CButton } from "@coreui/react";
 import Select from "react-select";
 import {Link} from "react-router-dom";
@@ -28,9 +28,13 @@ const UPDATE_USER = gql `
   }
 `;
 
+ 
 
-const listOfRoles = [];
+
+
 let user = {};
+const currentUserRole = [];
+ 
 
  
 const UpdateUser = (props) => {
@@ -44,29 +48,79 @@ const UpdateUser = (props) => {
     let info = JSON.parse(localStorage.getItem("user"));
     const firstName = info.name.split(" ")[0].toString();
     const lastName = info.name.split(" ")[1].toString();
- 
 
-    const [selectedOption, setSelectedOption] = useState(null);
+
+    
+
+
+    info.roles.map(item => {
+      return(
+        currentUserRole.push({label: item.name, value: item.id})
+      )
+    });
+
 
     const [state, setState] = useState({
         state : {
            firstName: "",
            lastName: "",
            email: "",
-           password: "",
            phoneNumber: ""
         }
      });
-
+    
     const handleChange = (e) => {
        const {name, value} = e.target;
-       setState({...state, [name] : value});
+       setState({...state, [name] : value});   
      }
+     
+
+     const handleAndDisplayError = (e, button) => {
+      /**
+       * Based on error messages from the server
+       * The first words are taken and error are displayed accordingly
+       * Eg. "Failed to fetch" means there is a network problem....so based on that "check your connection" message is displayed to user
+       */
+      
+      button.innerHTML = "UPDATE";
+      var firstWordInErrorMessage = JSON.stringify(e.message).replace(/ .*/,'"');
+      switch(JSON.parse(firstWordInErrorMessage)){
+        case "Failed": 
+          Swal.fire({
+            toast: true,
+            title: "network problem",
+            html: "check your internet connection",
+            icon: "warning",
+            timer: 2000,
+            position: "top",
+            showConfirmButton: false
+          });
+          break;
+    
+        case "Response":
+          Swal.fire({
+            toast: true,
+            title: "Fill all fields",
+            html: "correctly",
+            icon: "warning",
+            timer: 2000,
+            position: "top",
+            showConfirmButton: false,
+            width: "480px"
+          });
+          break;
+    
+        default: 
+           break;
+      }
+     
+    }
 
       
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
         const button = document.getElementById("button");
         button.innerHTML = "UPDATING USER...";
         try {
@@ -99,54 +153,7 @@ const UpdateUser = (props) => {
         }
          
     }
-
-    const handleAndDisplayError = (e, button) => {
-        /**
-         * Based on error messages from the server
-         * The first words are taken and error are displayed accordingly
-         * Eg. "Failed to fetch" means there is a network problem....so based on that "check your connection" message is displayed to user
-         */
-        
-        button.innerHTML = "UPDATE";
-        var firstWordInErrorMessage = JSON.stringify(e.message).replace(/ .*/,'"');
-        switch(JSON.parse(firstWordInErrorMessage)){
-          case "Failed": 
-            Swal.fire({
-              toast: true,
-              title: "network problem",
-              html: "check your internet connection",
-              icon: "warning",
-              timer: 2000,
-              position: "top",
-              showConfirmButton: false
-            });
-            break;
-      
-          case "Response":
-            Swal.fire({
-              toast: true,
-              title: "Fill all fields",
-              html: "correctly",
-              icon: "warning",
-              timer: 2000,
-              position: "top",
-              showConfirmButton: false,
-              width: "480px"
-            });
-            break;
-      
-          default: 
-             break;
-        }
-       
-      }
-
-
-    const handleOnSelectedOption = e => {
-        setSelectedOption(e);
-     }
-
-
+ 
 
     return (
         <CContainer>
@@ -214,23 +221,15 @@ const UpdateUser = (props) => {
                                 <input type="password" 
                                 disabled
                                 className="form-control" 
-                                id="passwordId"
-                                name="password"
-                                value={state.password || ""}
-                                onChange={handleChange}
-                                noValidate/>
+                                value= "password"/>
                                  
                           </div>
 
                           <div className="form-group">
                                        <label htmlFor="categoriesId">ADD ROLE</label>
                                        <Select type="text" 
-                                       options = {listOfRoles}
-                                       defaultValue= {selectedOption}
-                                       onChange = {handleOnSelectedOption}
-                                       isMulti
-                                       isClearable
-                                       disabled = {true}
+                                       defaultValue= {currentUserRole}
+                                       isMulti 
                                        isSearchable
                                       />
                                    </div>

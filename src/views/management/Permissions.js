@@ -32,6 +32,7 @@ const LIST_OF_ROLES = gql `
          lastName
        }
        permissions{
+         id
          description
        }
      }
@@ -59,7 +60,7 @@ const Permission = (props) => {
         {key: "options", _style:{width: "20%"}}
       ];
 
-      try{     
+      try{  
         if(error){
           block = false;
           Swal.fire({

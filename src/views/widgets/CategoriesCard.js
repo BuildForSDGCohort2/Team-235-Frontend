@@ -110,7 +110,6 @@ const CategoriesCard = () => {
       })
 
     if (data) {
-      console.log(data);
       Swal.close();
       return (
         data.getCategories.map(item => {
@@ -132,9 +131,7 @@ const CategoriesCard = () => {
       });
     }
 
-    } catch (e){
-       console.log(e);
-    }
+    } catch (e){}
   }
 
   return (

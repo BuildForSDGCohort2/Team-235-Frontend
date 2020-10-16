@@ -91,7 +91,7 @@ const STOCKS = gql`
           showConfirmButton: false,
           icon: "error"
         });
-      };
+      }
 
       if(data){
         block = false;
