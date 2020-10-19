@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import {
     CCard,
     CDropdown,
@@ -11,18 +11,18 @@ import {
     CCardBody
   } from "@coreui/react";
   import Swal from "sweetalert2";
-  import {useQuery, gql} from "@apollo/client";
+  //import {useQuery, gql} from "@apollo/client";
  
-const STOCKS = gql `
-  query GetStocksByCategoryId($data: Float!){
-      getStocksByCategoryId(data: {
-          data: $data
-      }){
-          id
-          name
-      }    
-    }
-`
+// const STOCKS = gql `
+//   query GetStocksByCategoryId($data: Float!){
+//       getStocksByCategoryId(data: {
+//           data: $data
+//       }){
+//           id
+//           name
+//       }    
+//     }
+// `;
 
 const CategoryStocks = (props) => {
    
@@ -31,21 +31,21 @@ const CategoryStocks = (props) => {
     if(id){
        localStorage.setItem("stockId", JSON.stringify(id));
     }
-    const stockId = JSON.parse(localStorage.getItem("stockId"));
-    const itemId = parseFloat(stockId.toString());
+    //const stockId = JSON.parse(localStorage.getItem("stockId"));
+   // const itemId = parseFloat(stockId.toString());
     
 
-    const {error, data} = useQuery(STOCKS, {
-        variables: itemId
-    });
+    // const {error, data} = useQuery(STOCKS, {
+    //     variables: itemId
+    // });
 
-    if(data){
-        console.log(data);
-    }
+    // if(data){
+    //     console.log(data);
+    // }
 
-    if(error){
-        console.log(error);
-    }
+    // if(error){
+    //     console.log(error);
+    // }
     
     const tableFields = [
         {key: "name"},
@@ -96,7 +96,8 @@ const CategoryStocks = (props) => {
                         </CDropdownMenu>
                     </CDropdown>
                   </td>
-              )}
+              );
+            }
             }}>
    
             </CDataTable>

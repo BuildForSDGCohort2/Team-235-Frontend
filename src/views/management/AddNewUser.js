@@ -155,9 +155,7 @@ const NewUser = (props) =>  {
       
       if(isValidForm(state, button)){
            const {firstName, lastName, email, password, phoneNumber} = state;
-           console.log(firstName, lastName, email, password, phoneNumber, id)
-           
-           
+          
            try{
              const response = await createUser({
                 variables: {
