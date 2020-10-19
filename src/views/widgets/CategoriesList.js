@@ -7,7 +7,7 @@ import {
     CDropdownItem,
     CDropdownToggle
   } from "@coreui/react";
-import {useQuery, gql} from "@apollo/client";
+//import {useQuery, gql} from "@apollo/client";
 import CIcon from "@coreui/icons-react";
 import {withRouter} from "react-router-dom";
 
