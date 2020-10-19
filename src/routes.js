@@ -17,6 +17,7 @@ const ViewStock = React.lazy(() => import("./views/StockDetails/ViewStock"));
 const Report = React.lazy(() => import("./views/Report/Report"));
 const UpdateUser = React.lazy(() => import("./views/update/UpdateUser"));
 const UpdateRole = React.lazy(() => import("./views/update/UpdateRole"));
+const CategoryStocks = React.lazy(() => import("./views/widgets/CategoryStocks"));
 
 const routes = [
   { path: "/", exact: true, name: "", component: Login },
@@ -35,7 +36,8 @@ const routes = [
   {path: "/viewstock", name: "View Stock Details", component: ViewStock},
   {path: "/report", name: "Report", component: Report},
   {path: "/updateuser", name: "UpdateUser", component: UpdateUser},
-  {path: "/updaterole", name: "UpdateRole", component: UpdateRole}
+  {path: "/updaterole", name: "UpdateRole", component: UpdateRole},
+  {path: "/categorystocks", name: "Category Stocks", component: CategoryStocks}
 ];
 
 

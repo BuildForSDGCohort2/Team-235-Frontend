@@ -64,13 +64,13 @@ const CreateNewRole = (props) => {
 
     const handleSelectedValue = e => {
         setSelectedValue(e); 
-        if(!e === null){
+        //TODO: fix something that is buggy here
             e.map(item => {
                 return(
                     ids.add(item.id)
                 )
             });
-        }
+        
         
     };
 

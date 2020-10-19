@@ -95,7 +95,7 @@ const STOCKS = gql`
 
       if(data){
         block = false;
-        
+        //console.log(data);
         data.getStocks.map(item => {
           const {name, quantity, categories} = item;
           const listOfCategories = displayCategories(categories);

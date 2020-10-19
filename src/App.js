@@ -44,7 +44,7 @@ const  App  = () => {
               <Route exact path="/report" name= "Report" render={(props) => <TheLayout {...props}/>} />
               <Route exact path="/updateuser" name= "UpdateUser" render={(props) => <TheLayout {...props}/>} />
               <Route exact path="/updaterole" name= "UpdateRole" render={(props) => <TheLayout {...props}/>} />
-              
+              <Route exact path="/categorystocks" name= "Category Stocks" render={(props) => <TheLayout {...props}/>} />
             </Switch>
           </React.Suspense>
       </HashRouter>

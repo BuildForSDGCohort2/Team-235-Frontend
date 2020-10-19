@@ -41,7 +41,7 @@ let block = false;
 
 
 
-const CategoriesCard = () => {
+const CategoriesCard = (props) => {
 
   const [createCategory] = useMutation(CREATE_CATEGORY);
   const { error, data} = useQuery(GET_CATEGORIES_LIST);
@@ -49,7 +49,6 @@ const CategoriesCard = () => {
 
   
 
-  // function triggers when user click on add new category button
  const show =  async () => {
   try{
     const {value: name} = await Swal.fire({
@@ -114,7 +113,7 @@ const CategoriesCard = () => {
       return (
         data.getCategories.map(item => {
           return(
-            <CategoriesList key={item.id} name={item.name} />
+            <CategoriesList key={item.id} name={item.name} id = {item.id} />
           )
         } 
           
