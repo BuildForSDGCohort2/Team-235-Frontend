@@ -25,6 +25,7 @@ import "react-block-ui/style.css";
  
 
 let block = true;
+let stockInfo = {};
 
 const STOCKS = gql`
    query GetStocks {
@@ -39,9 +40,7 @@ const STOCKS = gql`
         createdAt
         }
    }
-`
-
- 
+`;
 
  const StockDetails = (props) => {
   const {error, data} = useQuery(STOCKS, {
@@ -57,8 +56,7 @@ const STOCKS = gql`
  });
 
 
-    
-    
+
     const stockData = [];
 
 
@@ -95,7 +93,7 @@ const STOCKS = gql`
 
       if(data){
         block = false;
-        
+        //console.log(data);
         data.getStocks.map(item => {
           const {name, quantity, categories} = item;
           const listOfCategories = displayCategories(categories);
@@ -128,6 +126,7 @@ const STOCKS = gql`
 
         <CCardBody>
             <CDataTable
+            onRowClick = {(e) => stockInfo = e}
             items={stockData}
             fields={tableFields}
             striped
@@ -157,7 +156,10 @@ const STOCKS = gql`
                              })
                             }
                             >Delete</CDropdownItem>
-                            <CDropdownItem onClick = {() => props.history.push("/viewstock")}>View</CDropdownItem>
+                            <CDropdownItem onClick = {() => props.history.push({
+                              pathname: "/viewstock",
+                              data: stockInfo
+                            })}>View</CDropdownItem>
                         </CDropdownMenu>
                     </CDropdown>
                   </td>

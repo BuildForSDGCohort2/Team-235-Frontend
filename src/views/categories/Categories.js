@@ -15,7 +15,7 @@ const Categories = (props) =>  {
  })
 
     return (
-      <CategoriesCard />
+      <CategoriesCard/>
     )
 }
 

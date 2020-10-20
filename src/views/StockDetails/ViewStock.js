@@ -1,7 +1,19 @@
 import React from "react";
 import { CContainer, CRow, CCol, CCard, CCardHeader, CCardFooter, CCardBody} from "@coreui/react";
 
-const ViewStock = () => {
+let stock = {};
+const ViewStock = (props) => {
+
+    try{
+      stock = props.location.data;
+      if(stock){
+       localStorage.setItem("stock", JSON.stringify(stock));
+      }
+    }catch(e){};
+
+    let info = JSON.parse(localStorage.getItem("stock"));
+    
+
     return (
         <CContainer>
         <CRow>
@@ -10,24 +22,35 @@ const ViewStock = () => {
                      <CCardHeader className="text-center"><h4>VIEW STOCK</h4></CCardHeader>
                  
                      <CCardBody>
-                       
-                       <div class="form-group form-group-xs row">
-                            <label class="col-6 col-form-label">Stock name </label>
-                            <div class="col-6">
-                                <span class="form-control-plaintext">Paracetamol</span>
-                            </div>
-                            <label class="col-6 col-form-label">Stock name </label>
-                            <div class="col-6">
-                                <span class="form-control-plaintext">Paracetamol</span>
-                            </div>
-                        </div>
-                          
-                       
+                      <CRow>
+                        <CCol>
+                         <h6>NAME</h6>
+                        </CCol>
+                        <CCol>
+                         <h5>{info.name}</h5>
+                        </CCol>
+                      </CRow>
+
+                      <CRow>
+                        <CCol>
+                         <h6>QUANTITY</h6>
+                        </CCol>
+                        <CCol>
+                         <h5>{info.quantity}</h5>
+                        </CCol>
+                      </CRow>
+
+                      <CRow>
+                        <CCol>
+                         <h6>CATEGORIES</h6>
+                        </CCol>
+                        <CCol>
+                         <h5>{info.categories}</h5>
+                        </CCol>
+                      </CRow>
                      </CCardBody>
 
-                     <CCardFooter className="text-center">
-                     
-                     </CCardFooter>
+                     <CCardFooter className="text-center"></CCardFooter>
                     
                  </CCard>
            </CCol>

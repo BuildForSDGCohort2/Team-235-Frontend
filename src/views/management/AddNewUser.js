@@ -49,7 +49,7 @@ const GET_ROLES = gql `
   }
 `;
 
-const isValidForm = ({...rest}) => {
+const isValidForm = ({...rest}, button) => {
    const {firstName, lastName, email, phoneNumber} = rest;
    if(firstName.length > 3 && lastName.length > 3 && checkEmail.test(email) && phoneNumber.length >= 13){
       return true;
@@ -63,7 +63,8 @@ const isValidForm = ({...rest}) => {
       position: "top",
       showConfirmButton: false,
       icon: "error"
-   })       
+   });
+   button.innerHTML = "SAVE";       
      return false;
 }
 
@@ -135,14 +136,14 @@ const NewUser = (props) =>  {
 
 
    const handleOnSelectedOption = e => {
-      setSelectedOption(e)
-      if(!e === null){
+      setSelectedOption(e);
+      //TODO: something is buggy is here
          Object.values(e).map(item => {
             return(
                id.add(item.value)
             )
          });
-      }
+   
    }
  
 
@@ -152,10 +153,9 @@ const NewUser = (props) =>  {
 
       e.preventDefault();
       
-      if(isValidForm(state)){
+      if(isValidForm(state, button)){
            const {firstName, lastName, email, password, phoneNumber} = state;
-           
-           
+          
            try{
              const response = await createUser({
                 variables: {

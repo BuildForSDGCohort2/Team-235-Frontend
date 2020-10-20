@@ -131,13 +131,9 @@ const TheUserManagement = (props) => {
       })
     } 
      
-     }catch(e){
-       
-     };
+     }catch(e){};
 
-     
-     
-     
+
     return (
       <>
       <BlockUi message= "Please wait..." blocking={block} > 
